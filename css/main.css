@@ -2,14 +2,9 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     font-size: 19px;
-}
-
-@media (min-width: 1200px) {
-    .container {
-        width: 970px;
-    }
 }
 
 main {
@@ -25,6 +20,7 @@ footer {
     text-transform: uppercase;
     margin-top: 15px;
 }
+
 footer p {
     margin: 0;
 }
@@ -46,29 +42,91 @@ li {
     height: auto;
     line-height: 40px;
 }
+
 .navbar .navbar-brand small {
     font-size: 18px;
     font-weight: 300;
     margin-left: 10px;
 }
 
-@media (min-width: 768px) {
-    #sidebar {
-        position:fixed;
-        margin-top: 30px;
+.navbar-brand img {
+    display: inline-block;
+}
+
+@media (max-width: 415px) {
+    header.navbar .navbar-brand small {
+        display: block;
+        margin-left: 0;
     }
 }
+
+@media (min-width: 768px) {
+    #sidebar {
+        position: fixed;
+        margin-top: 15px;
+    }
+
+    /* hacks to make sidebar nav vertical. */ 
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+
+    .sidebar-nav .navbar ul {
+        float: none;
+    }
+
+    .sidebar-nav .navbar ul:not {
+        display: block;
+    }
+
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .sidebar-nav .navbar-nav > li  > a {
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-header {
+        float: right;
+    }
+    .navbar-collapse {
+        width: 85%;
+    }
+}
+
 @media (max-width: 960px) {
     body {
         font-size: 17px;
     }
+
     pre {
         font-size: 12px;
     }
 }
 
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
+    }
+}
+
 .page-header {
     margin-top: 0;
+}
+
+#sidebar {
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 #sidebar .text-muted {
@@ -80,24 +138,25 @@ pre {
     border-radius: 4px;
     font-size: 15px;
 }
+
 pre code {
     border: none;
 }
 
 h1, .h1 {
-    font-size: 45px;
-}
-
-h2, .h2 {
     font-size: 34px;
 }
 
-h3, .h3 {
+h2, .h2 {
     font-size: 24px;
 }
 
-h4, .h4 {
+h3, .h3 {
     font-size: 20px;
+}
+
+h4, .h4 {
+    font-size: 14px;
 }
 
 h5, .h5 {
@@ -106,4 +165,30 @@ h5, .h5 {
 
 h6, .h6 {
     font-size: 14px;
+}
+
+.navbar-toggle {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* more hacks because. */
+
+.navbar-default .navbar-nav > li > a {
+    color: #2196f3 !important;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background-color: #2196f3 !important;
+    color: #ffffff !important;
+}
+
+.nav > li > a:hover,
+.nav >li > a:focus {
+    text-decoration: none !important;
+    background-color: #eeeeee !important;
 }
