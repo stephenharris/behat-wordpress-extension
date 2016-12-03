@@ -16,11 +16,11 @@
         <header class="navbar navbar-default">
 
             <a class="navbar-brand" href="http://wordhat.info/">
-                                    <img src="http://paulgibbs.github.io/wordhat/lettermark.svg" class="hidden-xs" alt="">
+                                    <img src="//paulgibbs.github.io/wordhat/lettermark.svg" class="hidden-xs" alt="">
                 
                 WordHat
                 <small>
-                    WordPress Extension for Behat
+                    Behat for WordPress
                 </small>
             </a>
 
@@ -41,8 +41,8 @@
                             </div>
                             <div class="navbar-collapse collapse sidebar-navbar-collapse">
                                 <ul class="nav navbar-nav nav-pills nav-stacked">
-                                                                            <li class="active">
-                                            <a href="http://wordhat.info/index.html">
+                                                                            <li class="">
+                                            <a href="http://wordhat.info/about.html">
                                                 About
                                             </a>
                                         </li>
@@ -89,31 +89,38 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                    <h1 id="about">About</h1>
-<p>The WordPress Extension for Behat is an integration layer between <a href="http://behat.org">Behat</a>, <a href="https://github.com/Behat/MinkExtension">Mink</a>, and <a href="https://wordpress.org">WordPress</a>. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.</p>
-<h2 id="what-does-behat-and-mink-do">What does Behat and Mink do?</h2>
-<p>Behat and Mink allow you to describe the behavior of a website in plain, but stylised, language, and then turn that description into an automated test that will visit the site and perform each step you describe.</p>
-<p>Such functional tests can help site builders ensure that the added value they've created when building a WordPress site continues to behave as expected after any sort of site change -- WordPress updates, new plugins, new features, and so on.</p>
-<h2 id="what-does-this-extension-do">What does this extension do?</h2>
-<p>The extension provides <a href="http://docs.behat.org/en/latest/user_guide/context/definitions.html">step definitions</a> that help you implement tests for common WordPress tasks:</p>
-<ul>
-<li>Manage themes and plugins.</li>
-<li>Manipulate site content.</li>
-<li>And more!</li>
-</ul>
+                    <style type="text/css">
+#content .index-logo {
+  border: 0;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  #content .index-logo {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  #content .index-logo {
+    width: 30vw;
+  }
+}
+</style>
+<img src="//paulgibbs.github.io/wordhat/logo.svg" class="index-logo" alt="">
+<p><a href="https://travis-ci.org/paulgibbs/behat-wordpress-extension"><img src="https://travis-ci.org/paulgibbs/behat-wordpress-extension.svg?branch=master" alt="Build Status" /></a>
+<a href="https://packagist.org/packages/paulgibbs/behat-wordpress-extension"><img src="https://poser.pugx.org/paulgibbs/behat-wordpress-extension/v/stable.svg" alt="Latest Stable Version" /></a>
+<a href="https://packagist.org/packages/paulgibbs/behat-wordpress-extension"><img src="https://poser.pugx.org/paulgibbs/behat-wordpress-extension/downloads.svg" alt="Total Downloads" /></a>
+<a href="https://packagist.org/packages/paulgibbs/behat-wordpress-extension"><img src="https://poser.pugx.org/paulgibbs/behat-wordpress-extension/v/unstable.svg" alt="Latest Unstable Version" /></a>
+<a href="https://packagist.org/packages/paulgibbs/behat-wordpress-extension"><img src="https://poser.pugx.org/paulgibbs/behat-wordpress-extension/license.svg" alt="License" /></a></p>
+<p>WordHat is an integration layer between <a href="http://behat.org">Behat</a>, <a href="https://github.com/Behat/MinkExtension">Mink Extension</a>, and <a href="https://wordpress.org">WordPress</a>. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.</p>
+<p>If you are new to the project or Behat, we recommend that you first read through all the documentation.</p>
                 </section>
 
             </div>
         </main>
 
-        <footer>
-            <div class="container-fluid">
-                <p class="text-muted">
-                    <a href="credits.html">Built on the shoulders of giants</a>
-                </p>
-            </div>
-        </footer>
-
+        
         <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>

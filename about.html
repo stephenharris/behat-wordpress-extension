@@ -41,7 +41,7 @@
                             </div>
                             <div class="navbar-collapse collapse sidebar-navbar-collapse">
                                 <ul class="nav navbar-nav nav-pills nav-stacked">
-                                                                            <li class="">
+                                                                            <li class="active">
                                             <a href="http://wordhat.info/about.html">
                                                 About
                                             </a>
@@ -56,7 +56,7 @@
                                                 Installation
                                             </a>
                                         </li>
-                                                                            <li class="active">
+                                                                            <li class="">
                                             <a href="http://wordhat.info/settings.html">
                                                 Settings
                                             </a>
@@ -88,37 +88,19 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                                                                                                                                                                                                                                                                    <nav id="topbar" role="navigation">
-
-                                    <ul class="nav nav-tabs">
-                                        <li class="">
-                                            <a href="http://wordhat.info/settings.html">
-                                                Settings
-                                            </a>
-                                        </li>
-
-                                                                                    <li class="active">
-                                                <a href="http://wordhat.info/environment-settings.html">
-                                                    Environment
-                                                </a>
-                                            </li>
-                                                                            </ul>
-                                </nav>
-                                                                                                                                                                                                                                                                                        
-                    <h1 id="environment-settings">Environment Settings</h1>
-<p>Some of the settings in <code>behat.yml</code> are environment specific. For example, the <code>base_url</code> may be <code>http://test.example.dev</code> on your local development environment, while on a test server it might be <code>http://test.example.com</code>.</p>
-<p>If you intend to run your tests on different environments, these sorts of settings should not be committed to <code>behat.yml</code>; instead, they should be exported in an environment variable.</p>
-<p>Before running tests, Behat will check the <code>BEHAT_PARAMS</code> environment variable and add these settings to the ones that are present in <code>behat.yml</code>. This variable should contain a JSON object with your settings.</p>
-<p>Example JSON object:</p>
-<pre><code class="language-JSON">{
-  "extensions": {
-    "Behat\\MinkExtension": {
-      "base_url": "http://development.dev"
-    }
-  }
-}</code></pre>
-<p>To export this into the <code>BEHAT_PARAMS</code> environment variable, squash the JSON object into a single line and surround with single quotes:</p>
-<pre><code class="language-Shell">export BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://development.dev"}}}'</code></pre>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    <h1 id="about">About</h1>
+<p>WordHat is a <a href="http://behat.org">Behat</a> extension, integrating Behat, <a href="https://github.com/Behat/MinkExtension">Mink</a>, and <a href="https://wordpress.org">WordPress</a>. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.</p>
+<h2 id="what-does-behat-and-mink-do">What does Behat and Mink do?</h2>
+<p>Behat and Mink allow you to describe the behavior of a website in plain, but stylised, language, and then turn that description into an automated test that will visit the site and perform each step you describe.</p>
+<p>Such functional tests can help site builders ensure that the added value they've created when building a WordPress site continues to behave as expected after any sort of site change -- WordPress updates, new plugins, new features, and so on.</p>
+<h2 id="what-does-this-extension-do">What does this extension do?</h2>
+<p>The extension provides <a href="http://docs.behat.org/en/latest/user_guide/context/definitions.html">step definitions</a> that help you implement tests for common WordPress tasks:</p>
+<ul>
+<li>Manage themes and plugins.</li>
+<li>Manipulate site content.</li>
+<li>And more!</li>
+</ul>
                 </section>
 
             </div>

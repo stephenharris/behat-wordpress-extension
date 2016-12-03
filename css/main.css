@@ -29,6 +29,10 @@ li {
     margin-bottom: 3px;
 }
 
+#content {
+    margin-bottom: 15px;
+}
+
 #content img {
     max-width: 100%;
     padding: 4px;
@@ -153,6 +157,7 @@ h2, .h2 {
 
 h3, .h3 {
     font-size: 20px;
+    font-weight: bold;
 }
 
 h4, .h4 {
