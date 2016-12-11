@@ -90,9 +90,13 @@
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     <h1 id="drivers">Drivers</h1>
-<p>WordHat provides a range of drivers for interacting with the WordPress site you are testing. A driver represents and manages the connection between the Behat and WordPress environments.</p>
-<p>The default driver is <code>wpcli</code>. To specify which driver to use for your tests, set <a href="settings.html"><code>default_driver</code></a> in your <code>behat.yml</code> file.</p>
-<p>Different drivers support different features:</p>
+<p>WordHat provides a range of drivers for interacting with the WordPress site you are testing. A driver represents and manages the connection between the Behat and WordPress environments. Different drivers support different features.</p>
+<ul>
+<li>The <strong>WP-CLI</strong> driver -- the default -- uses <a href="http://wp-cli.org/">WP-CLI</a> to communicate with WordPress.</li>
+<li>The <strong>WordPress API</strong> driver loads WordPress in the same PHP context as Behat.</li>
+<li>The <strong>Blackbox</strong> driver only communicates with WordPress through a web browser.</li>
+</ul>
+<p>To specify which driver to use for your tests, set <a href="settings.html"><code>default_driver</code></a> in your <code>behat.yml</code> file.</p>
 <table>
 <thead>
 <tr>
@@ -111,6 +115,12 @@
 </tr>
 <tr>
 <td>Create terms for taxonomy.</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Create users.</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>No</td>
