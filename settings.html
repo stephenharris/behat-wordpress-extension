@@ -129,7 +129,9 @@
       password: contributor
     subscriber:
       username: subscriber
-      password: subscriber</code></pre>
+      password: subscriber
+  permalinks:
+    author_archive: author/%s/</code></pre>
 <table>
 <thead>
 <tr>
@@ -141,7 +143,7 @@
 <tbody>
 <tr>
 <td><code>default_driver</code></td>
-<td><strong>wpcli</strong></td>
+<td><em>wpcli</em></td>
 <td>The <a href="drivers.html">driver</a> to use (&quot;wpcli&quot;, &quot;wpapi&quot;, &quot;blackbox&quot;).</td>
 </tr>
 <tr>
@@ -155,19 +157,14 @@
 <td><em>Optional</em>. <a href="https://wp-cli.org/commands/cli/alias/">WP-CLI alias</a> (preferred over <code>wpcli.path</code>).</td>
 </tr>
 <tr>
-<td><code>wpcli.users</code></td>
+<td><code>users.*</code></td>
 <td><em>see example</em></td>
 <td>Keys must match names of WordPress roles.</td>
 </tr>
 <tr>
-<td><code>users.*.username</code></td>
-<td></td>
-<td>The name of a user with the specified role.</td>
-</tr>
-<tr>
-<td><code>users.*.password</code></td>
-<td></td>
-<td>The password of a user with the specified role.</td>
+<td><code>permalinks.*</code></td>
+<td><em>see example</em></td>
+<td>Permalink pattern for the specified kind of link.<br><code>%s</code> is replaced with user ID/nicename/etc, as appropriate.</td>
 </tr>
 </tbody>
 </table>
