@@ -18,7 +18,9 @@ default:
       javascript_session: selenium2
       sessions:
         default:
-          goutte: ~
+          goutte:
+            guzzle_parameters:
+              verify: false  # Allow self-signed SSL certificates
         selenium2:
           selenium2: ~
 
