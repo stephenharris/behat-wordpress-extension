@@ -49,13 +49,25 @@ class WpcliDriver extends BaseDriver
      * Set up anything required for the driver.
      *
      * Called when the driver is used for the first time.
+     * Checks `core is-installed`, and the version number.
      */
     public function bootstrap()
     {
         $status = $this->wpcli('core', 'is-installed')['exit_code'];
-
         if ($status !== 0) {
             throw new RuntimeException('WP-CLI driver cannot find WordPress. Check "path" and/or "alias" settings.');
+        }
+
+        try {
+            $version = '';
+            $this->wpcli('cli', 'version');
+        } catch (UnexpectedValueException $e) {
+            preg_match('#^WP-CLI driver query failure: WP-CLI (\d\.\d\.\d)$#', $e->getMessage(), $match);
+            $version = array_pop($match);
+        }
+
+        if (! version_compare($version, '0.24.0', '>=')) {
+            throw new RuntimeException('Your WP-CLI is too old; version 0.24.0 or newer is required.');
         }
 
         $this->is_bootstrapped = true;

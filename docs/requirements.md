@@ -12,7 +12,7 @@ currentMenu: requirements
 
 ## Driver requirements
 
-The [WP-CLI driver](drivers.html) (the default) requires [WP-CLI](http://wp-cli.org/), installed globally:
+The [WP-CLI driver](drivers.html) requires [WP-CLI](http://wp-cli.org/) (version 0.24.0 or newer), to be installed globally:
   ```Shell
   curl -o wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   chmod +x wp
