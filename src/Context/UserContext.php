@@ -91,7 +91,7 @@ class UserContext extends RawWordpressContext
      *
      * Example: Given I am logged in as an admin
      *
-     * @Given /^(?:I am|they are) logged in as (?:a|an) ([\d\w]+)$/
+     * @Given /^(?:I am|they are) logged in as (?:a|an) (.+)$/
      *
      * @param string $role
      */
