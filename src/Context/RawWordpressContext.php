@@ -205,8 +205,6 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
 
     /**
      * Clear object cache.
-     *
-     * @AfterScenario
      */
     public function clearCache()
     {
@@ -215,8 +213,6 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
 
     /**
      * Clear Mink's browser environment.
-     *
-     * @AfterScenario
      */
     public function resetBrowser()
     {

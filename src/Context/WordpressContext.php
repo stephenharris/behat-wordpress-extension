@@ -11,6 +11,26 @@ use function PaulGibbs\WordpressBehatExtension\is_wordpress_error;
 class WordpressContext extends RawWordpressContext
 {
     /**
+     * Clear object cache.
+     *
+     * @AfterScenario
+     */
+    public function clearCache()
+    {
+        parent::clearCache();
+    }
+
+    /**
+     * Clear Mink's browser environment.
+     *
+     * @AfterScenario
+     */
+    public function resetBrowser()
+    {
+        parent::resetBrowser();
+    }
+
+    /**
      * Open the dashboard.
      *
      * Example: Given I am on the dashboard
