@@ -111,9 +111,9 @@
 <p>Extension <code>PaulGibbs\WordpressBehatExtension</code> integrates WordPress into Behat. These are its configuration options:</p>
 <pre><code class="language-YAML">PaulGibbs\WordpressBehatExtension:
   default_driver: wpcli
-  path: /www/example.com
-  wpcli:
-    alias: dev
+  path: ~
+
+  # User settings.
   users:
     admin:
       username: admin
@@ -130,8 +130,15 @@
     subscriber:
       username: subscriber
       password: subscriber
+
+  # WordPress settings.
   permalinks:
-    author_archive: author/%s/</code></pre>
+    author_archive: author/%s/
+  siteurl: ~
+
+  # Driver settings.
+  wpcli:
+    alias: dev</code></pre>
 <table>
 <thead>
 <tr>
@@ -143,32 +150,56 @@
 <tbody>
 <tr>
 <td><code>default_driver</code></td>
-<td><em>wpcli</em></td>
-<td>The <a href="drivers.html">driver</a> to use (&quot;wpcli&quot;, &quot;wpapi&quot;, &quot;blackbox&quot;).</td>
+<td>&quot;wpcli&quot;</td>
+<td><em>Optional</em>.<br>The <a href="drivers.html">driver</a> to use (&quot;wpcli&quot;, &quot;wpapi&quot;, &quot;blackbox&quot;).</td>
 </tr>
 <tr>
 <td><code>path</code></td>
-<td><em>null</em></td>
-<td><em>Optional</em>. Path to WordPress files.</td>
-</tr>
-<tr>
-<td><code>wpcli.alias</code></td>
-<td><em>null</em></td>
-<td><em>Optional</em>. <a href="https://wp-cli.org/commands/cli/alias/">WP-CLI alias</a> (preferred over <code>wpcli.path</code>).</td>
+<td>null</td>
+<td><em>Required</em>.<br>Path to WordPress files.</td>
 </tr>
 <tr>
 <td><code>users.*</code></td>
 <td><em>see example</em></td>
-<td>Keys must match names of WordPress roles.</td>
+<td><em>Optional</em>.<br>Keys must match names of WordPress roles.</td>
 </tr>
 <tr>
 <td><code>permalinks.*</code></td>
 <td><em>see example</em></td>
-<td>Permalink pattern for the specified kind of link.<br><code>%s</code> is replaced with user ID/nicename/etc, as appropriate.</td>
+<td><em>Optional</em>.<br>Permalink pattern for the specific kind of link.<br><code>%s</code> is replaced with an ID/object name, as appropriate.</td>
+</tr>
+<tr>
+<td><code>siteurl</code></td>
+<td>null</td>
+<td><em>Optional</em>.<br>If your site's <code>home_url()</code> and <code>site_url()</code> values <a href="http://wordpress.stackexchange.com/a/50605">mismatch</a>,<br>set this to the <code>site_url()</code> value.</td>
+</tr>
+<tr>
+<td><code>wpcli.alias</code></td>
+<td>null</td>
+<td><em>Optional</em>.<br><a href="https://wp-cli.org/commands/cli/alias/">WP-CLI alias</a> (preferred over <code>wpcli.path</code>).</td>
 </tr>
 </tbody>
 </table>
 <h2 id="behatminkextension">Behat\MinkExtension</h2>
+<pre><code class="language-YAML">Behat\MinkExtension:
+  # Recommended settings.
+  base_url: ~</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>base_url</code></td>
+<td><em>null</em></td>
+<td>If you use relative paths in your tests, define a URL to use as the basename.</td>
+</tr>
+</tbody>
+</table>
 <p>Extension <code>Behat\MinkExtension</code> integrates Mink into Behat. <a href="http://mink.behat.org/en/latest/">Visit its website</a> for more information.</p>
                 </section>
 
