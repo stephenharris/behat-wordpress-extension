@@ -63,6 +63,10 @@ class WpcliDriver extends BaseDriver
             $this->wpcli('cli', 'version');
         } catch (UnexpectedValueException $e) {
             preg_match('#^WP-CLI driver query failure: WP-CLI (\d\.\d\.\d)$#', $e->getMessage(), $match);
+            if (empty($match)) {
+                throw $e;
+            }
+
             $version = array_pop($match);
         }
 
