@@ -80,6 +80,9 @@ class WordpressBehatExtension implements ExtensionInterface
                 ->end()
                 ->scalarNode('path')->end()
 
+                // WordPress' "siteurl" option.
+                ->scalarNode('site_url')->end()
+
                 // Account roles -> username/password.
                 ->arrayNode('users')
                     ->addDefaultsIfNotSet()

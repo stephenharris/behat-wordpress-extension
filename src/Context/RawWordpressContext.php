@@ -38,6 +38,25 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
     }
 
     /**
+     * Build URL, based on provided path.
+     *
+     * @param string $path Relative or absolute URL.
+     * @return string
+     */
+    public function locatePath($path)
+    {
+        if (strtolower(substr($path, 0, '4')) === 'http') {
+            return $path;
+        }
+
+        $home = $this->getMinkParameter('base_url');
+        $site = $this->getWordpressParameter('site_url');
+        $url  = $site ?: $home;
+
+        return rtrim($url, '/') . '/' . ltrim($path, '/');
+    }
+
+    /**
      * Set WordPress instance.
      *
      * @param WordpressDriverManager $wordpress
