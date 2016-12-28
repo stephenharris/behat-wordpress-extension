@@ -36,8 +36,6 @@ class WordpressBehatExtension implements ExtensionInterface
     public function __construct(ServiceProcessor $processor = null)
     {
         $this->processor = $processor ?: new ServiceProcessor();
-
-        require_once dirname( __FILE__ ) . '/../utility.php';
     }
 
     /**
