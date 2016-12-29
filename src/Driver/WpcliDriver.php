@@ -53,11 +53,6 @@ class WpcliDriver extends BaseDriver
      */
     public function bootstrap()
     {
-        $status = $this->wpcli('core', 'is-installed')['exit_code'];
-        if ($status !== 0) {
-            throw new RuntimeException('WP-CLI driver cannot find WordPress. Check "path" and/or "alias" settings.');
-        }
-
         try {
             $version = '';
             $this->wpcli('cli', 'version');
@@ -72,6 +67,11 @@ class WpcliDriver extends BaseDriver
 
         if (! version_compare($version, '0.24.0', '>=')) {
             throw new RuntimeException('Your WP-CLI is too old; version 0.24.0 or newer is required.');
+        }
+
+        $status = $this->wpcli('core', 'is-installed')['exit_code'];
+        if ($status !== 0) {
+            throw new RuntimeException('WP-CLI driver cannot find WordPress. Check "path" and/or "alias" settings.');
         }
 
         $this->is_bootstrapped = true;
