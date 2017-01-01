@@ -15,8 +15,8 @@ WP_CLI::add_hook('before_ssh', function () {
 
     // Have remote WP-CLI download the custom logger and verify checksum.
     $command = sprintf(
-        'curl %1$s --create-dirs -o %2$s -s -S && CHECKSUM=$(cat %2$s | openssl dgst -sha1 -binary | xxd -p) && [ "$CHECKSUM" = "2dd805188481c5f4034b1a5c1073dcda8eac9261" ] || { echo >&2 "WP-CLI driver SSH bad checksum."; exit 1; }',
-        'https://gist.githubusercontent.com/paulgibbs/8b9bae17ba66d03644a8520762f9ca1b/raw/0591a77f09a013cc7bddc2bf139d73b7d50d01e6/wpcli-shouty-logger.php',
+        'curl %1$s --create-dirs -o %2$s -s -S && CHECKSUM=$(cat %2$s | openssl dgst -sha1 -binary | xxd -p) && [ "$CHECKSUM" = "37102b5be88d7ef85ead5c4cf4c74e06d89ac3e9" ] || { echo >&2 "WP-CLI driver SSH bad checksum."; exit 1; }',
+        'https://raw.githubusercontent.com/paulgibbs/Shouty-Logger-for-WP-CLI/96d56f7f4c9a871638bd4ccaed6211b7ba138e85/wpcli-shouty-logger.php',
         $bootstrap
     );
 
