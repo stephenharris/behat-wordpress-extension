@@ -123,7 +123,7 @@ class WpcliDriver extends BaseDriver
         $wpcli_args = '--no-color --require=src/WpcliLogger.php';
 
         // Query WP-CLI.
-        exec("{$binary} {$config} {$command} {$subcommand} {$arguments} {$wpcli_args} 2>&1", $cmd_output, $exit_code);
+        exec("{$binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1", $cmd_output, $exit_code);
         $cmd_output = implode(PHP_EOL, $cmd_output);
 
         if ($cmd_output) {
