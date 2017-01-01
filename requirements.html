@@ -90,17 +90,51 @@
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     <h1 id="requirements">Requirements</h1>
-<ul>
-<li>A <a href="https://wordpress.org/">WordPress</a> site, running version 4.7+.</li>
-<li>PHP 5.6+, with the <a href="https://curl.haxx.se/libcurl/php/install.html">cURL extension</a>.</li>
-<li><a href="https://getcomposer.org/">Composer</a>.</li>
-<li><a href="http://docs.seleniumhq.org/download/">Selenium</a> (the &quot;Standalone Server&quot; version).</li>
-</ul>
-<h2 id="driver-requirements">Driver requirements</h2>
-<p>The <a href="drivers.html">WP-CLI driver</a> requires <a href="http://wp-cli.org/">WP-CLI</a> (version 0.24.0 or newer), to be installed globally:</p>
-<pre><code class="language-Shell">  curl -o wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-  chmod +x wp</code></pre>
-<p>The executable <em>must</em> be named <code>wp</code> and be within your system's <a href="https://en.wikipedia.org/wiki/PATH_(variable)">$PATH</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Minimum required version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://getcomposer.org/">Composer</a></td>
+<td>*</td>
+</tr>
+<tr>
+<td><a href="https://php.net/">PHP</a></td>
+<td>&gt;= 5.6</td>
+</tr>
+<tr>
+<td><a href="https://wordpress.org/">WordPress</a></td>
+<td>&gt;= 4.7</td>
+</tr>
+</tbody>
+</table>
+<h1 id="suggested-extras">Suggested extras</h1>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Minimum required version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://docs.seleniumhq.org/download/">Selenium standalone</a><sup><a href="#SEL">1</a></sup></td>
+<td>&gt;= 3.0.1</td>
+</tr>
+<tr>
+<td><a href="https://wp-cli.org/">WP-CLI</a><sup><a href="#WP-CLI">2</a></sup></td>
+<td>&gt;= 0.24.0</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Recommended for testing <a href="http://mink.behat.org/en/latest/guides/drivers.html" id="SEL">websites that require Javascript</a>. Requires the <a href="https://packagist.org/packages/behat/mink-selenium2-driver">Mink Selenium2 driver</a> in your project.</li>
+<li>The WP-CLI executable <em>must</em> be named <code>wp</code> and be within your system's <a href="https://en.wikipedia.org/wiki/PATH_(variable)" id="WP-CLI">$PATH</a>.</li>
+</ol>
                 </section>
 
             </div>
