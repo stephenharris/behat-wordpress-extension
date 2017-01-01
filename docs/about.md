@@ -4,7 +4,7 @@ currentMenu: about
 
 # About
 
-WordHat is a [Behat](http://behat.org) extension, integrating Behat, [Mink](https://github.com/Behat/MinkExtension), and [WordPress](https://wordpress.org). It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.
+Welcome! WordHat is a [Behat](http://behat.org) extension, integrating Behat, [Mink](https://github.com/Behat/MinkExtension), and [WordPress](https://wordpress.org). It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.
 
 
 ## What does Behat and Mink do?
@@ -25,4 +25,4 @@ The extension provides [step definitions](http://docs.behat.org/en/latest/user_g
 
 ## Contributions are welcomed!
 
-If you encounter a bug, have a suggestion, or would like to help the project grow, please get in contact via [Github](https://github.com/paulgibbs/behat-wordpress-extension). Thank you!
+If you encounter a bug, have a suggestion, or would like to help the project grow, please get in contact via [Github](https://github.com/paulgibbs/behat-wordpress-extension).
