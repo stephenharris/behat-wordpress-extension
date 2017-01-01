@@ -4,18 +4,19 @@ currentMenu: requirements
 
 # Requirements
 
-* A [WordPress](https://wordpress.org/) site, running version 4.7+.
-* PHP 5.6+, with the [cURL extension](https://curl.haxx.se/libcurl/php/install.html).
-* [Composer](https://getcomposer.org/).
-* [Selenium](http://docs.seleniumhq.org/download/) (the "Standalone Server" version).
+Package                              | Minimum required version
+------------------------------------ | ------------------------
+[Composer](https://getcomposer.org/) | *
+[PHP](https://php.net/)              | >= 5.6
+[WordPress](https://wordpress.org/)  | >= 4.7
 
 
-## Driver requirements
+# Suggested extras
 
-The [WP-CLI driver](drivers.html) requires [WP-CLI](http://wp-cli.org/) (version 0.24.0 or newer), to be installed globally:
-  ```Shell
-  curl -o wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-  chmod +x wp
-  ```
+Package                              | Minimum required version
+------------------------------------ | ------------------------
+[Selenium standalone](http://docs.seleniumhq.org/download/)<sup>[1](#SEL)</sup> | >= 3.0.1
+[WP-CLI](https://wp-cli.org/)<sup>[2](#WP-CLI)</sup>                            | >= 0.24.0
 
-  The executable *must* be named `wp` and be within your system's [$PATH](https://en.wikipedia.org/wiki/PATH_(variable)).
+1. Recommended for testing <a href="http://mink.behat.org/en/latest/guides/drivers.html" id="SEL">websites that require Javascript</a>. Requires the [Mink Selenium2 driver](https://packagist.org/packages/behat/mink-selenium2-driver) in your project.
+1. The WP-CLI executable *must* be named `wp` and be within your system's <a href="https://en.wikipedia.org/wiki/PATH_(variable)" id="WP-CLI">$PATH</a>.
