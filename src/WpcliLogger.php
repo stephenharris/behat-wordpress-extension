@@ -25,5 +25,4 @@ WP_CLI::add_hook('before_ssh', function () {
 
     // Modify `--require` arg to have remote WP-CLI load the custom logger.
     $GLOBALS['argv'][$option] = "--require={$bootstrap}";
-    $GLOBALS['argv'][]        = '--debug';
 });
