@@ -1,6 +1,5 @@
 vendor/
 behat.yml
-node_modules
 .DS_Store
 .couscous
 npm-debug.log
