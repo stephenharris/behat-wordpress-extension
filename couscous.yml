@@ -53,3 +53,4 @@ googleAnalyticsCode: UA-88402256-1
 logo: //paulgibbs.github.io/wordhat/lettermark.svg
 subTitle: Behat for WordPress
 title: WordHat
+metadescription: WordHat is a Behat extension, providing WordPress-specific functionality for common testing scenarios specific to WordPress sites.
