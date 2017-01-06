@@ -46,7 +46,7 @@ menu:
       text: Credits
       relativeUrl: credits.html
 
-baseUrl: http://wordhat.info/
+baseUrl: https://wordhat.info/
 branch: gh-pages
 cname: wordhat.info
 googleAnalyticsCode: UA-88402256-1
