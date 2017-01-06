@@ -11,6 +11,35 @@
         <link rel="stylesheet" href="http://wordhat.info/css/highlight.dark.css">
         <link rel="stylesheet" href="http://wordhat.info/css/main.css">
         <meta name="description" content="WordHat is a Behat extension, providing WordPress-specific functionality for common testing scenarios specific to WordPress sites."/>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script async src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+
+        <script>
+            (function($) {
+                $(document).ready(function() {
+                    hljs.initHighlightingOnLoad();
+
+                    $("section>h1").wrap('<div class="page-header" />');
+                    $('table').map(function() {
+                        var table = $(this);
+                        table.addClass('table table-striped');
+                        table.wrap(function() {
+                            return '<div class="table-responsive"></div>';
+                        });
+                    });
+                });
+            })(jQuery);
+
+                            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-88402256-1', 'auto');
+                ga('send', 'pageview');
+                    </script>
     </head>
     <body>
 
@@ -110,32 +139,5 @@
         </main>
 
         
-        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
-
-        <script>
-            $(function() {
-                hljs.initHighlightingOnLoad();
-
-                $("section>h1").wrap('<div class="page-header" />');
-                $('table').map(function() {
-                    var table = $(this);
-                    table.addClass('table table-striped');
-                    table.wrap(function() {
-                        return '<div class="table-responsive"></div>';
-                    });
-                });
-            });
-
-                            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-                ga('create', 'UA-88402256-1', 'auto');
-                ga('send', 'pageview');
-                    </script>
-
     </body>
 </html>
