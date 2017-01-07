@@ -118,9 +118,15 @@ class WpcliDriver extends BaseDriver
             $binary = 'wp';
         }
 
+        // Adjust bootstrap path, dependant on if WordHat is a Composer dependancy, or being run directly.
+        $package = '/vendor/paulgibbs/behat-wordpress-extension';
+        if ($package === substr(getcwd(), -strlen($package))) {
+            $package = '';
+        }
+
         $cmd_output = [];
         $exit_code  = 0;
-        $wpcli_args = '--no-color --require=src/WpcliLogger.php';
+        $wpcli_args = sprintf('--no-color --require=%1$s%2$s/src/WpcliLogger.php', getcwd(), $package);
 
         // Query WP-CLI.
         exec("{$binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1", $cmd_output, $exit_code);

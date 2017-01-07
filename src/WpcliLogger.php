@@ -6,12 +6,31 @@ if (! defined('WP_CLI') || ! WP_CLI) {
 
 // Have the remote WP-CLI configure itself to use a custom logger.
 WP_CLI::add_hook('before_ssh', function () {
-    $option = array_search('--require=src/WpcliLogger.php', $GLOBALS['argv'], true);
-    if ($option === false) {
-        return;
+    $args_count = count($GLOBALS['argv']);
+    $bootstrap  = '/tmp/wordhat-wpcli-bootstrap.php';
+    $option     = null;
+
+    // Find the position of the --require=... arg.
+    for ($i = 0; $i < $args_count; $i++) {
+        if (strpos($GLOBALS['argv'][$i], '--require=') !== 0) {
+            continue;
+        }
+
+        $regex  = '#^--require=(?:[\d\w/]*)/vendor/paulgibbs/behat-wordpress-extension/src/WpcliLogger.php$#i';
+        $result = preg_match($regex, $GLOBALS['argv'][$i]);
+
+        if ($result !== 1) {
+            continue;
+        }
+
+        // We've found the correct argument.
+        $option = $i;
+        break;
     }
 
-    $bootstrap = '/tmp/wordhat-wpcli-bootstrap.php';
+    if ($option === null) {
+        return;
+    }
 
     // Have remote WP-CLI download the custom logger and verify checksum.
     $command = sprintf(
