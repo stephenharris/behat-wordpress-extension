@@ -17,6 +17,12 @@ class WpapiDriver extends BaseDriver
      */
     protected $path = '';
 
+    /**
+     * WordPres database object.
+     *
+     * @var \wpdb
+     */
+    protected $wpdb = null;
 
     /**
      * Constructor.
@@ -53,6 +59,7 @@ class WpapiDriver extends BaseDriver
         // "Cry 'Havoc!' and let slip the dogs of war".
         require_once "{$this->path}/wp-blog-header.php";
 
+        $this->wpdb            = $GLOBALS['wpdb'];
         $this->is_bootstrapped = true;
     }
 
@@ -306,26 +313,19 @@ class WpapiDriver extends BaseDriver
 
     /**
      * Start a database transaction.
-     *
-     * Violating dependency injection because WordPress.
      */
     public function startTransaction()
     {
-        global $wpdb;
-
-        $wpdb->query('SET autocommit = 0;');
-        $wpdb->query('START TRANSACTION;');
+        $this->wpdb->query('SET autocommit = 0;');
+        $this->wpdb->query('START TRANSACTION;');
     }
 
     /**
      * End (rollback) a database transaction.
-     *
-     * Violating dependency injection because WordPress.
      */
     public function endTransaction()
     {
-        global $wpdb;
-        $wpdb->query('ROLLBACK;');
+        $this->wpdb->query('ROLLBACK;');
     }
 
 
