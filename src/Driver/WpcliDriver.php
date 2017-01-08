@@ -120,7 +120,7 @@ class WpcliDriver extends BaseDriver
 
         // Adjust bootstrap path, dependant on if WordHat is a Composer dependancy, or being run directly.
         $package = '/vendor/paulgibbs/behat-wordpress-extension';
-        if ($package === substr(getcwd(), -strlen($package))) {
+        if ($package !== substr(getcwd(), -strlen($package))) {
             $package = '';
         }
 
