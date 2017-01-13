@@ -14,13 +14,13 @@ menu:
       text: About
       relativeUrl: about.html
 
-    requirements:
-      text: Requirements
-      relativeUrl: requirements.html
-
     installation:
       text: Installation
       relativeUrl: installation.html
+      items:
+        requirements:
+          text: Requirements
+          relativeUrl: requirements.html
 
     settings:
       text: Settings
