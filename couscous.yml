@@ -38,6 +38,10 @@ menu:
       text: Contexts
       relativeUrl: contexts.html
 
+    faq:
+      text: FAQs
+      relativeUrl: faq.html
+
     license:
       text: License
       relativeUrl: license.html
