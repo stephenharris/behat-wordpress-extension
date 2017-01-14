@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                                                                                                                <title>Settings -- WordHat</title>
-                                                                                                                                                                                
+                                                                                                                                                                                                    <title>FAQs -- WordHat</title>
+                                                                                            
         <link rel="stylesheet" href="https://wordhat.info/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://wordhat.info/css/highlight.dark.css">
         <link rel="stylesheet" href="https://wordhat.info/css/main.css">
@@ -80,7 +80,7 @@
                                                 Installation
                                             </a>
                                         </li>
-                                                                            <li class="active">
+                                                                            <li class="">
                                             <a href="https://wordhat.info/settings.html">
                                                 Settings
                                             </a>
@@ -95,7 +95,7 @@
                                                 Contexts
                                             </a>
                                         </li>
-                                                                            <li class="">
+                                                                            <li class="active">
                                             <a href="https://wordhat.info/faq.html">
                                                 FAQs
                                             </a>
@@ -117,119 +117,21 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                                                                                                                                                                                                                <nav id="topbar" role="navigation">
-
-                                    <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a href="https://wordhat.info/settings.html">
-                                                Settings
-                                            </a>
-                                        </li>
-
-                                                                                    <li class="">
-                                                <a href="https://wordhat.info/environment-settings.html">
-                                                    Environment
-                                                </a>
-                                            </li>
-                                                                            </ul>
-                                </nav>
-                                                                                                                                                                                                                                                                                                                                            
-                    <h1 id="settings">Settings</h1>
-<p>Behat uses <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> for its configuration file.</p>
-<h2 id="paulgibbswordpressbehatextension">PaulGibbs\WordpressBehatExtension</h2>
-<p>Extension <code>PaulGibbs\WordpressBehatExtension</code> integrates WordPress into Behat. These are its configuration options:</p>
-<pre><code class="language-YAML">PaulGibbs\WordpressBehatExtension:
-  default_driver: wpcli
-  path: ~
-
-  # User settings.
-  users:
-    admin:
-      username: admin
-      password: admin
-    editor:
-      username: editor
-      password: editor
-    author:
-      username: author
-      password: author
-    contributor:
-      username: contributor
-      password: contributor
-    subscriber:
-      username: subscriber
-      password: subscriber
-
-  # WordPress settings.
-  permalinks:
-    author_archive: author/%s/
-  siteurl: ~
-
-  # Driver settings.
-  wpcli:
-    alias: dev</code></pre>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>default_driver</code></td>
-<td>&quot;wpcli&quot;</td>
-<td><em>Optional</em>.<br>The <a href="drivers.html">driver</a> to use (&quot;wpcli&quot;, &quot;wpapi&quot;, &quot;blackbox&quot;).</td>
-</tr>
-<tr>
-<td><code>path</code></td>
-<td>null</td>
-<td><em>Required</em>.<br>Path to WordPress files.</td>
-</tr>
-<tr>
-<td><code>users.*</code></td>
-<td><em>see example</em></td>
-<td><em>Optional</em>.<br>Keys must match names of WordPress roles.</td>
-</tr>
-<tr>
-<td><code>permalinks.*</code></td>
-<td><em>see example</em></td>
-<td><em>Optional</em>.<br>Permalink pattern for the specific kind of link.<br><code>%s</code> is replaced with an ID/object name, as appropriate.</td>
-</tr>
-<tr>
-<td><code>site_url</code></td>
-<td>null</td>
-<td><em>Optional</em>.<br>If your site's <code>home_url()</code> and <code>site_url()</code> values <a href="http://wordpress.stackexchange.com/a/50605">mismatch</a>,<br>set this to the <code>site_url()</code> value.</td>
-</tr>
-<tr>
-<td><code>wpcli.alias</code></td>
-<td>null</td>
-<td><em>Optional</em>.<br><a href="https://wp-cli.org/commands/cli/alias/">WP-CLI alias</a> (preferred over <code>wpcli.path</code>).</td>
-</tr>
-</tbody>
-</table>
-<h2 id="behatminkextension">Behat\MinkExtension</h2>
-<pre><code class="language-YAML">Behat\MinkExtension:
-  # Recommended settings.
-  base_url: ~</code></pre>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>base_url</code></td>
-<td><em>null</em></td>
-<td>If you use relative paths in your tests, define a URL to use as the basename.</td>
-</tr>
-</tbody>
-</table>
-<p>Extension <code>Behat\MinkExtension</code> integrates Mink into Behat. <a href="http://mink.behat.org/en/latest/">Visit its website</a> for more information.</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    <h1 id="faqs">FAQs</h1>
+<h2 id="composer">Composer</h2>
+<ul>
+<li>WordHat does not support a custom <code>vendor-bin</code> for Composer if you are using the <a href="drivers.html">WP-CLI driver</a>. <a href="https://github.com/paulgibbs/behat-wordpress-extension/issues/16">#16</a></li>
+</ul>
+<h2 id="javascript">Javascript</h2>
+<ul>
+<li>If you are using <a href="http://docs.seleniumhq.org/download/">Selenium</a> to run Javascript tests, and you access your WordPress site over HTTPS, <em>and</em> it has a self-signed certificate, you will need to manually configure the web browser to accept that certificate.</li>
+</ul>
+<h2 id="wp-cli">WP-CLI</h2>
+<ul>
+<li>If your WordPress site causes PHP notices or errors during WP-CLI execution, or prints to <code>error_log</code>, Behat will interpret this as an error (<code>UnexpectedValueException</code>). The solution is to fix the code in the plugin or theme.</li>
+<li>If you are using the WP-CLI driver to <a href="https://wp-cli.org/blog/version-0.24.0.html#but-wait-whats-the-ssh-in-there">connect to a remote WordPress site over SSH</a>, WordHat assumes the remote server is Linux-like, with a shell that provides <a href="https://www.gnu.org/software/coreutils/coreutils.html">GNU Coreutils</a>.</li>
+</ul>
                 </section>
 
             </div>
