@@ -35,10 +35,6 @@ before_install:
 install:
   - phpenv config-rm xdebug.ini
 
-  # Build plugin
-  - mkdir $(pwd)/build;
-  - cp -r !(build) $(pwd)/build/
-
   # Install dependencies
   - composer validate
   - composer update --no-interaction --prefer-dist --no-progress;
