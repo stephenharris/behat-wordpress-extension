@@ -37,7 +37,7 @@ install:
 
   # Install dependencies
   - composer validate
-  - composer update --no-interaction --prefer-dist --no-progress;
+  - composer install --no-interaction --prefer-dist --no-progress;
 
   # install wordpress
   - bash ./ci/prepare.sh wordpress root '' localhost $WP_VERSION
