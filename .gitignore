@@ -1,5 +1,6 @@
 vendor/
-behat.yml
+/behat.yml
+
 .DS_Store
 .couscous
 npm-debug.log
