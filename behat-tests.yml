@@ -24,7 +24,6 @@ default:
           selenium2: ~
 
     PaulGibbs\WordpressBehatExtension:
-      default_driver: wpapi
       path: www
       users:
         admin:
