@@ -48,7 +48,7 @@ install:
 
   # install wordpress
   - bash ./bin/prepare.sh wordpress root '' localhost $WP_VERSION
-  - mv ci/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
+  - mv bin/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
 
   # start selenium
   - bash ./bin/pre-behat.sh
