@@ -429,4 +429,23 @@ class WpcliDriver extends BaseDriver
 
         $this->wpcli('user', 'delete', $wpcli_args);
     }
+
+    /**
+     * Get a User's ID from their username.
+     *
+     * @param string $username The username of the user to get the ID of
+     * @return int ID of the user user.
+     * @throws \UnexpectedValueException If provided data is invalid
+     */
+    public function getUserIdFromLogin($username)
+    {
+        $wpcli_args = [$username, '--field=ID'];
+
+        $userId = (int) $this->wpcli('user', 'get', $wpcli_args);
+
+        if (! $userId) {
+            throw new UnexpectedValueException(sprintf('User "%s" not found', $username));
+        }
+        return $userId;
+    }
 }
