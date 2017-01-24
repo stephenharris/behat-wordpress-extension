@@ -15,7 +15,7 @@ function get_download_script($download_path)
 {
     // Have remote WP-CLI download the custom logger and verify checksum.
     return sprintf(
-        'curl %1$s --create-dirs -o %2$s -s -S && CHECKSUM=$(cat %2$s | openssl dgst -sha1 -binary | xxd -p) && [ "$CHECKSUM" = "37102b5be88d7ef85ead5c4cf4c74e06d89ac3e9" ] || { echo >&2 "WP-CLI driver SSH bad checksum."; exit 1; }',
+        'curl %1$s --create-dirs -o %2$s -s -S && CHECKSUM=$(cat %2$s | openssl dgst -sha1 | sed \'s/^.* //\') && [ "$CHECKSUM" = "37102b5be88d7ef85ead5c4cf4c74e06d89ac3e9" ] || { echo >&2 "WP-CLI driver SSH bad checksum."; exit 1; }',
         'https://raw.githubusercontent.com/paulgibbs/Shouty-Logger-for-WP-CLI/96d56f7f4c9a871638bd4ccaed6211b7ba138e85/wpcli-shouty-logger.php',
         $download_path
     );
