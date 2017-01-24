@@ -23,6 +23,3 @@ java -jar selenium-server-standalone-2.53.1.jar -p $SELENIUM_PORT > /dev/null 2>
 
 # Wait for Selenium, if necessary
 wait_for_port $SELENIUM_PORT
-
-echo 'waiting to start tests...';
-sleep 5

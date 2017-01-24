@@ -47,11 +47,11 @@ install:
   - composer install --no-interaction --prefer-dist --no-progress;
 
   # install wordpress
-  - bash ./ci/prepare.sh wordpress root '' localhost $WP_VERSION
-  - mv ci/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
+  - bash ./bin/prepare.sh wordpress root '' localhost $WP_VERSION
+  - mv bin/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
 
   # start selenium
-  - bash ./ci/pre-behat.sh
+  - bash ./bin/pre-behat.sh
 
 before_script:
 
