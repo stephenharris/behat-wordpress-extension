@@ -26,17 +26,6 @@ class ContentContext extends RawWordpressContext
         }
     }
 
-    private function parseArgs($postData)
-    {
-        if (isset($postData['post_author'])) {
-            $user = get_user_by('login', $postData['post_author']);
-            if (! ( $user instanceof \WP_User )) {
-                throw new \Exception(sprintf('User "%s" not found', $postData['post_author']));
-            }
-            $postData['post_author'] = (int) $user->ID;
-        }
-        return $postData;
-    }
     /**
      * Create content, and go to it in the browser.
      *
@@ -50,7 +39,24 @@ class ContentContext extends RawWordpressContext
      */
     public function iAmViewingBlogPost(TableNode $post_data)
     {
-        $post = $this->createContent($post_data->getHash());
+        $post = $this->createContent($this->parseArgs($post_data->getHash()));
         $this->visitPath(sprintf('?p=%d', (int) $post['id']));
+    }
+
+    /**
+     * Converts data from TableNode into a format understood by Driver\DriverInterface;
+     * i.e. converts public identifiers (such as slugs, log-ins) to internal identifiers
+     * (such as database IDs).
+     * @param $postData array
+     * @return array
+     * @throws \UnexpectedValueException If provided data is invalid
+     */
+    private function parseArgs($postData)
+    {
+        if (isset($postData['post_author'])) {
+            $userId = $this->getDriver()->getUserIdFromLogin($postData['post_author']);
+            $postData['post_author'] = (int) $userId;
+        }
+        return $postData;
     }
 }
