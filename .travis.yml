@@ -74,4 +74,5 @@ addons:
   artifacts:
     debug: true
     paths:
-      - $($(HOME)/failed/* | tr "\n" ":")
+      - $(pwd)/failed
+      - $($(pwd)/failed/* | tr "\n" ":")
