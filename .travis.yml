@@ -72,4 +72,4 @@ addons:
   artifacts:
     debug: true
     paths:
-    - $(${HOME}/failed/* | tr "\n" ":")
+      - $($(HOME)/failed/* | tr "\n" ":")
