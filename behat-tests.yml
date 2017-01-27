@@ -2,7 +2,8 @@ default:
   suites:
     default:
       contexts:
-        - FeatureContext
+        - FeatureContext:
+            screenshot_dir: '%paths.base%/failed/'
         - Behat\MinkExtension\Context\MinkContext
         - PaulGibbs\WordpressBehatExtension\Context\ContentContext
         - PaulGibbs\WordpressBehatExtension\Context\DashboardContext

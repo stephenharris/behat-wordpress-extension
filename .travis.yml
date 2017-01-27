@@ -46,6 +46,8 @@ install:
   - composer validate
   - composer install --no-interaction --prefer-dist --no-progress;
 
+  - mkdir $(pwd)/failed
+
   # install wordpress
   - bash ./bin/prepare.sh wordpress root '' localhost $WP_VERSION
   - mv bin/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
@@ -65,3 +67,9 @@ script:
 
 after_success:
   - vendor/bin/couscous travis-auto-deploy --php-version=7.1
+
+addons:
+  artifacts:
+    debug: true
+    paths:
+    - $(${HOME}/failed/* | tr "\n" ":")
