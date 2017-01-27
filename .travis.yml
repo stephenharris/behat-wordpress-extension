@@ -64,6 +64,8 @@ script:
   # Run behat tests.
   - vendor/bin/behat --config behat-tests.yml
 
+  - ls $(pwd)/failed
+
 
 after_success:
   - vendor/bin/couscous travis-auto-deploy --php-version=7.1
