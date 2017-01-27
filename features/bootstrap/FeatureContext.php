@@ -1,7 +1,9 @@
 <?php
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 
-use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Context\SnippetAcceptingContext,
+    Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Testwork\Tester\Result\TestResult;
 
 /**
  * Define application features from the specific context.
