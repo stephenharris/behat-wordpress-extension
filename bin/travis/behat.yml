@@ -1,8 +1,9 @@
 default:
   suites:
     default:
+      paths:
+        - %paths.base%/../../features
       contexts:
-        - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
         - PaulGibbs\WordpressBehatExtension\Context\ContentContext
         - PaulGibbs\WordpressBehatExtension\Context\DashboardContext
@@ -12,7 +13,7 @@ default:
 
   extensions:
     Behat\MinkExtension:
-      base_url: http://wordpress.dev
+      base_url: http://wordpress.dev:8080
       default_session: default
       javascript_session: selenium2
       sessions:

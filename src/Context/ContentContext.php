@@ -2,12 +2,26 @@
 namespace PaulGibbs\WordpressBehatExtension\Context;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Testwork\Tester\Result\TestResult;
 
 /**
  * Provides step definitions for creating content: post types, comments, and terms.
  */
 class ContentContext extends RawWordpressContext
 {
+    /**
+     * @AfterScenario
+     */
+    public function printPageMarkUpAfterFailedStep(AfterScenarioScope $scope)
+    {
+        if (TestResult::FAILED === $scope->getTestResult()->getResultCode()) {
+            echo 'URL:';
+            echo $this->getSession()->getCurrentUrl();
+        }
+    }
+
     /**
      * Create content of the given type.
      *
