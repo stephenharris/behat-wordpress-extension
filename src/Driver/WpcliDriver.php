@@ -50,9 +50,9 @@ class WpcliDriver extends BaseDriver
         $this->url   = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
 
         //Support Windows
-        if (is_null( $binary ) && DIRECTORY_SEPARATOR === '\\') {
+        if (is_null($binary) && DIRECTORY_SEPARATOR === '\\') {
             $this->binary = 'wp.bat';
-        } elseif (! is_null( $binary)) {
+        } elseif (! is_null($binary)) {
             $this->binary = $binary;
         }
     }
@@ -124,7 +124,7 @@ class WpcliDriver extends BaseDriver
         }
 
         //Absolute path to the WordHat src directory
-        $src = dirname( __DIR__ );
+        $src = dirname(__DIR__);
 
         $cmd_output = [];
         $exit_code  = 0;
@@ -132,9 +132,9 @@ class WpcliDriver extends BaseDriver
 
         // Query WP-CLI.
         exec(
-         "{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1",
-         $cmd_output,
-         $exit_code
+            "{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1",
+            $cmd_output,
+            $exit_code
         );
         $cmd_output = implode(PHP_EOL, $cmd_output);
 

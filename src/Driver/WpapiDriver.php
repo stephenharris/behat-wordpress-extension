@@ -131,7 +131,7 @@ class WpapiDriver extends BaseDriver
             return;
         }
 
-        switch_theme( $the_theme->get_template() );
+        switch_theme($the_theme->get_template());
     }
 
     /**

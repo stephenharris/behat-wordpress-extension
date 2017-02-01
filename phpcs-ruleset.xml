@@ -2,4 +2,10 @@
 <ruleset name="Behat for WordPress coding standards">
   <rule ref="PSR1" />
   <rule ref="PSR2" />
+  <rule ref="PSR2.Methods.FunctionCallSignature.SpaceAfterCloseBracket">
+    <severity>5</severity>
+  </rule>
+  <rule ref="PSR2.Methods.FunctionCallSignature.SpaceAfterOpenBracket">
+    <severity>5</severity>
+  </rule>
 </ruleset>
