@@ -30,19 +30,32 @@ class WpcliDriver extends BaseDriver
      */
     protected $url = '';
 
+    /**
+     * Binary for WP-CLi
+     * Defaults to wp, or wp.bat for Windows installs
+     */
+    protected $binary = 'wp';
 
     /**
      * Constructor.
      *
-     * @param string $alias WP-CLI alias. This or $path must be not falsey.
-     * @param string $path  Absolute path to WordPress site's files. This or $alias must be not falsey.
-     * @param string $url   WordPress site URL.
+     * @param string $alias  WP-CLI alias. This or $path must be not falsey.
+     * @param string $path   Absolute path to WordPress site's files. This or $alias must be not falsey.
+     * @param string $url    WordPress site URL.
+     * @param string $binary Path to the WP-CLI binary
      */
-    public function __construct($alias, $path, $url)
+    public function __construct($alias, $path, $url, $binary)
     {
         $this->alias = ltrim($alias, '@');
         $this->path  = realpath($path);
         $this->url   = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
+
+        //Support Windows
+        if (is_null($binary) && DIRECTORY_SEPARATOR === '\\') {
+            $this->binary = 'wp.bat';
+        } elseif (! is_null($binary)) {
+            $this->binary = $binary;
+        }
     }
 
     /**
@@ -111,25 +124,16 @@ class WpcliDriver extends BaseDriver
             $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
         }
 
-        // Support Windows.
-        if (DIRECTORY_SEPARATOR === '\\') {
-            $binary = 'wp.bat';
-        } else {
-            $binary = 'wp';
-        }
-
-        // Adjust bootstrap path, dependant on if WordHat is a Composer dependancy, or being run directly.
-        $package = '/vendor/paulgibbs/behat-wordpress-extension';
-        if ($package === substr(getcwd(), -strlen($package), strlen($package))) {
-            $package = '';
-        }
-
         $cmd_output = [];
         $exit_code  = 0;
-        $wpcli_args = sprintf('--no-color --require=%1$s%2$s/src/WpcliLogger.php', getcwd(), $package);
+        $wpcli_args = sprintf('--no-color --require=%1$s/WpcliLogger.php', dirname(__DIR__));
 
         // Query WP-CLI.
-        exec("{$binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1", $cmd_output, $exit_code);
+        exec(
+            "{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1",
+            $cmd_output,
+            $exit_code
+        );
         $cmd_output = implode(PHP_EOL, $cmd_output);
 
         if ($cmd_output) {

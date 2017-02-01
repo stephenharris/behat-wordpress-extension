@@ -18,12 +18,15 @@ env:
     - GH_REF: github.com/paulgibbs/behat-wordpress-extension
     - secure: RDArf/FuQFEz0O5n9NnWq9efe8tOH8eQIH28rNhSGA1lZ57zo2+3fU6QRvZrvW4fb7bIN6cvZSlOnsO3RYrf/UUwPSItjn9Jiia1wo70iqvdWw9VRtZ7YWysHkxi3tfEhIoBkHJMXJ7xhPrGg/qAevuoXWAkuocRUg370Fpe1oyMT6FC9brCsfgt6kJeCDEjeRrxUVCaozpTpX8/K/Glfu2lU8jiF6U5GvoT8+fzVsAgs/zJz9CoJcAzhWl/b2UrF5H2pqd6LoNad93NM5c5sG69E3VtuxO0ahECk1d2FttL6cEeSXM81ZRO4tRXfUfkvLu43kRVdNSYdRlD+XjQ2s+GcNvVMvmS/kun19rOxxlf+rgbYMcVoENC/DsSu0Qvk/y++POJHNLVwPECAviHK1qEgvdhMMsN87lh/op0aDLB1mKIYj4DbF5gHt4d16QfAJVTx8SeYbqRJrbHHXcRG3HHWwPp5mxWUoknvAkZgWRqZgByXdW1oB81qqqDZ42L1iGCmjufDYF6gw9dzaUERJzO/EmgS6dqeflUJIYxjn8bNrrCwEvYOTFNElHg78M/hUs046i4Ui9xd1kJUhEKduX9HoLalfzTwF+qAz+lEHOGXkIs/1hWB6UhacggnWPj7/GPXi4OgWwPPgJuHJ+MfmO/frXx3h/mYTx8OzMv8NU=
   matrix:
-    - WP_VERSION=nightly
-    - WP_VERSION=latest
+    - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
+    - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
+    - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
+    - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
 
 matrix:
   allow_failures:
-    - env: WP_VERSION=nightly
+    - env: WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
+    - env: WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
 
 addons:
   apt:
