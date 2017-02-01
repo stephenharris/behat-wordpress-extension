@@ -72,7 +72,5 @@ after_success:
 
 addons:
   artifacts:
-    debug: true
     paths:
       - $(pwd)/failed
-      - $($(pwd)/failed/* | tr "\n" ":")
