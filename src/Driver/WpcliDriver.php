@@ -124,12 +124,9 @@ class WpcliDriver extends BaseDriver
             $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
         }
 
-        //Absolute path to the WordHat src directory
-        $src = dirname(__DIR__);
-
         $cmd_output = [];
         $exit_code  = 0;
-        $wpcli_args = sprintf('--no-color --require=%1$s/WpcliLogger.php', $src);
+        $wpcli_args = sprintf('--no-color --require=%1$s/WpcliLogger.php', dirname(__DIR__));
 
         // Query WP-CLI.
         exec(
