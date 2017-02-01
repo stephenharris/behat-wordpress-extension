@@ -39,11 +39,12 @@ class WpcliDriver extends BaseDriver
     /**
      * Constructor.
      *
-     * @param string $alias WP-CLI alias. This or $path must be not falsey.
-     * @param string $path  Absolute path to WordPress site's files. This or $alias must be not falsey.
-     * @param string $url   WordPress site URL.
+     * @param string $alias  WP-CLI alias. This or $path must be not falsey.
+     * @param string $path   Absolute path to WordPress site's files. This or $alias must be not falsey.
+     * @param string $url    WordPress site URL.
+     * @param string $binary Path to the WP-CLI binary
      */
-    public function __construct($alias, $path, $url, $binary = null)
+    public function __construct($alias, $path, $url, $binary)
     {
         $this->alias = ltrim($alias, '@');
         $this->path  = realpath($path);
