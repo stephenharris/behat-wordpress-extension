@@ -6,7 +6,7 @@ WordHat provides a range of drivers for interacting with the WordPress site you 
 * The **WordPress API** driver loads WordPress in the same PHP context as Behat.
 * The **Blackbox** driver interacts with WordPress through a web browser, in an unpriviledged context.
 
-To specify which driver to use for your tests, set [`default_driver`](settings.html) in your `behat.yml` file.
+To specify which driver to use for your tests, set [`default_driver`](settings.md) in your `behat.yml` file.
 
 Feature                                  | WP-CLI                     | WordPress API | Blackbox
 ---------------------------------------- | -------------------------- | ------------- | --------

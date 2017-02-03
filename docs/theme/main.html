@@ -6,3 +6,15 @@
   {% endif %}
   {{ page.content }}
 {% endblock %}
+
+{% block fonts %}
+  <style>
+  body, input {
+    font-family: {{ config.extra.get("font", {}).text }};
+  }
+  code, kbd, pre {
+    font-family: {{ config.extra.get("font", {}).code }};
+  }
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% endblock %}

@@ -25,16 +25,12 @@ extra:
       link: 'https://github.com/paulgibbs/behat-wordpress-extension'
     - type: 'twitter'
       link: 'https://twitter.com/pgibbs'
-
 extra_css:
   - 'stylesheets/style.css'
-
 use_directory_urls: false
-
 google_analytics:
   - 'UA-88402256-1'
   - 'auto'
-
 markdown_extensions:
   - admonition
   - footnotes
@@ -48,14 +44,18 @@ theme: 'material'
 theme_dir: "docs/theme"
 pages:
   - Home: index.md
-  - About: about.md
-  - Installation: installation.md
-  - Settings: settings.md
-  - Drivers: drivers.md
-  - Contexts: contexts.md
+  - About:
+    - Introduction: about.md
+    - License: license.md
+    - Credits: credits.md
+  - Guide:
+    - Requirements: requirements.md
+    - Installation: installation.md
+    #- Getting Started: installation.md
+  - Configuration:
+    - Settings: settings.md
+    - Environment: environment-settings.md
+  - Behat:
+    - Drivers: drivers.md
+    - Contexts: contexts.md
   - FAQs: faq.md
-  - License: license.md
-  - Credits: credits.md
-  - User Guide:
-    - 'Writing your docs': 'settings.md'
-    - 'Styling your docs': 'settings.md'

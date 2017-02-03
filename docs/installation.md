@@ -13,7 +13,7 @@
 
   All the commands that follow are written to install from the root of your project folder.
 
-1. Check that all of the [requirements](requirements.html) are met. These instructions assume that Composer has been downloaded into your project folder.
+1. Check that all of the [requirements](requirements.md) are met. These instructions assume that Composer has been downloaded into your project folder.
 
 1. Tell [Composer](https://getcomposer.org/) to install WordHat. To do this conveniently, run:
 
