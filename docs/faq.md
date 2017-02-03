@@ -1,7 +1,3 @@
----
-currentMenu: faq
----
-
 # FAQs
 
 ## Composer

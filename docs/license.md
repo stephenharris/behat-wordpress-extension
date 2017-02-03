@@ -1,7 +1,3 @@
----
-currentMenu: license
----
-
 # License
 
 Copyright (C) 2016-present, Paul Gibbs.

@@ -1,7 +1,3 @@
----
-currentMenu: installation
----
-
 # Installation
 
 > Do you know how to use Composer? tl;dr?
@@ -10,7 +6,7 @@ currentMenu: installation
 
 1. Create a folder for your tests:
 
-  ```Shell
+  ```Bash
   mkdir projectfolder
   cd projectfolder
   ```

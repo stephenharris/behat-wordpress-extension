@@ -64,6 +64,7 @@ script:
 
 after_success:
   # Update document website after succesful tests.
+  - if [[ "$WP_VERSION" = "latest" && "$TRAVIS_PHP_VERSION" = "7.1" ]] ; then mkdocs gh-deploy; fi
 
 after_script:
   # Tidy up after test run.

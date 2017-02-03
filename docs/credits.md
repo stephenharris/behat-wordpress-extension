@@ -1,7 +1,3 @@
----
-currentMenu: credits
----
-
 # Credits &amp; Acknowledgements
 
 [Paul Gibbs](https://github.com/paulgibbs/) (project lead) and the rest of the contributors wish to thank the following projects and their contributors, who provided inspiration and were fantasically useful learning resources:

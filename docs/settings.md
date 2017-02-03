@@ -1,7 +1,3 @@
----
-currentMenu: settings
----
-
 # Settings
 
 Behat uses [YAML](https://en.wikipedia.org/wiki/YAML) for its configuration file.

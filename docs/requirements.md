@@ -1,7 +1,3 @@
----
-currentMenu: requirements
----
-
 # Requirements
 
 Package                              | Minimum required version

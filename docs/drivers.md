@@ -1,7 +1,3 @@
----
-currentMenu: drivers
----
-
 # Drivers
 
 WordHat provides a range of drivers for interacting with the WordPress site you are testing. A driver represents and manages the connection between the Behat and WordPress environments. Different drivers support different features.

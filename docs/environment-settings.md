@@ -1,7 +1,3 @@
----
-currentMenu: environment
----
-
 # Environment Settings
 
 Some of the settings in `behat.yml` are environment specific. For example, the `base_url` may be `http://test.example.dev` on your local development environment, while on a test server it might be `http://test.example.com`.
@@ -12,7 +8,7 @@ Before running tests, Behat will check the `BEHAT_PARAMS` environment variable a
 
 Example JSON object:
 
-```JSON
+```JavaScript
 {
   "extensions": {
     "Behat\\MinkExtension": {

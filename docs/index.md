@@ -1,23 +1,4 @@
-<style type="text/css">
-#content .index-logo {
-  border: 0;
-  margin-bottom: 15px;
-}
-
-@media (max-width: 768px) {
-  #content .index-logo {
-    width: 100%;
-  }
-}
-
-@media (min-width: 768px) {
-  #content .index-logo {
-    width: 30vw;
-  }
-}
-</style>
-
-<img src="//paulgibbs.github.io/wordhat/logo.svg" class="index-logo" alt="">
+<img src="/img/logo.svg" class="index-logo" alt="">
 
 [![Build Status](https://api.travis-ci.org/paulgibbs/behat-wordpress-extension.svg?branch=master)](https://travis-ci.org/paulgibbs/behat-wordpress-extension)
 [![Latest Stable Version](https://poser.pugx.org/paulgibbs/behat-wordpress-extension/v/stable.svg)](https://packagist.org/packages/paulgibbs/behat-wordpress-extension)
