@@ -66,15 +66,10 @@ class WpcliDriver extends BaseDriver
      */
     public function bootstrap()
     {
-        try {
-            $version = '';
-            $this->wpcli('cli', 'version');
-        } catch (UnexpectedValueException $e) {
-            preg_match('#^WP-CLI driver query failure: WP-CLI (\d\.\d\.\d)$#', $e->getMessage(), $match);
-            if (empty($match)) {
-                throw $e;
-            }
+        $version = '';
 
+        preg_match('#^WP-CLI (\d\.\d\.\d)$#', $this->wpcli('cli', 'version')['cmd_output'], $match);
+        if (! empty($match)) {
             $version = array_pop($match);
         }
 
@@ -124,21 +119,23 @@ class WpcliDriver extends BaseDriver
             $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
         }
 
-        $cmd_output = [];
-        $exit_code  = 0;
+
         $wpcli_args = sprintf('--no-color --require=%1$s/WpcliLogger.php', dirname(__DIR__));
 
         // Query WP-CLI.
-        exec(
-            "{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments} 2>&1",
-            $cmd_output,
-            $exit_code
-        );
-        $cmd_output = implode(PHP_EOL, $cmd_output);
+        $proc = proc_open("{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments}", [
+            1 => ['pipe','w'],
+            2 => ['pipe','w'],
+        ], $pipes);
 
-        if ($cmd_output) {
-            // Any output is bad.
-            throw new UnexpectedValueException("WP-CLI driver query failure: {$cmd_output}");
+        $cmd_output = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        $exit_code = proc_close($proc);
+
+        if ($exit_code || $stderr) {
+            throw new UnexpectedValueException("WP-CLI driver query failure: {$stderr} ($exit_code)");
         }
 
         return compact('cmd_output', 'exit_code');
@@ -445,7 +442,7 @@ class WpcliDriver extends BaseDriver
     {
         $wpcli_args = [$username, '--field=ID'];
 
-        $userId = (int) $this->wpcli('user', 'get', $wpcli_args);
+        $userId = (int) $this->wpcli('user', 'get', $wpcli_args)['cmd_output'];
 
         if (! $userId) {
             throw new UnexpectedValueException(sprintf('User "%s" not found', $username));
