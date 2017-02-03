@@ -16,4 +16,7 @@ __Extra special thanks is extended to [Jonathan Hedstrom](https://github.com/jhe
 
 For making it straightforward to publish this documentation, the project would like to thank [Couscous](http://couscous.io). Couscous generates HTML from Markdown, and does it wonderfully.
 
+If you have never seen a GitHub issue and pull request template generator featuring Cthulhu and Lewis Carroll, then you should [check this one out](https://www.talater.com/open-source-templates/).
+
+
 Finally, thank _you_ for considering WordHat. It is a tool for developers by developers, and we hope it helps you achieve wonderful things. Thank you for making it part of your world.
