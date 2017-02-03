@@ -74,9 +74,11 @@ class WpcliDriver extends BaseDriver
             if (empty($match)) {
                 throw $e;
             }
-
+            var_dump($e->getMessage());
             $version = array_pop($match);
         }
+
+        var_dump($version);
 
         if (! version_compare($version, '0.24.0', '>=')) {
             throw new RuntimeException('Your WP-CLI is too old; version 0.24.0 or newer is required.');
@@ -128,7 +130,6 @@ class WpcliDriver extends BaseDriver
         $wpcli_args = sprintf('--no-color --require=%1$s/WpcliLogger.php', dirname(__DIR__));
 
         // Query WP-CLI.
-
         $proc = proc_open("{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments}", [
             1 => ['pipe','w'],
             2 => ['pipe','w'],
