@@ -66,16 +66,12 @@ class WpcliDriver extends BaseDriver
      */
     public function bootstrap()
     {
-        try {
-            $version = $this->wpcli('cli', 'version')['cmd_output'];
-        } catch (UnexpectedValueException $e) {
-            preg_match('#^WP-CLI driver query failure: WP-CLI (\d\.\d\.\d)$#', $e->getMessage(), $match);
-            if (empty($match)) {
-                throw $e;
-            }
+        $version = '';
+
+        preg_match('#^WP-CLI driver query failure: WP-CLI (\d\.\d\.\d)$#', $this->wpcli('cli', 'version')['cmd_output'], $match);
+        if (! empty($match)) {
             $version = array_pop($match);
         }
-
         var_dump($version);
 
         if (! version_compare($version, '0.24.0', '>=')) {
