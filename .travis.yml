@@ -7,6 +7,7 @@ php:
 
 cache:
   apt: true
+  pip: true
   directories:
     - vendor
     - $HOME/.composer/cache
@@ -47,6 +48,7 @@ before_install:
 install:
   # Install all of the dependencies you need here.
   - composer install --no-interaction --prefer-dist --no-progress
+  - pip install --user pymdown-extensions pygments mkdocs mkdocs-material
   - bin/travis/wordpress.sh wordpress root '' localhost $WP_VERSION
   - bin/travis/nginx.sh
 
