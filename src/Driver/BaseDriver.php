@@ -198,6 +198,17 @@ abstract class BaseDriver implements DriverInterface
     }
 
     /**
+     * Get a User's ID from their username.
+     *
+     * @param string $username The username of the user to get the ID of
+     * @return int ID of the user user.
+     */
+    public function getUserIdFromLogin($username)
+    {
+        throw new UnsupportedDriverActionException('get user\'s ID in ' . self::class);
+    }
+
+    /**
      * Start a database transaction.
      */
     public function startTransaction()

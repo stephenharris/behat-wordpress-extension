@@ -312,6 +312,22 @@ class WpapiDriver extends BaseDriver
     }
 
     /**
+     * Get a User's ID from their username.
+     *
+     * @param string $username The username of the user to get the ID of
+     * @return int ID of the user user.
+     * @throws \UnexpectedValueException If provided data is invalid
+     */
+    public function getUserIdFromLogin($username)
+    {
+        $user = get_user_by('login', $username);
+        if (! ( $user instanceof \WP_User )) {
+            throw new UnexpectedValueException(sprintf('User "%s" not found', $username));
+        }
+        return (int) $user->ID;
+    }
+
+    /**
      * Start a database transaction.
      */
     public function startTransaction()
