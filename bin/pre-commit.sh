@@ -1,5 +1,7 @@
+#!/bin/bash
 git stash -q --keep-index
-./bin/phpcs.sh
+./vendor/bin/phpcs --standard=phpcs-ruleset.xml -p -s -v -n src --extensions=php
+
 RESULT=$?
 git stash pop -q
 [ $RESULT -ne 0 ] && exit 1

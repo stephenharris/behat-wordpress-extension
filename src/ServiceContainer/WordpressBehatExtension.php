@@ -152,6 +152,7 @@ class WordpressBehatExtension implements ExtensionInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('alias')->end()
+                        ->scalarNode('binary')->end()
                     ->end()
                 ->end()
 
@@ -227,6 +228,9 @@ class WordpressBehatExtension implements ExtensionInterface
 
         $config['wpcli']['path'] = isset($config['path']) ? $config['path'] : '';
         $container->setParameter('wordpress.driver.wpcli.path', $config['path']);
+
+        $config['wpcli']['binary'] = isset($config['wpcli']['binary']) ? $config['wpcli']['binary'] : null;
+        $container->setParameter('wordpress.driver.wpcli.binary', $config['wpcli']['binary']);
     }
 
     /**
