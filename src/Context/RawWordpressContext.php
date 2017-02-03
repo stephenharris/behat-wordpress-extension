@@ -54,7 +54,6 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         } else {
             $url = $this->getMinkParameter('base_url');
         }
-
         return rtrim($url, '/') . '/' . ltrim($path, '/');
     }
 
@@ -163,7 +162,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
             $this->logOut();
         }
 
-        $this->visitPath('wp-login.php?redirect_to=' . urlencode($this->locatePath('/')));
+        $this->visitPath('/wp-login.php?redirect_to=' . urlencode($this->locatePath('/')));
 
         $page = $this->getSession()->getPage();
         $page->fillField('user_login', $username);

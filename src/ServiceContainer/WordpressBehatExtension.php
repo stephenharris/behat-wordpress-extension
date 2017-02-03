@@ -60,6 +60,7 @@ class WordpressBehatExtension implements ExtensionInterface
      */
     public function initialize(ExtensionManager $extension_manager)
     {
+        $extension_manager->activateExtension('SensioLabs\Behat\PageObjectExtension');
     }
 
     /**
@@ -279,8 +280,17 @@ class WordpressBehatExtension implements ExtensionInterface
      */
     public function process(ContainerBuilder $container)
     {
+        // Default site_url to Mink's base_url property
+        $config = $container->getParameter('wordpress.parameters');
+        if (! isset($config['site_url'])) {
+            $config['site_url'] = $container->getParameter('mink.base_url');
+            $container->setParameter('wordpress.parameters', $config);
+        }
+
         $this->processDriverPass($container);
         $this->processClassGenerator($container);
+        $this->setPageObjectNamespaces($container);
+        $this->injectSiteUrlIntoPageObjects($container);
     }
 
     /**
@@ -303,5 +313,34 @@ class WordpressBehatExtension implements ExtensionInterface
     {
         $definition = new Definition('PaulGibbs\WordpressBehatExtension\Context\ContextClass\ClassGenerator');
         $container->setDefinition(ContextExtension::CLASS_GENERATOR_TAG . '.simple', $definition);
+    }
+
+    /**
+     * Tell Page Object Extension the namepsace of our page objects
+     *
+     * @param ContainerBuilder $container
+     */
+    protected function setPageObjectNamespaces(ContainerBuilder $container)
+    {
+        // Append our namespaces as earlier namespaces take precedence.
+        $pages = $container->getParameter('sensio_labs.page_object_extension.namespaces.page');
+        $pages[] = 'PaulGibbs\WordpressBehatExtension\PageObject';
+
+        $elements = $container->getParameter('sensio_labs.page_object_extension.namespaces.element');
+        $elements[] = 'PaulGibbs\WordpressBehatExtension\PageObject\Element';
+
+        $container->setParameter('sensio_labs.page_object_extension.namespaces.page', $pages);
+        $container->setParameter('sensio_labs.page_object_extension.namespaces.element', $elements);
+    }
+
+    /**
+     * Adds the WordPress site url as a page parameter into page objects
+     */
+    protected function injectSiteUrlIntoPageObjects(ContainerBuilder $container)
+    {
+        $page_parameters = $container->getParameter('sensio_labs.page_object_extension.page_factory.page_parameters');
+        $page_parameters = $container->getParameterBag()->resolveValue($page_parameters);
+        $page_parameters['site_url'] = $container->getParameter('wordpress.parameters')['site_url'];
+        $container->setParameter('sensio_labs.page_object_extension.page_factory.page_parameters', $page_parameters);
     }
 }
