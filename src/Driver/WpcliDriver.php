@@ -137,6 +137,20 @@ class WpcliDriver extends BaseDriver
         $cmd_output = implode(PHP_EOL, $cmd_output);
 
         if ($cmd_output) {
+            var_dump($cmd_output);
+
+            exec(
+                "{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments}",
+                $cmd_output,
+                $exit_code
+            );
+
+            $cmd_output = implode(PHP_EOL, $cmd_output);
+
+            var_dump($exit_code);
+
+            var_dump("{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments}");
+
             // Any output is bad.
             throw new UnexpectedValueException("WP-CLI driver query failure: {$cmd_output}");
         }
