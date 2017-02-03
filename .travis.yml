@@ -64,7 +64,6 @@ script:
 
 after_success:
   # Update document website after succesful tests.
-  - vendor/bin/couscous travis-auto-deploy --php-version=7.1
 
 after_script:
   # Tidy up after test run.
