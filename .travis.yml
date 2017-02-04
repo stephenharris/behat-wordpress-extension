@@ -20,7 +20,8 @@ env:
 
 matrix:
   allow_failures:
-    - env: WP_VERSION=nightly
+    - env: WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
+    - env: WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
 
 addons:
   apt:
@@ -67,7 +68,7 @@ after_success:
   # Update document website after succesful tests.
   - git remote set-url origin git@github.com:$TRAVIS_REPO_SLUG.git
   - git fetch origin -f gh-pages:gh-pages
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" && "$WH_BUILD_DOCS" = "1" && "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PHP_VERSION" = "7.1" ]] ; then mkdocs gh-deploy; fi
+  - if [[ "$TRAVIS_PULL_REQUEST" = "false" && "$WH_BUILD_DOCS" = "1" && "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PHP_VERSION" = "7.1" ]] ; then mkdocs gh-deploy; fi
 
 after_script:
   # Tidy up after test run.
