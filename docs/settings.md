@@ -31,9 +31,9 @@ PaulGibbs\WordpressBehatExtension:
       password: subscriber
 
   # WordPress settings.
+  siteurl: ~
   permalinks:
     author_archive: author/%s/
-  siteurl: ~
 
   # Driver settings.
   wpcli:
@@ -62,4 +62,4 @@ Option     | Default value | Description
 -----------| ------------- | -----------
 `base_url` | _null_        | If you use relative paths in your tests, define a URL to use as the basename.
 
-Extension `Behat\MinkExtension` integrates Mink into Behat. [Visit its website](http://mink.behat.org/en/latest/) for more information.
+The `Behat\MinkExtension` extension integrates Mink into Behat. [Visit its website](http://mink.behat.org/en/latest/) for more information.

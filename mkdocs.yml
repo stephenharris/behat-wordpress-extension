@@ -46,8 +46,8 @@ pages:
   - Home: index.md
   - About:
     - Introduction: about.md
-    - License: license.md
     - Credits: credits.md
+    - License: license.md
   - Guide:
     - Requirements: requirements.md
     - Installation: installation.md
