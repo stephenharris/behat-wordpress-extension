@@ -7,21 +7,16 @@ php:
 
 cache:
   apt: true
+  pip: true
   directories:
     - vendor
     - $HOME/.composer/cache
 
 env:
-  global:
-    - GIT_NAME: "'Couscous auto deploy'"
-    - GIT_EMAIL: couscous@couscous.io
-    - GH_REF: github.com/paulgibbs/behat-wordpress-extension
-    - secure: RDArf/FuQFEz0O5n9NnWq9efe8tOH8eQIH28rNhSGA1lZ57zo2+3fU6QRvZrvW4fb7bIN6cvZSlOnsO3RYrf/UUwPSItjn9Jiia1wo70iqvdWw9VRtZ7YWysHkxi3tfEhIoBkHJMXJ7xhPrGg/qAevuoXWAkuocRUg370Fpe1oyMT6FC9brCsfgt6kJeCDEjeRrxUVCaozpTpX8/K/Glfu2lU8jiF6U5GvoT8+fzVsAgs/zJz9CoJcAzhWl/b2UrF5H2pqd6LoNad93NM5c5sG69E3VtuxO0ahECk1d2FttL6cEeSXM81ZRO4tRXfUfkvLu43kRVdNSYdRlD+XjQ2s+GcNvVMvmS/kun19rOxxlf+rgbYMcVoENC/DsSu0Qvk/y++POJHNLVwPECAviHK1qEgvdhMMsN87lh/op0aDLB1mKIYj4DbF5gHt4d16QfAJVTx8SeYbqRJrbHHXcRG3HHWwPp5mxWUoknvAkZgWRqZgByXdW1oB81qqqDZ42L1iGCmjufDYF6gw9dzaUERJzO/EmgS6dqeflUJIYxjn8bNrrCwEvYOTFNElHg78M/hUs046i4Ui9xd1kJUhEKduX9HoLalfzTwF+qAz+lEHOGXkIs/1hWB6UhacggnWPj7/GPXi4OgWwPPgJuHJ+MfmO/frXx3h/mYTx8OzMv8NU=
-  matrix:
-    - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
-    - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
-    - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
-    - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
+  - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}' WH_BUILD_DOCS=1
+  - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
+  - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
+  - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
 
 matrix:
   allow_failures:
@@ -37,6 +32,14 @@ addons:
 
 before_install:
   # Execute all of the commands which need to be executed before installing dependencies.
+
+  # Set up deploy key for docs.
+  - openssl aes-256-cbc -K $encrypted_a7d0b9fc4af0_key -iv $encrypted_a7d0b9fc4af0_iv -in bin/travis/publish-key.enc -out ~/.ssh/publish-key -d
+  - chmod u=rw,og= ~/.ssh/publish-key
+  - echo "Host github.com" >> ~/.ssh/config
+  - echo "  IdentityFile ~/.ssh/publish-key" >> ~/.ssh/config
+
+  # Set up Behat.
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
@@ -47,6 +50,7 @@ before_install:
 install:
   # Install all of the dependencies you need here.
   - composer install --no-interaction --prefer-dist --no-progress
+  - pip install --user pymdown-extensions pygments mkdocs mkdocs-material
   - bin/travis/wordpress.sh wordpress root '' localhost $WP_VERSION
   - bin/travis/nginx.sh
 
@@ -62,7 +66,9 @@ script:
 
 after_success:
   # Update document website after succesful tests.
-  - vendor/bin/couscous travis-auto-deploy --php-version=7.1
+  - git remote set-url origin git@github.com:$TRAVIS_REPO_SLUG.git
+  - git fetch origin -f gh-pages:gh-pages
+  - if [[ "$TRAVIS_PULL_REQUEST" = "false" && "$WH_BUILD_DOCS" = "1" && "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PHP_VERSION" = "7.1" ]] ; then mkdocs gh-deploy; fi
 
 after_script:
   # Tidy up after test run.

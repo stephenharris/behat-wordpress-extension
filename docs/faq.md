@@ -1,11 +1,7 @@
----
-currentMenu: faq
----
-
 # FAQs
 
 ## Composer
-* WordHat does not support a custom `vendor-bin` for Composer if you are using the [WP-CLI driver](drivers.html). [#16](https://github.com/paulgibbs/behat-wordpress-extension/issues/16)
+* WordHat does not support a custom `vendor-bin` for Composer if you are using the [WP-CLI driver](drivers.md). [#16](https://github.com/paulgibbs/behat-wordpress-extension/issues/16)
 
 ## Javascript
 * If you are using [Selenium](http://docs.seleniumhq.org/download/) to run Javascript tests, and you access your WordPress site over HTTPS, *and* it has a self-signed certificate, you will need to manually configure the web browser to accept that certificate.

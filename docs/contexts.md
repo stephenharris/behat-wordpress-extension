@@ -1,7 +1,3 @@
----
-currentMenu: contexts
----
-
 # Contexts
 
 With Behat, it is possible to flexibly structure your code by using multiple [contexts](http://docs.behat.org/en/latest/user_guide/context.html) in a single test suite. WordHat provides the following contexts:

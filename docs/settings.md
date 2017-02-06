@@ -1,7 +1,3 @@
----
-currentMenu: settings
----
-
 # Settings
 
 Behat uses [YAML](https://en.wikipedia.org/wiki/YAML) for its configuration file.
@@ -35,9 +31,9 @@ PaulGibbs\WordpressBehatExtension:
       password: subscriber
 
   # WordPress settings.
+  siteurl: ~
   permalinks:
     author_archive: author/%s/
-  siteurl: ~
 
   # Driver settings.
   wpcli:
@@ -46,7 +42,7 @@ PaulGibbs\WordpressBehatExtension:
 
 Option           | Default value | Description
 -----------------| ------------- | -----------
-`default_driver` | "wpcli"       | _Optional_.<br>The [driver](drivers.html) to use ("wpcli", "wpapi", "blackbox").
+`default_driver` | "wpcli"       | _Optional_.<br>The [driver](drivers.md) to use ("wpcli", "wpapi", "blackbox").
 `path`           | null          | _Required_.<br>Path to WordPress files.
 `users.*`        | _see example_ | _Optional_.<br>Keys must match names of WordPress roles.
 `permalinks.*`   | _see example_ | _Optional_.<br>Permalink pattern for the specific kind of link.<br>`%s` is replaced with an ID/object name, as appropriate.
@@ -66,4 +62,4 @@ Option     | Default value | Description
 -----------| ------------- | -----------
 `base_url` | _null_        | If you use relative paths in your tests, define a URL to use as the basename.
 
-Extension `Behat\MinkExtension` integrates Mink into Behat. [Visit its website](http://mink.behat.org/en/latest/) for more information.
+The `Behat\MinkExtension` extension integrates Mink into Behat. [Visit its website](http://mink.behat.org/en/latest/) for more information.
