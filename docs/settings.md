@@ -50,7 +50,7 @@ Option           | Default value | Description
 `path`           | null          | _Required_.<br>Path to WordPress files.
 `users.*`        | _see example_ | _Optional_.<br>Keys must match names of WordPress roles.
 `permalinks.*`   | _see example_ | _Optional_.<br>Permalink pattern for the specific kind of link.<br>`%s` is replaced with an ID/object name, as appropriate.
-`site_url`       | null          | _Optional_.<br>If your site's `home_url()` and `site_url()` values [mismatch](http://wordpress.stackexchange.com/a/50605),<br>set this to the `site_url()` value.
+`site_url`       | null          | _Optional_.<br>If your site's `home_url()` and `site_url()` values [mismatch](http://wordpress.stackexchange.com/a/50605),<br>set this to the `site_url()` value. Defaults to `mink.base_url`
 `wpcli.alias`    | null          | _Optional_.<br>[WP-CLI alias](https://wp-cli.org/commands/cli/alias/) (preferred over `wpcli.path`).
 
 
