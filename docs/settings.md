@@ -31,7 +31,7 @@ PaulGibbs\WordpressBehatExtension:
       password: subscriber
 
   # WordPress settings.
-  siteurl: ~
+  site_url: ~
   permalinks:
     author_archive: author/%s/
 
