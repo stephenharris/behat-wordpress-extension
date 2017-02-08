@@ -79,7 +79,7 @@ class WordpressBehatExtension implements ExtensionInterface
                 ->scalarNode('path')->end()
 
                 // WordPress' "siteurl" option.
-                ->scalarNode('site_url')->end()
+                ->scalarNode('site_url')->defaultValue('%mink.base_url%')->end()
 
                 // Account roles -> username/password.
                 ->arrayNode('users')
