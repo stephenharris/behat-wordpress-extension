@@ -5,8 +5,3 @@ WordHat is an integration layer between [Behat](http://behat.org), [Mink](https:
 If you are new to the project or Behat, we recommend that you first read through our documentation. If you just want to get started, download WordHat on [Composer](https://packagist.org/packages/paulgibbs/behat-wordpress-extension) or [Github](https://github.com/paulgibbs/behat-wordpress-extension).
 
 If you encounter a bug, have a suggestion, or would like to help the project grow, please get in contact via Github. Thank you!
-
-[![License](https://img.shields.io/packagist/l/paulgibbs/behat-wordpress-extension.svg)](https://packagist.org/packages/paulgibbs/behat-wordpress-extension)
-[![Latest Stable Version](https://img.shields.io/packagist/v/paulgibbs/behat-wordpress-extension.svg)](https://packagist.org/packages/paulgibbs/behat-wordpress-extension)
-[![Build Status](https://api.travis-ci.org/paulgibbs/behat-wordpress-extension.svg?branch=master)](https://travis-ci.org/paulgibbs/behat-wordpress-extension)
-[![Total Downloads](https://img.shields.io/packagist/dt/paulgibbs/behat-wordpress-extension.svg)](https://packagist.org/packages/paulgibbs/behat-wordpress-extension)
