@@ -30,6 +30,9 @@ addons:
   hosts:
     - wordpress.dev
 
+notifications:
+  email: false
+
 before_install:
   # Execute all of the commands which need to be executed before installing dependencies.
 
