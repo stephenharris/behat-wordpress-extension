@@ -13,3 +13,7 @@ h1[data-page="Home"] {
   margin-bottom: 15px;
   width: 100%;
 }
+
+body .md-nav {
+  font-size: 1.6rem;
+}
