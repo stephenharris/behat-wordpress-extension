@@ -294,7 +294,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        $this->getDriver()->activatePlugin($term_id, $taxonomy);
+        $this->getDriver()->deleteTerm($term_id, $taxonomy);
     }
 
     /**

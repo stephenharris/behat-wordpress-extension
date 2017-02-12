@@ -397,7 +397,7 @@ class WpcliDriver extends BaseDriver
 
 
         // User slug (nicename.
-        $wpcli_args = [$post_id, '--fields=user_nicename'];
+        $wpcli_args = [$user_id, '--fields=user_nicename'];
         $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['cmd_output'];
 
 
