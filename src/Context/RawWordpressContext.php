@@ -49,10 +49,10 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
             return $path;
         }
 
+        $url = $this->getMinkParameter('base_url');
+
         if (strpos($path, 'wp-admin') !== false || strpos($path, '.php') !== false) {
             $url = $this->getWordpressParameter('site_url');
-        } else {
-            $url = $this->getMinkParameter('base_url');
         }
 
         return rtrim($url, '/') . '/' . ltrim($path, '/');
