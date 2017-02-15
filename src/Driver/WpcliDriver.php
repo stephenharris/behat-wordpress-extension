@@ -139,7 +139,7 @@ class WpcliDriver extends BaseDriver
         if ($exit_code || $stderr || strpos($stdout, 'Warning: ') !== false || strpos($stdout, 'Error: ') !== false) {
             throw new UnexpectedValueException(
                 sprintf(
-                    'WP-CLI driver query failure: %1$s (%2$s)',
+                    "WP-CLI driver query failure (%2\$s): \n\n%1\$s\n",
                     $stderr ?: $stdout,
                     $exit_code
                 )
