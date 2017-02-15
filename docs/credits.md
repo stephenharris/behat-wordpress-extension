@@ -7,6 +7,7 @@
 * [Tom Forrer](https://github.com/tmf/): [tmf/WordPressExtension](https://github.com/tmf/WordPressExtension/)
 * [Walter Dal Mut](https://github.com/wdalmut/): [wdalmut/WordPressExtension](https://github.com/wdalmut/WordPressExtension/)
 * [Laracasts](https://github.com/laracasts/): [laracasts/Behat-Laravel-Extension](https://github.com/laracasts/Behat-Laravel-Extension/)
+* [Ariel Gold](https://github.com/ari-gold/): [ari-gold/WordPress-Behat-Quickstart](https://github.com/ari-gold/WordPress-Behat-Quickstart)
 
 __Extra special thanks is extended to [Jonathan Hedstrom](https://github.com/jhedstrom) and his [Behat Drupal Extension](https://github.com/jhedstrom/drupalextension/) project. Much of the structure of this project is based on Jonathan's work, and this project is forever in its debt, having taken direct inspiration from its amazing technical architecture and innovative features.__
 
