@@ -130,8 +130,8 @@ class WpcliDriver extends BaseDriver
             $pipes
         );
 
-        $stdout = stream_get_contents($pipes[1]);
-        $stderr = stream_get_contents($pipes[2]);
+        $stdout = trim(stream_get_contents($pipes[1]));
+        $stderr = trim(stream_get_contents($pipes[2]));
         fclose($pipes[1]);
         fclose($pipes[2]);
         $exit_code = proc_close($proc);
@@ -139,7 +139,8 @@ class WpcliDriver extends BaseDriver
         if ($exit_code || $stderr || strpos($stdout, 'Warning: ') !== false || strpos($stdout, 'Error: ') !== false) {
             throw new UnexpectedValueException(
                 sprintf(
-                    "WP-CLI driver query failure (%2\$s): \n\n%1\$s\n",
+                    "WP-CLI driver failure in method %1\$s(): \n\t%2\$s\n(%3\$s)",
+                    debug_backtrace()[1]['function'],
                     $stderr ?: $stdout,
                     $exit_code
                 )
@@ -214,7 +215,7 @@ class WpcliDriver extends BaseDriver
 
 
         // Term slug.
-        $wpcli_args = [$taxonomy, $term_id, '--fields=slug'];
+        $wpcli_args = [$taxonomy, $term_id, '--field=slug'];
         $term_slug  = $this->wpcli('term', 'get', $wpcli_args)['stdout'];
 
 
@@ -265,7 +266,7 @@ class WpcliDriver extends BaseDriver
 
 
         // Post slug.
-        $wpcli_args = [$post_id, '--fields=post_name'];
+        $wpcli_args = [$post_id, '--field=post_name'];
         $post_slug  = $this->wpcli('post', 'get', $wpcli_args)['stdout'];
 
 
@@ -405,7 +406,7 @@ class WpcliDriver extends BaseDriver
 
 
         // User slug (nicename).
-        $wpcli_args = [$user_id, '--fields=user_nicename'];
+        $wpcli_args = [$user_id, '--field=user_nicename'];
         $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['stdout'];
 
         return array(
