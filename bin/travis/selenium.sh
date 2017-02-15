@@ -26,4 +26,4 @@ wget -O selenium.jar http://selenium-release.storage.googleapis.com/2.53/seleniu
 java -jar selenium.jar -p $SELENIUM_PORT > /dev/null 2>&1 &
 wait_for_port $SELENIUM_PORT
 
-wait 5
+sleep 5
