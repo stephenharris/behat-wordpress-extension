@@ -41,7 +41,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function clearCache()
     {
-        throw new UnsupportedDriverActionException('clear cache in ' . self::class);
+        throw new UnsupportedDriverActionException('clear cache in ' . static::class);
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function activatePlugin($plugin)
     {
-        throw new UnsupportedDriverActionException('activate plugins in ' . self::class);
+        throw new UnsupportedDriverActionException('activate plugins in ' . static::class);
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function deactivatePlugin($plugin)
     {
-        throw new UnsupportedDriverActionException('deactivate plugins in ' . self::class);
+        throw new UnsupportedDriverActionException('deactivate plugins in ' . static::class);
     }
 
     /**
@@ -71,7 +71,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function switchTheme($theme)
     {
-        throw new UnsupportedDriverActionException('switch themes in ' . self::class);
+        throw new UnsupportedDriverActionException('switch themes in ' . static::class);
     }
 
     /**
@@ -87,7 +87,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function createTerm($term, $taxonomy, $args = [])
     {
-        throw new UnsupportedDriverActionException('create terms in ' . self::class);
+        throw new UnsupportedDriverActionException('create terms in ' . static::class);
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        throw new UnsupportedDriverActionException('delete terms in ' . self::class);
+        throw new UnsupportedDriverActionException('delete terms in ' . static::class);
     }
 
     /**
@@ -112,7 +112,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function createContent($args)
     {
-        throw new UnsupportedDriverActionException('create content in ' . self::class);
+        throw new UnsupportedDriverActionException('create content in ' . static::class);
     }
 
     /**
@@ -123,7 +123,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function deleteContent($id, $args = [])
     {
-        throw new UnsupportedDriverActionException('delete content in ' . self::class);
+        throw new UnsupportedDriverActionException('delete content in ' . static::class);
     }
 
     /**
@@ -136,7 +136,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function createComment($args)
     {
-        throw new UnsupportedDriverActionException('create comments in ' . self::class);
+        throw new UnsupportedDriverActionException('create comments in ' . static::class);
     }
 
     /**
@@ -147,7 +147,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function deleteComment($id, $args = [])
     {
-        throw new UnsupportedDriverActionException('delete comments in ' . self::class);
+        throw new UnsupportedDriverActionException('delete comments in ' . static::class);
     }
 
     /**
@@ -157,7 +157,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function exportDatabase()
     {
-        throw new UnsupportedDriverActionException('export the database in ' . self::class);
+        throw new UnsupportedDriverActionException('export the database in ' . static::class);
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function importDatabase($import_file)
     {
-        throw new UnsupportedDriverActionException('import the database in ' . self::class);
+        throw new UnsupportedDriverActionException('import the database in ' . static::class);
     }
 
     /**
@@ -183,7 +183,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function createUser($user_login, $user_email, $args = [])
     {
-        throw new UnsupportedDriverActionException('create users in ' . self::class);
+        throw new UnsupportedDriverActionException('create users in ' . static::class);
     }
 
     /**
@@ -194,7 +194,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function deleteUser($id, $args = [])
     {
-        throw new UnsupportedDriverActionException('delete users in ' . self::class);
+        throw new UnsupportedDriverActionException('delete users in ' . static::class);
     }
 
     /**
@@ -205,7 +205,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function getUserIdFromLogin($username)
     {
-        throw new UnsupportedDriverActionException('get user\'s ID in ' . self::class);
+        throw new UnsupportedDriverActionException('get user\'s ID in ' . static::class);
     }
 
     /**
@@ -213,7 +213,7 @@ abstract class BaseDriver implements DriverInterface
      */
     public function startTransaction()
     {
-        throw new UnsupportedDriverActionException('start a database transaction in ' . self::class);
+        throw new UnsupportedDriverActionException('start a database transaction in ' . static::class);
     }
 
     /**
@@ -221,6 +221,6 @@ abstract class BaseDriver implements DriverInterface
      */
     public function endTransaction()
     {
-        throw new UnsupportedDriverActionException('rollback a database transaction in ' . self::class);
+        throw new UnsupportedDriverActionException('rollback a database transaction in ' . static::class);
     }
 }
