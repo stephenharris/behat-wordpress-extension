@@ -221,6 +221,6 @@ abstract class BaseDriver implements DriverInterface
      */
     public function endTransaction()
     {
-        throw new UnsupportedDriverActionException('end (rollback) a database transaction ' . self::class);
+        throw new UnsupportedDriverActionException('rollback a database transaction in ' . self::class);
     }
 }
