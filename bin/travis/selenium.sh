@@ -25,3 +25,5 @@ export DISPLAY=localhost:0.0
 wget -O selenium.jar http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
 java -jar selenium.jar -p $SELENIUM_PORT > /dev/null 2>&1 &
 wait_for_port $SELENIUM_PORT
+
+wait 5
