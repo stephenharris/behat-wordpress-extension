@@ -136,7 +136,7 @@ class WpcliDriver extends BaseDriver
         fclose($pipes[2]);
         $exit_code = proc_close($proc);
 
-        if ($exit_code || $stderr || strpos($stdout, 'Warning: ') !== false || strpos($stdout, 'Error: ') !== false) {
+        if ($exit_code || $stderr || strpos($stdout, 'Warning: ') === 0 || strpos($stdout, 'Error: ') === 0) {
             throw new UnexpectedValueException(
                 sprintf(
                     "WP-CLI driver failure in method %1\$s(): \n\t%2\$s\n(%3\$s)",
