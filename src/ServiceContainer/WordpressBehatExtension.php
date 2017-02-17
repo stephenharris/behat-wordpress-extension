@@ -280,13 +280,6 @@ class WordpressBehatExtension implements ExtensionInterface
      */
     public function process(ContainerBuilder $container)
     {
-        // Default site_url to Mink's base_url property
-        $config = $container->getParameter('wordpress.parameters');
-        if (! isset($config['site_url'])) {
-            $config['site_url'] = $container->getParameter('mink.base_url');
-            $container->setParameter('wordpress.parameters', $config);
-        }
-
         $this->processDriverPass($container);
         $this->processClassGenerator($container);
         $this->setPageObjectNamespaces($container);
