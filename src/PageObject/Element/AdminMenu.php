@@ -1,10 +1,12 @@
 <?php
-
 namespace PaulGibbs\WordpressBehatExtension\PageObject\Element;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 
+/**
+ * An Element representing the admin menu.
+ */
 class AdminMenu extends Element
 {
     /**
@@ -13,12 +15,16 @@ class AdminMenu extends Element
     protected $selector = '#adminmenu';
 
     /**
-     * @return array Array of top-level menu item names (i.e. [ "Dashboard", "Posts", ...])
+     * Obtains a list of the top-leve menu items.
+     *
+     * The list contains the 'human readable' strings. e.g. 'Dashboard'.
+     *
+     * @return array List of top level menu links. E.g. [ 'Dashboard', 'Posts',...].
      */
     public function getTopLevelMenuItems()
     {
-        $menuItem_nodes = $this->findAll('css', '#adminmenu > li a .wp-menu-name');
-        $menuItem_texts = array();
+        $menu_item_nodes = $this->findAll('css', '#adminmenu > li a .wp-menu-name');
+        $menu_item_texts = array();
 
         foreach ($menuItem_nodes as $n => $element) {
             $menuItem_texts[] = $this->stripTagsAndContent($element->getHtml());
@@ -28,8 +34,13 @@ class AdminMenu extends Element
     }
 
     /**
-     * Clicks a menu item, given its human-readable path, delimited by >
-     * @param string $item Of the form "Plugins" or "Plugins > Add New"
+     * Click a specific item in the admin menu.
+     *
+     * Top-level items are identified by their link text (e.g. 'Comments' ).
+     * Second-level items are identified by their parent text and link text,
+     * delimited by a right angle bracket. E.g. Posts > Add New.
+     *
+     * @param string $item The menu item to click.
      * @throws \Exception If the menu item does not exist
      */
     public function clickMenuItem($item)

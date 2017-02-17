@@ -3,12 +3,19 @@ namespace PaulGibbs\WordpressBehatExtension\PageObject;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
+/**
+ * Page object representing a generic admin page.
+ *
+ * This class houses methods for navigating around the WordPress admin and
+ * acts as a base for most page-specific admin page objects.
+ */
 class AdminPage extends Page
 {
 
     /**
      * We use WordHat's site_url  property rather than Mink's base_url property
      * to get the correct URL to wp-admin, wp-login.php etc.
+     *
      * @param string $path
      * @return string Absolute URL
      */
@@ -18,6 +25,13 @@ class AdminPage extends Page
         return 0 !== strpos($path, 'http') ? $site_url.ltrim($path, '/') : $path;
     }
 
+    /**
+     * Returns the text in the header tag.
+     *
+     * The first h1 element is used, or first h2 element if it is not present.
+     *
+     * @return string The text in the header tag.
+     */
     public function getHeaderText()
     {
         $header = $this->getHeaderElement();
@@ -32,6 +46,11 @@ class AdminPage extends Page
         return $header_text;
     }
 
+    /**
+     * Asserts the text in the header tag matches the given text.
+     *
+     * @throws \Exception
+     */
     public function assertHasHeader($expected)
     {
         $actual = $this->getHeaderText();
@@ -40,6 +59,13 @@ class AdminPage extends Page
         }
     }
 
+    /**
+     * Get the text in the header tag/
+     *
+     * The first h1 element is used, or first h2 element if it is not present.
+     *
+     * @throws \Exception
+     */
     private function getHeaderElement()
     {
         // h2s were used prior to 4.3/4 and h1s after
@@ -56,12 +82,22 @@ class AdminPage extends Page
         throw new \Exception('Header could not be found');
     }
 
+    /**
+     * Click a link within the page header tag.
+     *
+     * @param string $link Link text.
+     */
     public function clickLinkInHeader($link)
     {
         $header = $this->getHeaderElement();
         $header->clickLink($link);
     }
 
+    /**
+     * Returns the AdminMenu element.
+     *
+     * @return AdminMenu
+     */
     public function getMenu()
     {
         return $this->getElement('Admin menu');
