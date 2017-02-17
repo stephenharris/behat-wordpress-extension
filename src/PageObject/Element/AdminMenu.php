@@ -98,7 +98,7 @@ class AdminMenu extends Element
      * @param string $html Raw HTML
      * @param string Extracted text. e.g. Some <span>HTML and</span>text  -->  Some text
      */
-    private function stripTagsAndContent($html)
+    protected function stripTagsAndContent($html)
     {
         if (trim($html) == '') {
             return $html;
