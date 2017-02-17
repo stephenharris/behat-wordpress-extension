@@ -2,6 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\PageObject;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
+use Behat\Mink\Exception\ExpectationException;
 
 /**
  * Page object representing a generic admin page.
@@ -35,13 +36,15 @@ class AdminPage extends Page
     /**
      * Asserts the text in the header tag matches the given text.
      *
-     * @throws \Exception
+     * @throws ExpectationException
      */
     public function assertHasHeader($expected)
     {
         $actual = $this->getHeaderText();
         if ($expected !== $actual) {
-            throw new \Exception(sprintf('Expected page header "%s", found "%s".', $expected, $actual));
+            throw new ExpectationException(
+                sprintf('Expected page header "%s", found "%s".', $expected, $actual), $this->getDriver()
+            );
         }
     }
 
@@ -50,7 +53,7 @@ class AdminPage extends Page
      *
      * The first h1 element is used, or first h2 element if it is not present.
      *
-     * @throws \Exception
+     * @throws ExpectationException
      */
     protected function getHeaderElement()
     {
@@ -65,7 +68,7 @@ class AdminPage extends Page
             return $header2;
         }
 
-        throw new \Exception('Header could not be found');
+        throw new ExpectationException('Header could not be found', $this->getDriver());
     }
 
     /**
