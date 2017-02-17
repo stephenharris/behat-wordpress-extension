@@ -11,20 +11,6 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
  */
 class AdminPage extends Page
 {
-
-    /**
-     * We use WordHat's site_url  property rather than Mink's base_url property
-     * to get the correct URL to wp-admin, wp-login.php etc.
-     *
-     * @param string $path
-     * @return string Absolute URL
-     */
-    private function makeSurePathIsAbsolute($path)
-    {
-        $site_url = rtrim($this->getParameter('site_url'), '/').'/';
-        return 0 !== strpos($path, 'http') ? $site_url.ltrim($path, '/') : $path;
-    }
-
     /**
      * Returns the text in the header tag.
      *
