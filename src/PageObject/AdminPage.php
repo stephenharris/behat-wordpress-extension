@@ -52,7 +52,7 @@ class AdminPage extends Page
      *
      * @throws \Exception
      */
-    private function getHeaderElement()
+    protected function getHeaderElement()
     {
         // h2s were used prior to 4.3/4 and h1s after
         // @see https://make.wordpress.org/core/2015/10/28/headings-hierarchy-changes-in-the-admin-screens/
@@ -123,7 +123,7 @@ class AdminPage extends Page
      * @param string $path Relative path of this page
      * @return string Absolute URL
      */
-    private function makeSurePathIsAbsolute($path)
+    protected function makeSurePathIsAbsolute($path)
     {
         $site_url = rtrim($this->getParameter('site_url'), '/').'/';
         return 0 !== strpos($path, 'http') ? $site_url.ltrim($path, '/') : $path;
@@ -135,7 +135,7 @@ class AdminPage extends Page
      * @param array $url_parameters
      * @return string
      */
-    private function unmaskUrl(array $url_parameters)
+    protected function unmaskUrl(array $url_parameters)
     {
         $url = $this->getPath();
 
