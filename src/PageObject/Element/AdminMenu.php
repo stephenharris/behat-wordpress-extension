@@ -12,6 +12,9 @@ class AdminMenu extends Element
      */
     protected $selector = '#adminmenu';
 
+    /**
+     * @return array Array of top-level menu item names (i.e. [ "Dashboard", "Posts", ...])
+     */
     public function getTopLevelMenuItems()
     {
         $menuItem_nodes = $this->findAll('css', '#adminmenu > li a .wp-menu-name');
@@ -24,6 +27,11 @@ class AdminMenu extends Element
         return $menuItem_texts;
     }
 
+    /**
+     * Clicks a menu item, given its human-readable path, delimited by >
+     * @param string $item Of the form "Plugins" or "Plugins > Add New"
+     * @throws \Exception If the menu item does not exist
+     */
     public function clickMenuItem($item)
     {
         $item = array_map('trim', preg_split('/(?<!\\\\)>/', $item));
@@ -75,6 +83,9 @@ class AdminMenu extends Element
      * All HTML tags, and their contents are removed.
      *
      * e.g. Some <span>HTML and</span>text  -->  Some text
+     *
+     * @param string $html Raw HTML
+     * @param string Extracted text. e.g. Some <span>HTML and</span>text  -->  Some text
      */
     private function stripTagsAndContent($html)
     {
