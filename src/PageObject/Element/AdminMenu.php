@@ -56,13 +56,13 @@ class AdminMenu extends Element
             // @link https://github.com/stephenharris/WordPressBehatExtension/issues/2
             $item_name = $this->stripTagsAndContent($first_level_item->find('css', '.wp-menu-name')->getHtml());
 
-            if (strtolower($item[0]) == strtolower($item_name)) {
+            if (strtolower($item[0]) === strtolower($item_name)) {
                 if (isset($item[1])) {
                     $second_level_items = $first_level_item->findAll('css', 'ul li a');
 
                     foreach ($second_level_items as $second_level_item) {
                         $item_name = $this->stripTagsAndContent($second_level_item->getHtml());
-                        if (strtolower($item[1]) == strtolower($item_name)) {
+                        if (strtolower($item[1]) === strtolower($item_name)) {
                             try {
                                 // Focus on the menu link so the submenu appears
                                 $first_level_item->find('css', 'a.menu-top')->focus();
@@ -100,7 +100,7 @@ class AdminMenu extends Element
      */
     protected function stripTagsAndContent($html)
     {
-        if (trim($html) == '') {
+        if (trim($html) === '') {
             return $html;
         }
 
