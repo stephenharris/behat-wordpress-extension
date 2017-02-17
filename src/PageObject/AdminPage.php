@@ -125,8 +125,8 @@ class AdminPage extends Page
      */
     protected function makeSurePathIsAbsolute($path)
     {
-        $site_url = rtrim($this->getParameter('site_url'), '/').'/';
-        return 0 !== strpos($path, 'http') ? $site_url.ltrim($path, '/') : $path;
+        $site_url = rtrim($this->getParameter('site_url'), '/') . '/';
+        return 0 !== strpos($path, 'http') ? $site_url . ltrim($path, '/') : $path;
     }
 
     /**

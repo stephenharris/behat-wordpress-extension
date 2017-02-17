@@ -8,4 +8,9 @@
   <rule ref="PSR2.Methods.FunctionCallSignature.SpaceAfterOpenBracket">
     <severity>5</severity>
   </rule>
+  <rule ref="Squiz.Strings.ConcatenationSpacing">
+    <properties>
+      <property name="spacing" value="1"/>
+    </properties>
+  </rule>
 </ruleset>
