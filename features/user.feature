@@ -4,6 +4,7 @@ Feature: Managing users
     Given I am logged in as an admin
 		And I am on the Dashboard
 
+  @javascript
   Scenario: I can add a new user
     Given I go to menu item "Users"
     When I click on the "Add New" link in the header
