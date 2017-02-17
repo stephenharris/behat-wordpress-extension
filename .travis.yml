@@ -37,10 +37,7 @@ before_install:
   # Execute all of the commands which need to be executed before installing dependencies.
 
   # Set up deploy key for docs.
-  - openssl aes-256-cbc -K $encrypted_a7d0b9fc4af0_key -iv $encrypted_a7d0b9fc4af0_iv -in bin/travis/publish-key.enc -out ~/.ssh/publish-key -d
-  - chmod u=rw,og= ~/.ssh/publish-key
-  - echo "Host github.com" >> ~/.ssh/config
-  - echo "  IdentityFile ~/.ssh/publish-key" >> ~/.ssh/config
+  - if [[ "$TRAVIS_PULL_REQUEST" = "false" && "$WH_BUILD_DOCS" = "1" && "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PHP_VERSION" = "7.1" ]] ; then bin/travis/deploy-key.sh; fi
 
   # Set up Behat.
   - composer self-update
