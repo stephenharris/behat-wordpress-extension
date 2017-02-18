@@ -38,6 +38,7 @@ PaulGibbs\WordpressBehatExtension:
   # Driver settings.
   wpcli:
     alias: dev
+    binary: wp
 ```
 
 Option           | Default value | Description
@@ -48,6 +49,7 @@ Option           | Default value | Description
 `permalinks.*`   | _see example_ | _Optional_.<br>Permalink pattern for the specific kind of link.<br>`%s` is replaced with an ID/object name, as appropriate.
 `site_url`       | null          | _Optional_.<br>If your site's `home_url()` and `site_url()` values [mismatch](http://wordpress.stackexchange.com/a/50605),<br>set this to the `site_url()` value. Defaults to `mink.base_url`
 `wpcli.alias`    | null          | _Optional_.<br>[WP-CLI alias](https://wp-cli.org/commands/cli/alias/) (preferred over `wpcli.path`).
+`wpcli.binary`   | `wp`          | _Optional_.<br>Path and name of WP-CLI binary.
 
 
 ## Behat\MinkExtension
