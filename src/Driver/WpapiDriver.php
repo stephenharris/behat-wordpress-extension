@@ -59,6 +59,11 @@ class WpapiDriver extends BaseDriver
         // "Cry 'Havoc!' and let slip the dogs of war".
         require_once "{$this->path}/wp-blog-header.php";
 
+        if (! function_exists('activate_plugin')) {
+            require_once "{$this->path}/wp-admin/includes/plugin.php";
+            require_once "{$this->path}/wp-admin/includes/plugin-install.php";
+        }
+
         $this->wpdb            = $GLOBALS['wpdb'];
         $this->is_bootstrapped = true;
     }
@@ -78,15 +83,6 @@ class WpapiDriver extends BaseDriver
      */
     public function activatePlugin($plugin)
     {
-        if (! file_exists("{$this->path}/wp-admin/includes/plugin.php") ||
-            ! file_exists("{$this->path}/wp-admin/includes/plugin-install.php")
-        ) {
-            throw new RuntimeException('WordPress API driver cannot find expected WordPress files.');
-        }
-
-        require_once "{$this->path}/wp-admin/includes/plugin.php";
-        require_once "{$this->path}/wp-admin/includes/plugin-install.php";
-
         $path = $this->getPlugin($plugin);
         if (! $path) {
             throw new RuntimeException("WordPress API driver cannot find the plugin: {$plugin}.");
@@ -102,15 +98,6 @@ class WpapiDriver extends BaseDriver
      */
     public function deactivatePlugin($plugin)
     {
-        if (! file_exists("{$this->path}/wp-admin/includes/plugin.php") ||
-            ! file_exists("{$this->path}/wp-admin/includes/plugin-install.php")
-        ) {
-            throw new RuntimeException('WordPress API driver cannot find expected WordPress files.');
-        }
-
-        require_once "{$this->path}/wp-admin/includes/plugin.php";
-        require_once "{$this->path}/wp-admin/includes/plugin-install.php";
-
         $path = $this->getPlugin($plugin);
         if (! $path) {
             throw new RuntimeException("WordPress API driver cannot find the plugin: {$plugin}.");
