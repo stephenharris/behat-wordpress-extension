@@ -25,8 +25,8 @@ class DashboardContext extends RawWordpressContext
     /**
      * Constructor.
      *
-     * @param AdminPage $alias  AdminPage object.
-     * @param Dashboard $path   Dashboard object.
+     * @param AdminPage $admin_page AdminPage object.
+     * @param Dashboard $dashboard  Dashboard object.
      */
     public function __construct(AdminPage $admin_page, Dashboard $dashboard)
     {

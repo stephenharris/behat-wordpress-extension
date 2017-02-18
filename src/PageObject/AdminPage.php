@@ -27,7 +27,7 @@ class AdminPage extends Page
 
         // The page headers can often incude an 'add new link'. Strip that out of the header text.
         if ($header_link) {
-            $header_text  = trim(str_replace($header_link->getText(), '', $header_text));
+            $header_text = trim(str_replace($header_link->getText(), '', $header_text));
         }
 
         return $header_text;

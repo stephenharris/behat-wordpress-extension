@@ -93,7 +93,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      *
      * @param string $name Parameter name.
      * @return mixed
-    */
+     */
     public function getWordpressParameter($name)
     {
         return isset($this->wordpress_parameters[$name]) ? $this->wordpress_parameters[$name] : null;
@@ -103,13 +103,13 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      * Get all WordPress parameters.
      *
      * @return array
-    */
+     */
     public function getWordpressParameters()
     {
         return $this->wordpress_parameters;
     }
 
-   /**
+    /**
      * Get active WordPress Driver.
      *
      * @param string $name Optional. Name of specific driver to retrieve.
