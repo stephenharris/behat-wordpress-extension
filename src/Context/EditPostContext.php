@@ -17,7 +17,7 @@ class EditPostContext extends RawWordpressContext
      */
     public function iGoToEditScreenForPostType($postType, $title)
     {
-        $post = $this->getDriver()->getPostByName($title, $postType);
+        $post = $this->getDriver()->getContentIdFromTitle($title, $postType);
         $this->edit_post_page->open(array(
             'id' => $post->ID,
         ));
@@ -28,7 +28,7 @@ class EditPostContext extends RawWordpressContext
      */
     public function iGoToEditScreenFor($title)
     {
-        $post = $this->getDriver()->getPostByName($title, null);
+        $post = $this->getDriver()->getContentIdFromTitle($title, null);
         $this->edit_post_page->open(array(
             'id' => $post->ID,
         ));
@@ -89,7 +89,7 @@ class EditPostContext extends RawWordpressContext
      */
     public function iAmOnEditScreenForPostType($postType, $title)
     {
-        $post = $this->getDriver()->getPostByName($title, $postType);
+        $post = $this->getDriver()->getContentIdFromTitle($title, $postType);
         $this->edit_post_page->isOpen(array(
             'id' => $post->ID,
         ));
@@ -100,7 +100,7 @@ class EditPostContext extends RawWordpressContext
      */
     public function iAmOnEditScreenFor($title)
     {
-        $post = $this->getDriver()->getPostByName($title, null);
+        $post = $this->getDriver()->getContentIdFromTitle($title, null);
         $this->edit_post_page->isOpen(array(
             'id' => $post->ID,
         ));
