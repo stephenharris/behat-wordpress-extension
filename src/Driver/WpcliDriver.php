@@ -374,7 +374,7 @@ class WpcliDriver extends BaseDriver
      */
     public function importDatabase($import_file)
     {
-        if (! in_array($import_file[0], [DIRECTORY_SEPARATOR, '~'])) {
+        if (! in_array($import_file[0], [DIRECTORY_SEPARATOR, '~'], true)) {
             $import_file = getcwd() . "/{$import_file}";
         }
         $this->wpcli('db', 'import', [$import_file]);
