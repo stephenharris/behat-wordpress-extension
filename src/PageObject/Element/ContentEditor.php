@@ -20,9 +20,9 @@ class ContentEditor extends Element
     public function setMode($mode)
     {
         if (self::VISUAL === $mode) {
-            $this->find('css', '#content-tmce')->pressButton();
+            $this->find('css', '#content-tmce')->press();
         } else {
-            $this->find('css', '#content-html')->pressButton();
+            $this->find('css', '#content-html')->press();
         }
     }
 
