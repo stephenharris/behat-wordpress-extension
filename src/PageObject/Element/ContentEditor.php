@@ -6,7 +6,7 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 /**
  * An Element representing the admin menu.
  */
-class ContentEdtior extends Element
+class ContentEditor extends Element
 {
 
     protected $selector = '#postdivrich';
