@@ -313,7 +313,7 @@ class WpcliDriver extends BaseDriver
 
         $post_type = (array) $post_type;
 
-        $wpcli_args = ['--title=' . $title, '--field=ID', '--post_type=' . implode(',', $post_type)];
+        $wpcli_args = ['--title="' . $title, '" --field=ID', '--post_type=' . implode(',', $post_type)];
         $postID = (int) $this->wpcli('post', 'list', $wpcli_args)['stdout'];
 
         if (! $postID) {
