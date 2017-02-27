@@ -367,11 +367,16 @@ class WpcliDriver extends BaseDriver
     /**
      * Import WordPress database.
      *
-     * @param string $import_file Relative path and filename of SQL file to import.
+     * If $import_file begins with a directory separator or ~ it is treated as an absolute path.
+     * Otherwise, it is treated as relative to the current working directory.
+     *
+     * @param string $import_file Relative or absolute path and filename of SQL file to import.
      */
     public function importDatabase($import_file)
     {
-        $import_file = getcwd() . "/{$import_file}";
+        if (! in_array($import_file[0], [DIRECTORY_SEPARATOR, '~'], true)) {
+            $import_file = getcwd() . "/{$import_file}";
+        }
         $this->wpcli('db', 'import', [$import_file]);
     }
 
