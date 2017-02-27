@@ -5,7 +5,7 @@ namespace PaulGibbs\WordpressBehatExtension\Context;
 use PaulGibbs\WordpressBehatExtension\PageObject\EditPostPage;
 use Behat\Gherkin\Node\PyStringNode;
 
-class WordPressEditPostContext implements Context
+class EditPostContext extends RawWordpressContext
 {
     public function __construct(EditPostPage $edit_post_page)
     {
@@ -13,7 +13,7 @@ class WordPressEditPostContext implements Context
     }
 
     /**
-     * @Given /^I am on the edit "([a-zA-z_-]+)" screen for "([^"]*)"$/
+     * @Given /^I am on the edit ([a-zA-z_-]+) screen for "([^"]*)"$/
      */
     public function iGoToEditScreenForPostType($postType, $title)
     {
@@ -43,7 +43,7 @@ class WordPressEditPostContext implements Context
     }
 
     /**
-     * @When /^I switch to the post content editor's :mode mode$/
+     * @When I switch to the post content editor's :mode mode
      */
     public function iSelectPostContentEditorMode($mode)
     {
@@ -52,7 +52,7 @@ class WordPressEditPostContext implements Context
     }
 
     /**
-     * @When /^I enter the following content into the post content editor:$/
+     * @When I enter the following content into the post content editor:
      */
     public function iEnterContentIntoPostContentEditor(PyStringNode $content)
     {
@@ -61,7 +61,8 @@ class WordPressEditPostContext implements Context
     }
 
     /**
-     * @Then /^the post content editor is in :mode mode$/
+     *
+     * @Then the post content editor is in :mode mode
      */
     public function postContentEditorIsInMode($mode)
     {

@@ -14,11 +14,11 @@ Feature: You can write in visual and text mode
     And I switch to the post content editor's "Text" mode
     Then the post content editor is in "Text" mode
 
-    And I enter the following content into the post content editor:
+    When I enter the following content into the post content editor:
       """
       <strong>HTML</strong> tags should be interpreted, and not displayed in text mode.
       """
-    And I press the (publish|update) button
+    And I press the update button
     Then I should see a status message that says "Post updated"
 
     When I follow "Visit Site"
@@ -32,11 +32,11 @@ Feature: You can write in visual and text mode
     And I switch to the post content editor's "Visual" mode
     Then the post content editor is in "Visual" mode
 
-    And I enter the following content into the post content editor:
+    When I enter the following content into the post content editor:
       """
       <strong>HTML</strong> tags should be displayed, and not parsed in visual mode.
       """
-    And I press the (publish|update) button
+    And I press the update button
     Then I should see a status message that says "Post updated"
 
     When I follow "Visit Site"
