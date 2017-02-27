@@ -2,7 +2,6 @@
 namespace PaulGibbs\WordpressBehatExtension\PageObject\Element;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 
 /**
  * An Element representing the admin menu.
@@ -10,8 +9,13 @@ use Behat\Mink\Exception\UnsupportedDriverActionException;
 class ContentEdtior extends Element
 {
 
+    protected $selector = '#postdivrich';
+
     const VISUAL = 'VISUAL';
     const TEXT = 'TEXT';
+
+    protected $wysiwyg_iframe_id = 'content_ifr';
+    protected $textarea_id = 'content';
 
     public function setMode($mode)
     {
@@ -25,5 +29,17 @@ class ContentEdtior extends Element
     public function getMode()
     {
         return $this->find('css', '#wp-content-wrap')->hasClass('tmce-active') ? self::VISUAL : self::TEXT;
+    }
+
+    public function setContent($content)
+    {
+        if (self::VISUAL == $this->getMode()) {
+            $iframe = $this->find('css', "#" . self::$wysiwyg_iframe_id);
+            $this->getDriver()->switchToIFrame($iframe);
+            $this->getDriver()->executeScript("document.body.innerHTML = '<p>" . $content . "</p>'");
+            $this->getDriver()->switchToIFrame();
+        } else {
+            $this->fillField('#' . self::$textarea_id);
+        }
     }
 }

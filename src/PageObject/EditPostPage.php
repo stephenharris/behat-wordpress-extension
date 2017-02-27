@@ -6,10 +6,6 @@ namespace PaulGibbs\WordpressBehatExtension\PageObject;
  */
 class EditPostPage extends AdminPage
 {
-    protected $elements = array(
-        'Content editor' => '#postdivrich',
-    );
-
 
     protected $path = '/wp-admin/post.php?post={id}&action=edit';
     /**

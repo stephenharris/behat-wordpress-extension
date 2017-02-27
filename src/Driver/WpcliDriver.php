@@ -297,6 +297,34 @@ class WpcliDriver extends BaseDriver
     }
 
     /**
+     * Get a User's ID from their username.
+     *
+     * @param string $title The title of the content to get the ID of
+     * @param string|array Post type(s) to consider when searching for the content
+     * @return int ID of the post.
+     * @throws \UnexpectedValueException If provided data is invalid
+     */
+    public function getContentIdFromTitle($title, $post_type = null)
+    {
+
+        if ($post_type === null) {
+            $post_type = explode("\n", $this->wpcli('post-type', 'list', ['--field=name'])['stdout']);
+        }
+
+        $post_type = (array) $post_type;
+
+        $wpcli_args = ['--title=' . $title, '--field=ID', '--post_type=' . implode(',', $post_type)];
+        $postID = (int) $this->wpcli('post', 'list', $wpcli_args)['stdout'];
+
+        if (! $postID) {
+            throw new UnexpectedValueException(
+                sprintf('Post "%s" of post type %s not found', $title, implode('/', $post_type))
+            );
+        }
+        return $postID;
+    }
+
+    /**
      * Create a comment.
      *
      * @param array $args Set the values of the new comment.
@@ -448,7 +476,7 @@ class WpcliDriver extends BaseDriver
      * Get a User's ID from their username.
      *
      * @param string $username The username of the user to get the ID of
-     * @return int ID of the user user.
+     * @return int ID of the user.
      * @throws \UnexpectedValueException If provided data is invalid
      */
     public function getUserIdFromLogin($username)
