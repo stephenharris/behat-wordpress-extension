@@ -21,7 +21,7 @@ Feature: You can write in visual and text mode
     And I press the update button
     Then I should see a status message that says "Post updated"
 
-    When I follow "Visit Site"
+    When I follow "View Post"
     Then I should see "Article written in text mode"
     And I should see "HTML tags should be parsed, and not rendedisplayedred in text mode."
     And I should not see "<strong>HTML</strong>"
@@ -39,7 +39,7 @@ Feature: You can write in visual and text mode
     And I press the update button
     Then I should see a status message that says "Post updated"
 
-    When I follow "Visit Site"
+    When I follow "View Post"
     Then I should see "Article written in visual mode"
     And I should see "<strong>HTML</strong> tags should be displayed, and not parsed in visual mode."
     And I should not see "HTML tags"
