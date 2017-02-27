@@ -34,12 +34,11 @@ class ContentEditor extends Element
     public function setContent($content)
     {
         if (self::VISUAL == $this->getMode()) {
-            $iframe = $this->find('css', "#" . self::$wysiwyg_iframe_id);
-            $this->getDriver()->switchToIFrame($iframe);
+            $this->getDriver()->switchToIFrame(self::$wysiwyg_iframe_id);
             $this->getDriver()->executeScript("document.body.innerHTML = '<p>" . $content . "</p>'");
             $this->getDriver()->switchToIFrame();
         } else {
-            $this->fillField('#' . self::$textarea_id, $content);
+            $this->fillField(self::$textarea_id, $content);
         }
     }
 }
