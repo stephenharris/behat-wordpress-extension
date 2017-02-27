@@ -14,8 +14,8 @@ class ContentEditor extends Element
     const VISUAL = 'VISUAL';
     const TEXT = 'TEXT';
 
-    protected $wysiwyg_iframe_id = 'content_ifr';
-    protected $textarea_id = 'content';
+    protected static $wysiwyg_iframe_id = 'content_ifr';
+    protected static $textarea_id = 'content';
 
     public function setMode($mode)
     {
@@ -39,7 +39,7 @@ class ContentEditor extends Element
             $this->getDriver()->executeScript("document.body.innerHTML = '<p>" . $content . "</p>'");
             $this->getDriver()->switchToIFrame();
         } else {
-            $this->fillField('#' . self::$textarea_id);
+            $this->fillField('#' . self::$textarea_id, $content);
         }
     }
 }
