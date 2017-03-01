@@ -18,6 +18,6 @@ class EditPostPage extends AdminPage
 
     public function getContentEditor()
     {
-        return $this->getElement('Content editor');
+        return $this->getElement('Post Content editor');
     }
 }
