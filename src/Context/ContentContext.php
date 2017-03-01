@@ -33,16 +33,21 @@ class ContentContext extends RawWordpressContext
      *     | post_type | post_title | post_content | post_status |
      *     | page      | Test Post   | Hello World  | publish     |
      *
-     * @Given /^(?:I am|they are) viewing a(?: blog)? post:/
+     * @Given /^(?:I am|they are) viewing a(?: blog)? post(?: "([^"]+)"|:)/
      *
-     * @param TableNode $post_data
+     * @param TableNode|string $post_data
      */
-    public function iAmViewingBlogPost(TableNode $post_data)
+    public function iAmViewingBlogPost($post_data_or_title)
     {
         // Retrieve the first row only
-        $post_data_hash = $post_data->getHash();
-        $post = $this->createContent($this->parseArgs($post_data_hash[0]));
-        $this->visitPath(sprintf('?p=%d', (int) $post['id']));
+        if ($post_data_or_title instanceof TableNode) {
+            $post_data_hash = $post_data_or_title->getHash();
+            $post = $this->createContent($this->parseArgs($post_data_hash[0]));
+            $post_id = $post['id'];
+        } else {
+            $post_id = $this->getDriver()->getContentIdFromTitle($post_data_or_title);
+        }
+        $this->visitPath(sprintf('?p=%d', (int) $post_id));
     }
 
     /**

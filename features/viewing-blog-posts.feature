@@ -23,3 +23,8 @@ Feature: Viewing posts
            | page      | My about page   | About this site | publish     |
         Then I should see "My about page"
         And I should see "About this site"
+
+    Scenario: Viewing an existing post
+        Given I am viewing a post "Just my article"
+        Then I should see "Just my article"
+        And I should see "The content of my article"
