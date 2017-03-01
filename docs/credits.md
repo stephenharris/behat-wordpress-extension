@@ -11,7 +11,7 @@
 
 __Extra special thanks is extended to [Jonathan Hedstrom](https://github.com/jhedstrom) and his [Behat Drupal Extension](https://github.com/jhedstrom/drupalextension/) project. Much of the structure of this project is based on Jonathan's work, and this project is forever in its debt, having taken direct inspiration from its amazing technical architecture and innovative features.__
 
-For making it straightforward to publish this documentation, the project would like to thank [Couscous](http://couscous.io). Couscous generates HTML from Markdown, and does it wonderfully.
+For making it straightforward to publish this documentation, the project would like to thank [MkDocs](http://www.mkdocs.org) and the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme. MkDocs generates HTML from Markdown, and does it wonderfully.
 
 If you have never seen a GitHub issue and pull request template generator featuring Cthulhu and Lewis Carroll, then you should [check this one out](https://www.talater.com/open-source-templates/).
 
