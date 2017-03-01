@@ -39,7 +39,9 @@ class ContentContext extends RawWordpressContext
      */
     public function iAmViewingBlogPost(TableNode $post_data)
     {
-        $post = $this->createContent($this->parseArgs($post_data->getHash()));
+        // Retrieve the first row only
+        $post_data_hash = $post_data->getHash();
+        $post = $this->createContent($this->parseArgs($post_data_hash[0]));
         $this->visitPath(sprintf('?p=%d', (int) $post['id']));
     }
 

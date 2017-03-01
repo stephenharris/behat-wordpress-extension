@@ -16,3 +16,10 @@ Feature: Viewing posts
         When I follow "Just my article"
         Then I should see "Just my article"
         And I should see "The content of my article"
+
+    Scenario: Viewing a single page
+        Given I am viewing a post:
+           | post_type | post_title      | post_content    | post_status |
+           | page      | My about page   | About this site | publish     |
+        Then I should see "My about page"
+        And I should see "About this site"
