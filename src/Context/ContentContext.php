@@ -33,7 +33,7 @@ class ContentContext extends RawWordpressContext
      *     | post_type | post_title | post_content | post_status |
      *     | page      | Test Post   | Hello World  | publish     |
      *
-     * @Given /^(?:I am|they are) viewing a (?:blog) post:/
+     * @Given /^(?:I am|they are) viewing a(?: blog)? post:/
      *
      * @param TableNode $post_data
      */
