@@ -8,11 +8,11 @@ Feature: You can write in visual and text mode
       | Just my article | The content of my article | publish     | admin       |
     And I am on the edit post screen for "Just my article"
 
-  @javascript @insulated
+  @javascript
   Scenario: I can update a post using the text view
     When I change the title to "Article written in text mode"
-    And I switch to the post content editor's "Text" mode
-    Then the post content editor is in "Text" mode
+    And I switch to the post content editor's Text mode
+    Then the post content editor is in Text mode
 
     When I enter the following content into the post content editor:
       """
@@ -26,11 +26,11 @@ Feature: You can write in visual and text mode
     And I should see "HTML tags should be parsed, and not rendedisplayedred in text mode."
     And I should not see "<strong>HTML</strong>"
 
-  @javascript @insulated
+  @javascript
   Scenario: I can update a post using the text view
     When I change the title to "Article written in visual mode"
-    And I switch to the post content editor's "Visual" mode
-    Then the post content editor is in "Visual" mode
+    And I switch to the post content editor's Visual mode
+    Then the post content editor is in Visual mode
 
     When I enter the following content into the post content editor:
       """
