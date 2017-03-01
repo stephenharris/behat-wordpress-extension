@@ -59,3 +59,4 @@ pages:
     - Drivers: drivers.md
     - Contexts: contexts.md
   - FAQs: faq.md
+  - Change Log: changelog.md
