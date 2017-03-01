@@ -35,7 +35,7 @@ class ContentEditor extends Element
     {
         if (self::VISUAL == $this->getMode()) {
             $this->getDriver()->switchToIFrame(self::$wysiwyg_iframe_id);
-            $this->getDriver()->executeScript("document.body.innerHTML = '<p>" . $content . "</p>'");
+            $this->getDriver()->executeScript(";document.body.innerHTML = '<p>" . addslashes(htmlspecialchars($content)) . "</p>';");
             $this->getDriver()->switchToIFrame();
         } else {
             $this->fillField(self::$textarea_id, $content);
