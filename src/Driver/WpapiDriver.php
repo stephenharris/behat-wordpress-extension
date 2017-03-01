@@ -213,7 +213,7 @@ class WpapiDriver extends BaseDriver
         $result = wp_delete_post($id, isset($args['force']));
 
         if (! $result) {
-            throw new UnexpectedValueException("WordPress API driver failed deleting content.");
+            throw new UnexpectedValueException('WordPress API driver failed deleting content.');
         }
     }
 
@@ -230,7 +230,7 @@ class WpapiDriver extends BaseDriver
         $comment_id = wp_new_comment($args);
 
         if (! $comment_id) {
-            throw new UnexpectedValueException("WordPress API driver failed creating a new comment.");
+            throw new UnexpectedValueException('WordPress API driver failed creating a new comment.');
         }
 
         return array('id' => $comment_id);
@@ -247,7 +247,7 @@ class WpapiDriver extends BaseDriver
         $result = wp_delete_comment($id, isset($args['force']));
 
         if (! $result) {
-            throw new UnexpectedValueException("WordPress API driver failed deleting a comment.");
+            throw new UnexpectedValueException('WordPress API driver failed deleting a comment.');
         }
     }
 
@@ -294,7 +294,7 @@ class WpapiDriver extends BaseDriver
         $result = wp_delete_user($id, $args);
 
         if (! $result) {
-            throw new UnexpectedValueException("WordPress API driver failed deleting user.");
+            throw new UnexpectedValueException('WordPress API driver failed deleting user.');
         }
     }
 
