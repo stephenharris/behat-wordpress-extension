@@ -218,6 +218,33 @@ class WpapiDriver extends BaseDriver
     }
 
     /**
+     * Get a content ID from its title.
+     *
+     * @param string $title The title of the content to get the ID of
+     * @param string|array Post type(s) to consider when searching for the content
+     * @return int ID of the post.
+     * @throws \UnexpectedValueException If post does not exist
+     */
+    public function getContentIdFromTitle($title, $post_type = null)
+    {
+
+        if ($post_type === null) {
+            $post_type = get_post_types('', 'names');
+        }
+
+        $post_type = (array) $post_type;
+
+        $post = get_page_by_title($title, OBJECT, $post_type);
+
+        if (! $post) {
+            throw new UnexpectedValueException(
+                sprintf('Post "%s" of post type %s not found', $title, implode('/', $post_type))
+            );
+        }
+        return (int) $post->ID;
+    }
+
+    /**
      * Create a comment.
      *
      * @param array $args Set the values of the new comment.
