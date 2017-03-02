@@ -329,7 +329,7 @@ class WpapiDriver extends BaseDriver
      * Get a User's ID from their username.
      *
      * @param string $username The username of the user to get the ID of
-     * @return int ID of the user user.
+     * @return int ID of the user.
      * @throws \UnexpectedValueException If provided data is invalid
      */
     public function getUserIdFromLogin($username)
