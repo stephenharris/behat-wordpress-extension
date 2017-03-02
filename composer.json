@@ -14,7 +14,7 @@
   ],
   "autoload": {
     "psr-4": {"PaulGibbs\\WordpressBehatExtension\\": "src"},
-    "files": ["src/functions.php", "src/Util/functions.php"]
+    "files": ["src/Util/functions.php"]
   },
   "require": {
     "behat/behat": "~3.1.0",
