@@ -4,6 +4,7 @@ namespace PaulGibbs\WordpressBehatExtension\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 use PaulGibbs\WordpressBehatExtension\WordpressDriverManager;
@@ -173,7 +174,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         $page        = $this->getSession()->getPage();
 
         try {
-            $has_toolbar = $page->has('css', '#wp-admin-bar-logout');
+            $has_toolbar = $page->has('css', '#wp-admin-bar-my-account');
 
         // This may fail if the user has not loaded any site yet.
         } catch (DriverException $e) {
@@ -182,12 +183,20 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         // No toolbar? Go to wp-admin, and check again.
         if (! $has_toolbar) {
             $this->visitPath('wp-admin/');
-            $has_toolbar = $page->has('css', '#wp-admin-bar-logout');
+            $has_toolbar = $page->has('css', '#wp-admin-bar-my-account');
         }
 
         // No toolbar? User must be anonymous.
         if (! $has_toolbar) {
             return;
+        }
+
+        // Using NodeElement::mouseOver() won't work because WordPress is using hoverIndent. Instead we just
+        // manually add the hover class. See https://github.com/paulgibbs/behat-wordpress-extension/issues/65
+        try {
+            $this->getSession()->getDriver()->evaluateScript('jQuery( "#wp-admin-bar-my-account" ).addClass("hover");');
+        } catch (UnsupportedDriverActionException $e) {
+            // This will fail for GoutteDriver but neither is it necessary
         }
 
         $page->find('css', '#wp-admin-bar-logout a')->click();
