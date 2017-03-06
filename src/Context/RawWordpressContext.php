@@ -153,10 +153,16 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         }
 
         $this->visitPath('wp-login.php?redirect_to=' . urlencode($this->locatePath('/')));
-
         $page = $this->getSession()->getPage();
-        $page->fillField('user_login', $username);
-        $page->fillField('user_pass', $password);
+
+        $node = $page->findField('user_login');
+        $node->focus();
+        $node->setValue($username);
+
+        $node = $page->findField('user_pass');
+        $node->focus();
+        $node->setValue($password);
+
         $page->findButton('wp-submit')->click();
 
         if (! $this->loggedIn()) {
