@@ -9,13 +9,17 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use PaulGibbs\WordpressBehatExtension\WordpressDriverManager;
 use PaulGibbs\WordpressBehatExtension\Util;
 
+use SensioLabs\Behat\PageObjectExtension\Context\PageObjectAware;
+
 /**
  * Base Behat context.
  *
  * Does not contain any step defintions.
  */
-class RawWordpressContext extends RawMinkContext implements WordpressAwareInterface, SnippetAcceptingContext
+class RawWordpressContext extends RawMinkContext implements WordpressAwareInterface, SnippetAcceptingContext, PageObjectAware
 {
+    use PageObjectContextTrait;
+
     /**
      * WordPress driver manager.
      *
@@ -175,28 +179,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function logOut()
     {
-        $has_toolbar = false;
-        $page        = $this->getSession()->getPage();
-
-        try {
-            $has_toolbar = $page->has('css', '#wp-admin-bar-logout');
-
-        // This may fail if the user has not loaded any site yet.
-        } catch (DriverException $e) {
-        }
-
-        // No toolbar? Go to wp-admin, and check again.
-        if (! $has_toolbar) {
-            $this->visitPath('wp-admin/');
-            $has_toolbar = $page->has('css', '#wp-admin-bar-logout');
-        }
-
-        // No toolbar? User must be anonymous.
-        if (! $has_toolbar) {
-            return;
-        }
-
-        $page->find('css', '#wp-admin-bar-logout a')->click();
+        $this->getElement('Toolbar')->logOut();
     }
 
     /**
