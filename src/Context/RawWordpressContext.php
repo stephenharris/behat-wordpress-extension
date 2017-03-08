@@ -5,6 +5,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 
 use PaulGibbs\WordpressBehatExtension\WordpressDriverManager;
 use PaulGibbs\WordpressBehatExtension\Util;
@@ -160,11 +161,19 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         $page = $this->getSession()->getPage();
 
         $node = $page->findField('user_login');
-        $node->focus();
+        try {
+            $node->focus();
+        } catch (UnsupportedDriverActionException $e) {
+            // This will fail for GoutteDriver but neither is it necessary
+        }
         $node->setValue($username);
 
         $node = $page->findField('user_pass');
-        $node->focus();
+        try {
+            $node->focus();
+        } catch (UnsupportedDriverActionException $e) {
+            // This will fail for GoutteDriver but neither is it necessary
+        }
         $node->setValue($password);
 
         $page->findButton('wp-submit')->click();
