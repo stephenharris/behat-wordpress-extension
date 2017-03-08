@@ -23,7 +23,7 @@ Feature: You can write in visual and text mode
 
     When I follow "View Post"
     Then I should see "Article written in text mode"
-    And I should see "HTML tags should be parsed, and not rendedisplayedred in text mode."
+    And I should see "HTML tags should be interpreted, and not displayed in text mode."
     And I should not see "<strong>HTML</strong>"
 
   @javascript
