@@ -106,7 +106,7 @@ class Toolbar extends Element
                     // "Focus" (add hover class) on the toolbar link so the submenu appears
                     $id = $first_level_item->getAttribute('id');
                     $this->getDriver()->evaluateScript(
-                        'jQuery( "#' . $id . '" ).addClass("hover");'
+                        'jQuery("#' . $id . '").addClass("hover");'
                     );
                 } catch (UnsupportedDriverActionException $e) {
                     // This will fail for GoutteDriver but neither is it necessary
@@ -156,7 +156,7 @@ class Toolbar extends Element
         // manually add the hover class. See https://github.com/paulgibbs/behat-wordpress-extension/issues/65
         try {
             $this->getDriver()->evaluateScript(
-                'jQuery( "#wp-admin-bar-my-account" ).addClass("hover");'
+                'jQuery("#wp-admin-bar-my-account").addClass("hover");'
             );
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary
