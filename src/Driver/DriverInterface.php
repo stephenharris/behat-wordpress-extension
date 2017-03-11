@@ -89,12 +89,16 @@ interface DriverInterface
     /**
      * Get a content ID from its title.
      *
-     * @param string $title The title of the content to get the ID of
+     * @param string $title The title of the content to get
      * @param string|array Post type(s) to consider when searching for the content
-     * @return int ID of the post.
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
      * @throws \UnexpectedValueException If post does not exist
      */
-    public function getContentIdFromTitle($title, $post_type = null);
+    public function getContentFromTitle($title, $post_type = null);
 
     /**
      * Create a comment.

@@ -46,11 +46,10 @@ class ContentContext extends RawWordpressContext
                 throw new \UnexpectedValueException('"Given I am viewing a post:" step must only contain one post');
             }
             $post = $this->createContent($this->parseArgs($post_data_hash[0]));
-            $post_id = $post['id'];
         } else {
-            $post_id = $this->getDriver()->getContentIdFromTitle($post_data_or_title);
+            $post = $this->getDriver()->getContentFromTitle($post_data_or_title);
         }
-        $this->visitPath(sprintf('?p=%d', (int) $post_id));
+        $this->visitPath($post['url']);
     }
 
     /**

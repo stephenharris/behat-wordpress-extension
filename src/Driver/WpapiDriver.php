@@ -196,9 +196,12 @@ class WpapiDriver extends BaseDriver
             );
         }
 
+        $post = get_post($post);
+
         return array(
-            'id'   => $post,
-            'slug' => get_post($post)->post_name,
+            'id'   => (int) $post->ID,
+            'slug' => $post->post_name,
+            'url'  => get_permalink($post)
         );
     }
 
@@ -218,16 +221,19 @@ class WpapiDriver extends BaseDriver
     }
 
     /**
-     * Get a content ID from its title.
+     * Get content from its title.
      *
-     * @param string $title The title of the content to get the ID of
+     * @param string $title The title of the content to get
      * @param string|array Post type(s) to consider when searching for the content
-     * @return int ID of the post.
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
      * @throws \UnexpectedValueException If post does not exist
      */
-    public function getContentIdFromTitle($title, $post_type = null)
+    public function getContentFromTitle($title, $post_type = null)
     {
-
         if ($post_type === null) {
             $post_type = get_post_types('', 'names');
         }
@@ -241,7 +247,11 @@ class WpapiDriver extends BaseDriver
                 sprintf('Post "%s" of post type %s not found', $title, implode('/', $post_type))
             );
         }
-        return (int) $post->ID;
+        return array(
+            'id'   => (int) $post->ID,
+            'slug' => $post->post_name,
+            'url'  => get_permalink($post)
+        );
     }
 
     /**
