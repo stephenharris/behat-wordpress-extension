@@ -12,7 +12,7 @@ trait PageObjectContextTrait
     /**
      * @var PageObjectFactory
      */
-    private $pageObjectFactory = null;
+    private $page_object_factory = null;
 
     /**
          * Creates a page object from its name
@@ -22,11 +22,11 @@ trait PageObjectContextTrait
      */
     public function getPage($name)
     {
-        if (null === $this->pageObjectFactory) {
+        if (null === $this->page_object_factory) {
             throw new \RuntimeException('To create pages you need to pass a factory with setPageObjectFactory()');
         }
 
-        return $this->pageObjectFactory->createPage($name);
+        return $this->page_object_factory->createPage($name);
     }
 
     /**
@@ -37,20 +37,20 @@ trait PageObjectContextTrait
      */
     public function getElement($name)
     {
-        if (null === $this->pageObjectFactory) {
+        if (null === $this->page_object_factory) {
             throw new \RuntimeException('To create elements you need to pass a factory with setPageObjectFactory()');
         }
 
-        return $this->pageObjectFactory->createElement($name);
+        return $this->page_object_factory->createElement($name);
     }
 
     /**
          * Sets the factory for creating page and element objects
-     * @param PageObjectFactory $pageObjectFactory
+     * @param PageObjectFactory $page_object_factory
      */
-    public function setPageObjectFactory(PageObjectFactory $pageObjectFactory)
+    public function setPageObjectFactory(PageObjectFactory $page_object_factory)
     {
-        $this->pageObjectFactory = $pageObjectFactory;
+        $this->page_object_factory = $page_object_factory;
     }
 
     /**
@@ -59,12 +59,12 @@ trait PageObjectContextTrait
      */
     public function getPageObjectFactory()
     {
-        if (null === $this->pageObjectFactory) {
+        if (null === $this->page_object_factory) {
             throw new \RuntimeException(
                 'To access the page factory you need to pass it first with setPageObjectFactory()'#
             );
         }
 
-        return $this->pageObjectFactory;
+        return $this->page_object_factory;
     }
 }
