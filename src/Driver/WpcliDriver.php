@@ -335,9 +335,9 @@ class WpcliDriver extends BaseDriver
         $post = $posts[0];
 
         return array(
-                'id'   => $post->ID,
-                'slug' => $post->post_name,
-                'url'  => $post->url,
+            'id'   => $post->ID,
+            'slug' => $post->post_name,
+            'url'  => $post->url,
         );
     }
 
