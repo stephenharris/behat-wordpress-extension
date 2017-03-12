@@ -322,16 +322,22 @@ class WpcliDriver extends BaseDriver
     protected function getPost($post_id)
     {
         $wpcli_args = [
-        '--format' => 'json',
-        '--post__in' => $post_id,
-        '--fields' => 'ID,post_name,url'
+            '--format'    => 'json',
+            '--post__in'  => $post_id,
+            '--post_type' => 'any',
+            '--fields'    => 'ID,post_name,url'
         ];
-        $post  = json_decode($this->wpcli('post', 'list', $wpcli_args)['stdout']);
+        $posts  = json_decode($this->wpcli('post', 'list', $wpcli_args)['stdout']);
+
+        if (! $posts) {
+            throw new \Exception(sprintf('Could not find post with ID %d', $post_id));
+        }
+        $post = $posts[0];
 
         return array(
-        'id'   => $post->ID,
-        'slug' => $post->post_name,
-        'url'  => $post->url,
+                'id'   => $post->ID,
+                'slug' => $post->post_name,
+                'url'  => $post->url,
         );
     }
 
