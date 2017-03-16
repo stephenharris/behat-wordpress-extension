@@ -264,16 +264,7 @@ class WpcliDriver extends BaseDriver
 
         $post_id = (int) $this->wpcli('post', 'create', $wpcli_args)['stdout'];
 
-
-        // Post slug.
-        $wpcli_args = [$post_id, '--field=post_name'];
-        $post_slug  = $this->wpcli('post', 'get', $wpcli_args)['stdout'];
-
-
-        return array(
-            'id'   => $post_id,
-            'slug' => $post_slug,
-        );
+        return $this->getPost($post_id);
     }
 
     /**
@@ -294,6 +285,60 @@ class WpcliDriver extends BaseDriver
         }
 
         $this->wpcli('post', 'delete', $wpcli_args);
+    }
+
+    /**
+     * Get content from its title.
+     *
+     * @param string $title The title of the content to get
+     * @param string|array Post type(s) to consider when searching for the content
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
+     * @throws \UnexpectedValueException If post does not exist
+     */
+    public function getContentFromTitle($title, $post_type = null)
+    {
+        if ($post_type === null) {
+            $post_type = explode("\n", $this->wpcli('post-type', 'list', ['--field=name'])['stdout']);
+        }
+
+        $post_type = (array) $post_type;
+
+        $wpcli_args = ['--title="' . $title, '" --field=ID', '--post_type=' . implode(',', $post_type)];
+        $post_id = (int) $this->wpcli('post', 'list', $wpcli_args)['stdout'];
+
+        if (! $post_id) {
+            throw new UnexpectedValueException(
+                sprintf('Post "%s" of post type %s not found', $title, implode('/', $post_type))
+            );
+        }
+
+        return $this->getPost($post_id);
+    }
+
+    protected function getPost($post_id)
+    {
+        $wpcli_args = [
+            '--format'    => 'json',
+            '--post__in'  => $post_id,
+            '--post_type' => 'any',
+            '--fields'    => 'ID,post_name,url'
+        ];
+        $posts  = json_decode($this->wpcli('post', 'list', $wpcli_args)['stdout']);
+
+        if (! $posts) {
+            throw new \Exception(sprintf('Could not find post with ID %d', $post_id));
+        }
+        $post = $posts[0];
+
+        return array(
+            'id'   => $post->ID,
+            'slug' => $post->post_name,
+            'url'  => $post->url,
+        );
     }
 
     /**
@@ -448,7 +493,7 @@ class WpcliDriver extends BaseDriver
      * Get a User's ID from their username.
      *
      * @param string $username The username of the user to get the ID of
-     * @return int ID of the user user.
+     * @return int ID of the user.
      * @throws \UnexpectedValueException If provided data is invalid
      */
     public function getUserIdFromLogin($username)

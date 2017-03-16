@@ -108,6 +108,7 @@ abstract class BaseDriver implements DriverInterface
      * @return array {
      *     @type int    $id   Content ID.
      *     @type string $slug Content slug.
+     *     @type string $url Content url.
      * }
      */
     public function createContent($args)
@@ -124,6 +125,23 @@ abstract class BaseDriver implements DriverInterface
     public function deleteContent($id, $args = [])
     {
         throw new UnsupportedDriverActionException('delete content in ' . static::class);
+    }
+
+    /**
+     * Get content from its title.
+     *
+     * @param string $title The title of the content to get
+     * @param string|array Post type(s) to consider when searching for the content
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
+     * @throws \UnexpectedValueException If post does not exist
+     */
+    public function getContentFromTitle($title, $post_type = null)
+    {
+        throw new UnsupportedDriverActionException('get content from title in ' . static::class);
     }
 
     /**

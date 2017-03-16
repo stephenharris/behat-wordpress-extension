@@ -196,9 +196,12 @@ class WpapiDriver extends BaseDriver
             );
         }
 
+        $post = get_post($post);
+
         return array(
-            'id'   => $post,
-            'slug' => get_post($post)->post_name,
+            'id'   => (int) $post->ID,
+            'slug' => $post->post_name,
+            'url'  => get_permalink($post)
         );
     }
 
@@ -215,6 +218,40 @@ class WpapiDriver extends BaseDriver
         if (! $result) {
             throw new UnexpectedValueException('WordPress API driver failed deleting content.');
         }
+    }
+
+    /**
+     * Get content from its title.
+     *
+     * @param string $title The title of the content to get
+     * @param string|array Post type(s) to consider when searching for the content
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
+     * @throws \UnexpectedValueException If post does not exist
+     */
+    public function getContentFromTitle($title, $post_type = null)
+    {
+        if ($post_type === null) {
+            $post_type = get_post_types('', 'names');
+        }
+
+        $post_type = (array) $post_type;
+
+        $post = get_page_by_title($title, OBJECT, $post_type);
+
+        if (! $post) {
+            throw new UnexpectedValueException(
+                sprintf('Post "%s" of post type %s not found', $title, implode('/', $post_type))
+            );
+        }
+        return array(
+            'id'   => (int) $post->ID,
+            'slug' => $post->post_name,
+            'url'  => get_permalink($post)
+        );
     }
 
     /**
@@ -302,7 +339,7 @@ class WpapiDriver extends BaseDriver
      * Get a User's ID from their username.
      *
      * @param string $username The username of the user to get the ID of
-     * @return int ID of the user user.
+     * @return int ID of the user.
      * @throws \UnexpectedValueException If provided data is invalid
      */
     public function getUserIdFromLogin($username)

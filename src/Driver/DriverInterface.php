@@ -87,6 +87,20 @@ interface DriverInterface
     public function deleteContent($id, $args = []);
 
     /**
+     * Get a content ID from its title.
+     *
+     * @param string $title The title of the content to get
+     * @param string|array Post type(s) to consider when searching for the content
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
+     * @throws \UnexpectedValueException If post does not exist
+     */
+    public function getContentFromTitle($title, $post_type = null);
+
+    /**
      * Create a comment.
      *
      * @param array $args Set the values of the new comment.
