@@ -3,7 +3,7 @@
   "type": "behat-extension",
   "description": "WordHat is a Behat extension, integrating Behat, Mink, and WordPress. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.",
   "keywords": ["WordPress", "behat", "extension", "bdd", "mink"],
-  "homepage": "http://wordhat.info",
+  "homepage": "https://wordhat.info",
   "license": "GPL-3.0",
   "authors": [
     {
