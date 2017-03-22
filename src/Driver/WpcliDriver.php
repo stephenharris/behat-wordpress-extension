@@ -319,6 +319,11 @@ class WpcliDriver extends BaseDriver
         return $this->getPost($post_id);
     }
 
+    /**
+     * Get a post by ID.
+     *
+     * @param int $post_id
+     */
     protected function getPost($post_id)
     {
         $wpcli_args = [
@@ -327,7 +332,7 @@ class WpcliDriver extends BaseDriver
             '--post_type' => 'any',
             '--fields'    => 'ID,post_name,url'
         ];
-        $posts  = json_decode($this->wpcli('post', 'list', $wpcli_args)['stdout']);
+        $posts = json_decode($this->wpcli('post', 'list', $wpcli_args)['stdout']);
 
         if (! $posts) {
             throw new \Exception(sprintf('Could not find post with ID %d', $post_id));
