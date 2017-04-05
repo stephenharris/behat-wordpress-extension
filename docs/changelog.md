@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Changed
 - Documentation corrections; website and PHPDoc.
 - WP-CLI driver no longer fails if the command returns text through stdout.
-- Travis-CI reports job status to our Slack; join us at http://wordhat.herokuapp.com 😀
+- Travis-CI reports job status to our Slack; join us at https://wordhat.herokuapp.com 😀
 - Composer requirements loosened for better compatibility with other projects.
 
 ### Fixed
@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Regex correction for `given` block for `ContentContext->thereArePosts()`.
 
 ### Deprecated
-- `is_wordpress_error()` moved into `Util` namespace
+- `is_wordpress_error()` moved into `Util` namespace.
 
 ## [0.5.0] - 2017-02-08
 ### Added
