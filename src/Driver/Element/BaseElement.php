@@ -43,11 +43,11 @@ abstract class BaseElement implements ElementInterface
      * Retrieve an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to fetch an object.
+     * @param array      $args Optional data used to fetch an object.
      *
      * @return mixed The item.
      */
-    public function get($id, $args)
+    public function get($id, $args = [])
     {
         throw new UnsupportedDriverActionException(sprintf('use the %s element get method', static::class));
     }
@@ -56,9 +56,9 @@ abstract class BaseElement implements ElementInterface
      * Update an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to update an object.
+     * @param array      $args Optional data used to update an object.
      */
-    public function update($id, $args)
+    public function update($id, $args = [])
     {
         throw new UnsupportedDriverActionException(sprintf('use the %s element update method', static::class));
     }
@@ -67,9 +67,9 @@ abstract class BaseElement implements ElementInterface
      * Delete an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to delete an object.
+     * @param array      $args Optional data used to delete an object.
      */
-    public function delete($id, $args)
+    public function delete($id, $args = [])
     {
         throw new UnsupportedDriverActionException(sprintf('use the %s element delete method', static::class));
     }

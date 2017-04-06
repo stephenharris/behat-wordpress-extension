@@ -12,9 +12,9 @@ class ThemeElement extends BaseElement
      * Switch active theme.
      *
      * @param string $id   Theme name to switch to.
-     * @param array  $args Data used to update an object.
+     * @param array  $args Optional data used to update an object.
      */
-    public function update($id, $args)
+    public function update($id, $args = [])
     {
         $this->drivers->getDriver()->wpcli('theme', 'activate', [$id]);
     }

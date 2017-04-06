@@ -39,11 +39,11 @@ class ContentElement extends BaseElement
      * Retrieve an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to fetch an object.
+     * @param array      $args Optional data used to fetch an object.
      *
      * @return mixed The item.
      */
-    public function get($id, $args)
+    public function get($id, $args = [])
     {
         $wpcli_args = [
             '--format'    => 'json',
@@ -70,9 +70,9 @@ class ContentElement extends BaseElement
      * Update an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to update an object.
+     * @param array      $args Optional data used to update an object.
      */
-    public function update($id, $args)
+    public function update($id, $args = [])
     {
         throw new PendingException();
     }
@@ -81,9 +81,9 @@ class ContentElement extends BaseElement
      * Delete an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to delete an object.
+     * @param array      $args Optional data used to delete an object.
      */
-    public function delete($id, $args)
+    public function delete($id, $args = [])
     {
         $wpcli_args = [$id];
         $whitelist  = ['force', 'defer-term-counting'];

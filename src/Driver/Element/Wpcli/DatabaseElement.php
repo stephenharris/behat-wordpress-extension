@@ -12,11 +12,11 @@ class DatabaseElement extends BaseElement
      * Export site database.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to fetch an object.
+     * @param array      $args Optional data used to fetch an object.
      *
      * @return string Path to the export file.
      */
-    public function get($id, $args)
+    public function get($id, $args = [])
     {
         while (true) {
             $filename = uniqid('database-', true) . '.sql';
@@ -38,9 +38,9 @@ class DatabaseElement extends BaseElement
      * Otherwise, it is treated as relative to the current working directory.
      *
      * @param string $id   Relative or absolute path and filename of SQL file to import.
-     * @param array  $args Data used to update an object.
+     * @param array  $args Optional data used to update an object.
      */
-    public function update($id, $args)
+    public function update($id, $args = [])
     {
         if (! in_array($id[0], [DIRECTORY_SEPARATOR, '~'], true)) {
             $id = getcwd() . "/{$id}";

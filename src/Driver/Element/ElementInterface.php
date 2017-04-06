@@ -24,25 +24,25 @@ interface ElementInterface
      * Retrieve an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to fetch an object.
+     * @param array      $args Optional data used to fetch an object.
      *
      * @return mixed The item.
      */
-    public function get($id, $args);
+    public function get($id, $args = []);
 
     /**
      * Update an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to update an object.
+     * @param array      $args Optional data used to update an object.
      */
-    public function update($id, $args);
+    public function update($id, $args = []);
 
     /**
      * Delete an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Data used to delete an object.
+     * @param array      $args Optional data used to delete an object.
      */
-    public function delete($id, $args);
+    public function delete($id, $args = []);
 }
