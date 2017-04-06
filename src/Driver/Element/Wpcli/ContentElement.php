@@ -2,7 +2,6 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
-use Behat\Behat\Tester\Exception\PendingException;
 use Exception;
 
 /**
@@ -64,17 +63,6 @@ class ContentElement extends BaseElement
             'slug' => $post->post_name,
             'url'  => $post->url,
         );
-    }
-
-    /**
-     * Update an item for this element.
-     *
-     * @param int|string $id   Object ID.
-     * @param array      $args Optional data used to update an object.
-     */
-    public function update($id, $args = [])
-    {
-        throw new PendingException();
     }
 
     /**
