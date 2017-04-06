@@ -11,8 +11,8 @@ class DatabaseElement extends BaseElement
     /**
      * Export site database.
      *
-     * @param int|string $id   Object ID.
-     * @param array      $args Optional data used to fetch an object.
+     * @param int|string $id   Not used.
+     * @param array      $args Not used.
      *
      * @return string Path to the export file.
      */
@@ -32,13 +32,13 @@ class DatabaseElement extends BaseElement
     }
 
     /**
-     * Import site database from file.
+     * Import site database.
      *
      * If $id begins with a directory separator or ~ it is treated as an absolute path.
      * Otherwise, it is treated as relative to the current working directory.
      *
      * @param string $id   Relative or absolute path and filename of SQL file to import.
-     * @param array  $args Optional data used to update an object.
+     * @param array  $args Not used.
      */
     public function update($id, $args = [])
     {
@@ -59,8 +59,8 @@ class DatabaseElement extends BaseElement
      *
      * @see get()
      *
-     * @param int|string $id   Object ID.
-     * @param array      $args Optional data used to fetch an object.
+     * @param int|string $id   Not used.
+     * @param array      $args Not used.
      *
      * @return string Path to the export file.
      */
@@ -75,7 +75,7 @@ class DatabaseElement extends BaseElement
      * @see update()
      *
      * @param string $id   Relative or absolute path and filename of SQL file to import.
-     * @param array  $args Optional data used to update an object.
+     * @param array  $args Not used.
      */
     public function import($id, $args = [])
     {

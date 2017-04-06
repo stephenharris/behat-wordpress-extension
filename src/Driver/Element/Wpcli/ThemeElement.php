@@ -12,7 +12,7 @@ class ThemeElement extends BaseElement
      * Switch active theme.
      *
      * @param string $id   Theme name to switch to.
-     * @param array  $args Optional data used to update an object.
+     * @param array  $args Not used.
      */
     public function update($id, $args = [])
     {
@@ -30,7 +30,7 @@ class ThemeElement extends BaseElement
      * @see update()
      *
      * @param string $id   Theme name to switch to.
-     * @param array  $args Optional data used to update an object.
+     * @param array  $args Not used.
      *
      * @return string Path to the export file.
      */
