@@ -1,56 +1,50 @@
+<?php
+namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
+use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
 
-
-
-
-
-
+/**
+ * WP-CLI driver element for managing user accounts.
+ */
+class UserElement extends BaseElement
+{
     /**
-     * Create a user.
+     * Create an item for this element.
      *
-     * @param string $user_login User login name.
-     * @param string $user_email User email address.
-     * @param array  $args       Optional. Extra parameters to pass to WordPress.
-     * @return array {
-     *     @type int    $id   User ID.
-     *     @type string $slug User slug (nicename).
-     * }
+     * @param array $args Data used to create an object.
+     * @return int New object ID.
      */
-    public function createUser($user_login, $user_email, $args = [])
+    public function create($args)
     {
-        // User.
-        $wpcli_args = [$user_login, $user_email, '--porcelain'];
+        $wpcli_args = [$args['user_login'], $args['user_email'], '--porcelain'];
         $whitelist  = array(
             'ID', 'user_pass', 'user_nicename', 'user_url', 'display_name', 'nickname', 'first_name', 'last_name',
             'description', 'rich_editing', 'comment_shortcuts', 'admin_color', 'use_ssl', 'user_registered',
             'show_admin_bar_front', 'role', 'locale',
         );
+
         foreach ($whitelist as $option) {
             if (isset($args[$option])) {
                 $wpcli_args["--{$option}"] = $args[$option];
             }
         }
-        $user_id = (int) $this->wpcli('user', 'create', $wpcli_args)['stdout'];
-        // User slug (nicename).
-        $wpcli_args = [$user_id, '--field=user_nicename'];
-        $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['stdout'];
-        return array(
-            'id'   => $user_id,
-            'slug' => $user_slug,
-        );
+
+        return (int) $this->drivers->getDriver()->wpcli('user', 'create', $wpcli_args)['stdout'];
     }
 
     /**
-     * Delete a user.
+     * Delete an item for this element.
      *
-     * @param int   $id   ID of user to delete.
-     * @param array $args Optional. Extra parameters to pass to WordPress.
+     * @param int|string $id   Object ID.
+     * @param array      $args Optional data used to delete an object.
      */
-    public function deleteUser($id, $args = [])
+    public function delete($id, $args = [])
     {
         $wpcli_args = [$id, '--yes'];
         $whitelist  = ['network', 'reassign'];
+
         foreach ($whitelist as $option => $value) {
+            // TODO: review why this whitelisting is different from all the others.
             if (isset($args[$option])) {
                 if (is_int($option)) {
                     $wpcli_args[] = "--{$value}";
@@ -59,6 +53,7 @@
                 }
             }
         }
-        $this->wpcli('user', 'delete', $wpcli_args);
-    }
 
+        $this->drivers->getDriver()->wpcli('user', 'delete', $wpcli_args);
+    }
+}
