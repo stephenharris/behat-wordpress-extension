@@ -31,11 +31,9 @@ class ThemeElement extends BaseElement
      *
      * @param string $id   Theme name to switch to.
      * @param array  $args Not used.
-     *
-     * @return string Path to the export file.
      */
     public function change($id, $args = [])
     {
-        return $this->update($id, $args);
+        $this->update($id, $args);
     }
 }

@@ -11,16 +11,16 @@ class PluginElement extends BaseElement
     /**
      * Activate or deactivate specified plugin.
      *
-     * @param string $id   Plugin name to affect.
+     * @param string $id   Plugin name.
      * @param array  $args Optional data used to update an object.
      */
     public function update($id, $args = [])
     {
-        if (! isset($args['action']) || ! in_array($args['action'], ['activate', 'deactivate'], true)) {
-            $args['action'] = 'activate';
+        if (! isset($args['status']) || ! in_array($args['status'], ['activate', 'deactivate'], true)) {
+            $args['status'] = 'activate';
         }
 
-        $this->drivers->getDriver()->wpcli('plugin', $args['action'], [$id]);
+        $this->drivers->getDriver()->wpcli('plugin', $args['status'], [$id]);
     }
 
 
@@ -38,7 +38,7 @@ class PluginElement extends BaseElement
      */
     public function activate($id, $args = [])
     {
-        $this->update($id, ['action' => 'activate']);
+        $this->update($id, ['status' => 'activate']);
     }
 
     /**
@@ -51,6 +51,6 @@ class PluginElement extends BaseElement
      */
     public function deactivate($id, $args = [])
     {
-        $this->update($id, ['action' => 'deactivate']);
+        $this->update($id, ['status' => 'deactivate']);
     }
 }
