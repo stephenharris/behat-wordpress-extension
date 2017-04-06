@@ -1,8 +1,36 @@
 <?php
+namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
+
+use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
+
+/**
+ * WP-CLI driver element for site cache.
+ */
+class CacheElement extends BaseElement
+{
     /**
      * Clear object cache.
+     *
+     * @param string $id   Not used.
+     * @param array  $args Not used.
      */
-    public function clearCache()
+    public function update($id, $args = [])
     {
-        $this->wpcli('cache', 'flush');
+        $this->drivers->getDriver()->wpcli('cache', 'flush');
     }
+
+
+    /*
+     * Convenience methods.
+     */
+
+    /**
+     * Alias of update().
+     *
+     * @see update()
+     */
+    public function clear()
+    {
+        $this->update(0);
+    }
+}
