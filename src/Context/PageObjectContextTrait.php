@@ -32,7 +32,7 @@ trait PageObjectContextTrait
 
     /**
      * Creates a page object element from its name.
-    *
+     *
      * @param string $name The name of the page object element e.g 'Toolbar'
      * @return Element
      * @throws \RuntimeException
