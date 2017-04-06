@@ -19,5 +19,23 @@ class ThemeElement extends BaseElement
         $this->drivers->getDriver()->wpcli('theme', 'activate', [$id]);
     }
 
-    // djpaultodo: helper functions? activate?
+
+    /*
+     * Convenience methods.
+     */
+
+    /**
+     * Alias of update().
+     *
+     * @see update()
+     *
+     * @param string $id   Theme name to switch to.
+     * @param array  $args Optional data used to update an object.
+     *
+     * @return string Path to the export file.
+     */
+    public function change($id, $args = [])
+    {
+        return $this->update($id, $args);
+    }
 }

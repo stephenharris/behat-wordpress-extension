@@ -49,5 +49,36 @@ class DatabaseElement extends BaseElement
         $this->drivers->getDriver()->wpcli('db', 'import', [$id]);
     }
 
-    // djpaultodo: helper functions? import/export?
+
+    /*
+     * Convenience methods.
+     */
+
+    /**
+     * Alias of get().
+     *
+     * @see get()
+     *
+     * @param int|string $id   Object ID.
+     * @param array      $args Optional data used to fetch an object.
+     *
+     * @return string Path to the export file.
+     */
+    public function export($id, $args = [])
+    {
+        return $this->get($id, $args);
+    }
+
+    /**
+     * Alias of update().
+     *
+     * @see update()
+     *
+     * @param string $id   Relative or absolute path and filename of SQL file to import.
+     * @param array  $args Optional data used to update an object.
+     */
+    public function import($id, $args = [])
+    {
+        $this->update($id, $args);
+    }
 }
