@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Regex correction for `given` block for `ContentContext->thereArePosts()`.
 
 ### Deprecated
-- `is_wordpress_error()` moved into `Util` namespace.
+- `isWordpressError()` moved into `Util` namespace.
 
 ## [0.5.0] - 2017-02-08
 ### Added

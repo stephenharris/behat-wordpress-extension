@@ -77,7 +77,7 @@ function stripTagsAndContent($html)
  * @param object $item
  * @return bool
  */
-function is_wordpress_error($item)
+function isWordpressError($item)
 {
     return (is_object($item) && get_class($item) === 'WP_Error');
 }
