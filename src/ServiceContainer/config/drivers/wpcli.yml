@@ -1,6 +1,13 @@
 parameters:
   wordpress.driver.wpcli.class: PaulGibbs\WordpressBehatExtension\Driver\WpcliDriver
+  wordpress.element.wpcli.cache.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\CacheElement
+  wordpress.element.wpcli.comment.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\CommentElement
   wordpress.element.wpcli.content.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\ContentElement
+  wordpress.element.wpcli.database.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\DatabaseElement
+  wordpress.element.wpcli.plugin.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\PluginElement
+  wordpress.element.wpcli.term.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\TermElement
+  wordpress.element.wpcli.theme.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\ThemeElement
+  wordpress.element.wpcli.user.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\UserElement
 
 services:
   wordpress.driver.wpcli:
@@ -13,9 +20,59 @@ services:
     tags:
       - { name: wordpress.driver, alias: wpcli }
 
+  wordpress.element.wpcli.cache:
+    class: %wordpress.element.wpcli.cache.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
+  wordpress.element.wpcli.comment:
+    class: %wordpress.element.wpcli.comment.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
   wordpress.element.wpcli.content:
     class: %wordpress.element.wpcli.content.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
       - { name: wordpress.element, alias: wpcli }
+
+  wordpress.element.wpcli.database:
+    class: %wordpress.element.wpcli.database.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
+  wordpress.element.wpcli.plugin:
+    class: %wordpress.element.wpcli.plugin.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
+  wordpress.element.wpcli.term:
+    class: %wordpress.element.wpcli.term.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
+  wordpress.element.wpcli.theme:
+    class: %wordpress.element.wpcli.theme.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
+  wordpress.element.wpcli.user:
+    class: %wordpress.element.wpcli.user.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }
+
