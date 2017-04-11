@@ -16,7 +16,7 @@ class PluginElement extends BaseElement
      */
     public function update($id, $args = [])
     {
-        if (! isset($args['status']) || ! in_array($args['status'], ['activate', 'deactivate'], true)) {
+        if (! in_array($args['status'], ['activate', 'deactivate'], true)) {
             $args['status'] = 'activate';
         }
 
