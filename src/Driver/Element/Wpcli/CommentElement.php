@@ -2,6 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
+use function PaulGibbs\WordpressBehatExtension\Util\buildCLIArgs;
 
 /**
  * WP-CLI driver element for post comments.
@@ -16,17 +17,15 @@ class CommentElement extends BaseElement
      */
     public function create($args)
     {
-        $wpcli_args = ['--porcelain'];
-        $whitelist  = array(
-            'comment_author', 'comment_author_email', 'comment_author_url', 'comment_content', 'comment_date',
-            'comment_date_gmt', 'comment_parent', 'comment_post_ID', 'user_id', 'comment_agent', 'comment_author_IP',
+        $wpcli_args = buildCLIArgs(
+            array(
+                'comment_author', 'comment_author_email', 'comment_author_url', 'comment_content', 'comment_date',
+                'comment_date_gmt', 'comment_parent', 'comment_post_ID', 'user_id', 'comment_agent', 'comment_author_IP',
+            ),
+            $args
         );
 
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args["--{$option}"] = $args[$option];
-            }
-        }
+        $wpcli_args = array_unshift($wpcli_args, '--porcelain');
 
         return (int) $this->drivers->getDriver()->wpcli('comment', 'create', $wpcli_args)['stdout'];
     }
@@ -39,14 +38,12 @@ class CommentElement extends BaseElement
      */
     public function delete($id, $args = [])
     {
-        $wpcli_args = [$id];
-        $whitelist  = ['force'];
+        $wpcli_args = buildCLIArgs(
+            ['force'],
+            $args
+        );
 
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args[] = "--{$option}";
-            }
-        }
+        $wpcli_args = array_unshift($wpcli_args, $id);
 
         $this->drivers->getDriver()->wpcli('comment', 'delete', $wpcli_args);
     }
