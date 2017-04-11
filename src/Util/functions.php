@@ -83,7 +83,7 @@ function isWordpressError($item)
 }
 
 /**
- * Construct an argument string for a CLI command.
+ * Construct arguments for a CLI command.
  *
  * Supports any mixture of assocative and numeric array values.
  *
