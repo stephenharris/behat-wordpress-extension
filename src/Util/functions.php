@@ -81,3 +81,36 @@ function isWordpressError($item)
 {
     return (is_object($item) && get_class($item) === 'WP_Error');
 }
+
+/**
+ * Construct an argument string for a CLI command.
+ *
+ * Supports any mixture of assocative and numeric array values.
+ *
+ * @param array $whitelist Accept only these arguments.
+ * @param array $raw_args Raw argument/value pairs. May be user-supplied.
+ * @return array
+ */
+function buildCLIArgs($whitelist, $raw_args)
+{
+    $retval = [];
+
+    foreach ($whitelist as $option => $value) {
+        // Assocative array key.
+        if (! is_numeric($option) && ! isset($raw_args[$option])) {
+            continue;
+
+        // Numeric array key.
+        } elseif (! in_array($value, $raw_args, true)) {
+            continue;
+        }
+
+        if (is_numeric($option)) {
+            $retval[] = '--' . escapeshellarg($value);
+        } else {
+            $retval[] = sprintf('%s=%s', escapeshellarg($option), escapeshellarg($value));
+        }
+    }
+
+    return $retval;
+}
