@@ -75,6 +75,6 @@ class TermElement extends BaseElement
             $id,
         ];
 
-        $this->drivers->getDriver()->wpcli('term', 'delete', [$wpcli_args]);
+        $this->drivers->getDriver()->wpcli('term', 'delete', $wpcli_args);
     }
 }
