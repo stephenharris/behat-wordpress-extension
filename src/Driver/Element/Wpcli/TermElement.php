@@ -2,6 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
+use Exception;
 
 /**
  * WP-CLI driver element for taxonomy terms.
@@ -12,7 +13,8 @@ class TermElement extends BaseElement
      * Create an item for this element.
      *
      * @param array $args Data used to create an object.
-     * @return int New object ID.
+     *
+     * @return mixed The new item.
      */
     public function create($args)
     {

@@ -2,6 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
+use Exception;
 use function PaulGibbs\WordpressBehatExtension\Util\buildCLIArgs;
 
 /**
@@ -13,7 +14,8 @@ class CommentElement extends BaseElement
      * Create an item for this element.
      *
      * @param array $args Data used to create an object.
-     * @return int New object ID.
+     *
+     * @return mixed The new item.
      */
     public function create($args)
     {

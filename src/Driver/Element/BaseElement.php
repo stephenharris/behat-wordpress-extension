@@ -32,7 +32,8 @@ abstract class BaseElement implements ElementInterface
      * Create an item for this element.
      *
      * @param array $args Data used to create an object.
-     * @return int|string New object ID.
+     *
+     * @return mixed The new item.
      */
     public function create($args)
     {
