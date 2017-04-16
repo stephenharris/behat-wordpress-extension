@@ -28,8 +28,38 @@ class CommentElement extends BaseElement
         );
 
         $wpcli_args = array_unshift($wpcli_args, '--porcelain');
+        $comment_id = (int) $this->drivers->getDriver()->wpcli('comment', 'create', $wpcli_args)['stdout'];
 
-        return (int) $this->drivers->getDriver()->wpcli('comment', 'create', $wpcli_args)['stdout'];
+        return $this->get($comment_id);
+    }
+
+    /**
+     * Retrieve an item for this element.
+     *
+     * @param int|string $id   Object ID.
+     * @param array      $args Optional data used to fetch an object.
+     *
+     * @return mixed The item.
+     */
+    public function get($id, $args = [])
+    {
+        $wpcli_args = buildCLIArgs(
+            array(
+                'field',
+                'fields',
+            ),
+            $args
+        );
+
+        $wpcli_args = array_unshift($wpcli_args, $id, '--format=json');
+        $comment    = $this->drivers->getDriver()->wpcli('comment', 'get', $wpcli_args)['stdout'];
+        $comment    = json_decode($comment);
+
+        if (! $comment) {
+            throw new Exception(sprintf('Could not find comment with ID %d', $id));
+        }
+
+        return $comment;
     }
 
     /**
