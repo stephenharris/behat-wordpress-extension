@@ -18,20 +18,55 @@ class TermElement extends BaseElement
      */
     public function create($args)
     {
-        $wpcli_args = [
-            $args['taxonomy'],
-            $args['term'],
-            '--porcelain',
-        ];
+        $wpcli_args = buildCLIArgs(
+            array(
+                'description',
+                'parent',
+                'slug',
+            ),
+            $args
+        );
 
-        return (int) $this->drivers->getDriver()->wpcli('term', 'create', $wpcli_args)['stdout'];
+        $wpcli_args = array_unshift($wpcli_args, $args['taxonomy'], $args['term'], '--porcelain');
+        $term_id    = (int) $this->drivers->getDriver()->wpcli('term', 'create', $wpcli_args)['stdout'];
+
+        return $this->get($term_id);
+    }
+
+    /**
+     * Retrieve an item for this element.
+     *
+     * @param int|string $id   Object ID.
+     * @param array      $args Optional data used to fetch an object.
+     *
+     * @return mixed The item.
+     */
+    public function get($id, $args = [])
+    {
+        $wpcli_args = buildCLIArgs(
+            array(
+                'field',
+                'fields',
+            ),
+            $args
+        );
+
+        $wpcli_args = array_unshift($wpcli_args, $args['taxonomy'], $id, '--format=json');
+        $term       = $this->drivers->getDriver()->wpcli('term', 'get', $wpcli_args)['stdout'];
+        $term       = json_decode($term);
+
+        if (! $term) {
+            throw new Exception(sprintf('Could not find term with ID %d', $id));
+        }
+
+        return $term;
     }
 
     /**
      * Delete an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Optional data used to delete an object.
+     * @param array      $args Unused.
      */
     public function delete($id, $args = [])
     {
