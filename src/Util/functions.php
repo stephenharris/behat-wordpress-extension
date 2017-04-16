@@ -106,9 +106,9 @@ function buildCLIArgs($whitelist, $raw_args)
         }
 
         if (is_numeric($option)) {
-            $retval[] = '--' . escapeshellarg($value);
+            $retval[] = "--{$value}";  // DJPAULTODO: check escaping for these.
         } else {
-            $retval[] = sprintf('%s=%s', escapeshellarg($option), escapeshellarg($value));
+            $retval[] = sprintf('--%s=%s', $option, escapeshellarg($value));
         }
     }
 
