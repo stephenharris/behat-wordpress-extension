@@ -75,4 +75,3 @@ services:
       - "@wordpress.wordpress"
     tags:
       - { name: wordpress.element, alias: wpcli }
-
