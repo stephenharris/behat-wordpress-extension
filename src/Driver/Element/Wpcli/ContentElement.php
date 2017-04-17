@@ -30,8 +30,9 @@ class ContentElement extends BaseElement
         );
 
         $wpcli_args = array_unshift($wpcli_args, '--porcelain');
+        $post_id    = (int) $this->drivers->getDriver()->wpcli('post', 'create', $wpcli_args)['stdout'];
 
-        return (int) $this->drivers->getDriver()->wpcli('post', 'create', $wpcli_args)['stdout'];
+        return $this->get($post_id);
     }
 
     /**
@@ -44,25 +45,23 @@ class ContentElement extends BaseElement
      */
     public function get($id, $args = [])
     {
-        $wpcli_args = [
-            '--format'    => 'json',
-            '--post__in'  => $id,
-            '--post_type' => 'any',
-            '--fields'    => 'ID,post_name,url',
-        ];
+        $wpcli_args = buildCLIArgs(
+            array(
+                'field',
+                'fields',
+            ),
+            $args
+        );
 
-        $post = $this->drivers->getDriver()->wpcli('post', 'get', $wpcli_args)['stdout'];
-        $post = json_decode($post);
+        $wpcli_args = array_unshift($wpcli_args, $id, '--format=json');
+        $post       = $this->drivers->getDriver()->wpcli('post', 'get', $wpcli_args)['stdout'];
+        $post       = json_decode($post);
 
         if (! $post) {
             throw new Exception(sprintf('Could not find post with ID %d', $id));
         }
 
-        return array(
-            'id'   => $post->ID,
-            'slug' => $post->post_name,
-            'url'  => $post->url,
-        );
+        return $post;
     }
 
     /**
