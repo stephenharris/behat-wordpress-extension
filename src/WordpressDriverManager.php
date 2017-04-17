@@ -48,7 +48,7 @@ class WordpressDriverManager
      */
     public function registerDriver($name, DriverInterface $driver)
     {
-        $name = strtolower($name);  // maybe this should make string safe for array key?
+        $name = strtolower($name);
         $this->drivers[$name] = $driver;
     }
 
