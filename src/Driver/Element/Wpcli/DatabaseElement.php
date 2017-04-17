@@ -1,6 +1,7 @@
 <?php
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
+use PaulGibbs\WordpressBehatExtension\Exception\UnsupportedDriverActionException;
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
 
 /**
@@ -47,6 +48,22 @@ class DatabaseElement extends BaseElement
         }
 
         $this->drivers->getDriver()->wpcli('db', 'import', [$id]);
+    }
+
+    /**
+     * Start a database transaction.
+     */
+    public function startTransaction()
+    {
+        throw new UnsupportedDriverActionException(sprintf('use the %s element create method', static::class));
+    }
+
+    /**
+     * End (rollback) a database transaction.
+     */
+    public function endTransaction()
+    {
+        throw new UnsupportedDriverActionException(sprintf('use the %s element create method', static::class));
     }
 
 
