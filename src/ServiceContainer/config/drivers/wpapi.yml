@@ -1,5 +1,13 @@
 parameters:
   wordpress.driver.wpapi.class: PaulGibbs\WordpressBehatExtension\Driver\WpapiDriver
+  wordpress.element.wpapi.cache.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\CacheElement
+  wordpress.element.wpapi.comment.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\CommentElement
+  wordpress.element.wpapi.content.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\ContentElement
+  wordpress.element.wpapi.database.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\DatabaseElement
+  wordpress.element.wpapi.plugin.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\PluginElement
+  wordpress.element.wpapi.term.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\TermElement
+  wordpress.element.wpapi.theme.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\ThemeElement
+  wordpress.element.wpapi.user.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\UserElement
 
 services:
   wordpress.driver.wpapi:
@@ -8,3 +16,59 @@ services:
       - %wordpress.path%
     tags:
       - { name: wordpress.driver, alias: wpapi }
+
+  wordpress.element.wpapi.cache:
+    class: %wordpress.element.wpapi.cache.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.comment:
+    class: %wordpress.element.wpapi.comment.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.content:
+    class: %wordpress.element.wpapi.content.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.database:
+    class: %wordpress.element.wpapi.database.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.plugin:
+    class: %wordpress.element.wpapi.plugin.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.term:
+    class: %wordpress.element.wpapi.term.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.theme:
+    class: %wordpress.element.wpapi.theme.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
+
+  wordpress.element.wpapi.user:
+    class: %wordpress.element.wpapi.user.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpapi }
