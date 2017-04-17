@@ -28,8 +28,38 @@ class UserElement extends BaseElement
         );
 
         $wpcli_args = array_unshift($wpcli_args, $args['user_login'], $args['user_email'], '--porcelain');
+        $user_id    = (int) $this->drivers->getDriver()->wpcli('user', 'create', $wpcli_args)['stdout'];
 
-        return (int) $this->drivers->getDriver()->wpcli('user', 'create', $wpcli_args)['stdout'];
+        return $this->get($user_id);
+    }
+
+    /**
+     * Retrieve an item for this element.
+     *
+     * @param int|string $id   Object ID.
+     * @param array      $args Optional data used to fetch an object.
+     *
+     * @return mixed The item.
+     */
+    public function get($id, $args = [])
+    {
+        $wpcli_args = buildCLIArgs(
+            array(
+                'field',
+                'fields',
+            ),
+            $args
+        );
+
+        $wpcli_args = array_unshift($wpcli_args, $id, '--format=json');
+        $user       = $this->drivers->getDriver()->wpcli('user', 'get', $wpcli_args)['stdout'];
+        $user       = json_decode($user);
+
+        if (! $user) {
+            throw new Exception(sprintf('Could not find user with ID %d', $id));
+        }
+
+        return $user;
     }
 
     /**
