@@ -11,8 +11,8 @@ class DatabaseElement extends BaseElement
     /**
      * Export site database.
      *
-     * @param int|string $id   Not used.
-     * @param array      $args Not used.
+     * @param int   $id   Not used.
+     * @param array $args Not used.
      *
      * @return string Path to the export file.
      */
@@ -59,8 +59,8 @@ class DatabaseElement extends BaseElement
      *
      * @see get()
      *
-     * @param int|string $id   Not used.
-     * @param array      $args Not used.
+     * @param int   $id   Not used.
+     * @param array $args Not used.
      *
      * @return string Path to the export file.
      */
