@@ -24,7 +24,7 @@ class ContentElement extends BaseElement
         if (is_wordpress_error($post)) {
             throw new UnexpectedValueException(
                 sprintf(
-                    'WordPress API driver failed creating new content: %s',
+                    'Failed creating new content: %s',
                     $post->get_error_message()
                 )
             );
@@ -63,7 +63,7 @@ class ContentElement extends BaseElement
         $result = wp_delete_post($id, isset($args['force']));
 
         if (! $result) {
-            throw new UnexpectedValueException('WordPress API driver failed deleting content.');
+            throw new UnexpectedValueException('Failed deleting content.');
         }
     }
 }

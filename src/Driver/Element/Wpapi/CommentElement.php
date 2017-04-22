@@ -21,7 +21,12 @@ class CommentElement extends BaseElement
         $comment_id = wp_new_comment($args);
 
         if (! $comment_id || is_wp_error($comment_id)) {
-            throw new UnexpectedValueException('WordPress API driver failed creating a new comment.');
+            throw new UnexpectedValueException(
+                sprintf(
+                    'Failed creating a new comment: %s',
+                    $user->get_error_message()
+                )
+            );
         }
 
         return $this->get($comment_id);
@@ -57,7 +62,7 @@ class CommentElement extends BaseElement
         $result = wp_delete_comment($id, isset($args['force']));
 
         if (! $result) {
-            throw new UnexpectedValueException('WordPress API driver failed deleting a comment.');
+            throw new UnexpectedValueException('Failed deleting a comment.');
         }
     }
 }
