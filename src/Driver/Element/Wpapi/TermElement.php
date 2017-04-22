@@ -42,7 +42,6 @@ class TermElement extends BaseElement
 
         if (! $term) {
             throw new UnexpectedValueException(sprintf('Could not find term with ID %d', $id));
-
         } elseif (is_wp_error($term)) {
             throw new UnexpectedValueException(
                 sprintf('Could not find term with ID %d: %s', $id, $term->get_error_message())

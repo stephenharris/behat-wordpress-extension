@@ -22,7 +22,6 @@ class CommentElement extends BaseElement
 
         if (! $comment_id) {
             throw new UnexpectedValueException('Failed creating a new comment');
-
         } elseif (is_wp_error($comment_id)) {
             throw new UnexpectedValueException(
                 sprintf('Failed creating a new comment: %s', $user->get_error_message())
