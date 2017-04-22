@@ -25,53 +25,53 @@ services:
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: cache }
 
   wordpress.element.wpcli.comment:
     class: %wordpress.element.wpcli.comment.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: comment }
 
   wordpress.element.wpcli.content:
     class: %wordpress.element.wpcli.content.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: content }
 
   wordpress.element.wpcli.database:
     class: %wordpress.element.wpcli.database.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: database }
 
   wordpress.element.wpcli.plugin:
     class: %wordpress.element.wpcli.plugin.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: plugin }
 
   wordpress.element.wpcli.term:
     class: %wordpress.element.wpcli.term.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: term }
 
   wordpress.element.wpcli.theme:
     class: %wordpress.element.wpcli.theme.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: theme }
 
   wordpress.element.wpcli.user:
     class: %wordpress.element.wpcli.user.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpcli }
+      - { name: wordpress.element, alias: user }

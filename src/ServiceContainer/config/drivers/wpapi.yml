@@ -22,53 +22,53 @@ services:
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: cache }
 
   wordpress.element.wpapi.comment:
     class: %wordpress.element.wpapi.comment.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: comment }
 
   wordpress.element.wpapi.content:
     class: %wordpress.element.wpapi.content.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: content }
 
   wordpress.element.wpapi.database:
     class: %wordpress.element.wpapi.database.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: database }
 
   wordpress.element.wpapi.plugin:
     class: %wordpress.element.wpapi.plugin.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: plugin }
 
   wordpress.element.wpapi.term:
     class: %wordpress.element.wpapi.term.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: term }
 
   wordpress.element.wpapi.theme:
     class: %wordpress.element.wpapi.theme.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: theme }
 
   wordpress.element.wpapi.user:
     class: %wordpress.element.wpapi.user.class%
     arguments:
       - "@wordpress.wordpress"
     tags:
-      - { name: wordpress.element, alias: wpapi }
+      - { name: wordpress.element, alias: user }
