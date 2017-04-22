@@ -16,10 +16,6 @@ class PluginElement extends BaseElement
      */
     public function update($id, $args = [])
     {
-        if (! in_array($args['status'], ['activate', 'deactivate'], true)) {
-            $args['status'] = 'activate';
-        }
-
         $this->drivers->getDriver()->wpcli('plugin', $args['status'], [$id]);
     }
 

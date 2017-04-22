@@ -22,12 +22,7 @@ class ContentElement extends BaseElement
         $post = wp_insert_post($args);
 
         if (is_wordpress_error($post)) {
-            throw new UnexpectedValueException(
-                sprintf(
-                    'Failed creating new content: %s',
-                    $post->get_error_message()
-                )
-            );
+            throw new UnexpectedValueException(sprintf('Failed creating new content: %s', $post->get_error_message()));
         }
 
         return $this->get($post->ID);

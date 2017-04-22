@@ -22,12 +22,7 @@ class UserElement extends BaseElement
         $user = wp_insert_user($args);
 
         if (is_wp_error($user)) {
-            throw new UnexpectedValueException(
-                sprintf(
-                    'Failed creating new user: %s',
-                    $user->get_error_message()
-                )
-            );
+            throw new UnexpectedValueException(sprintf('Failed creating new user: %s', $user->get_error_message()));
         }
 
         return $this->get($user->ID);
