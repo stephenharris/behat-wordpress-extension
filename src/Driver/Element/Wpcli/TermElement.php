@@ -2,7 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
-use Exception;
+use UnexpectedValueException;
 
 /**
  * WP-CLI driver element for taxonomy terms.
@@ -56,7 +56,7 @@ class TermElement extends BaseElement
         $term       = json_decode($term);
 
         if (! $term) {
-            throw new Exception(sprintf('Could not find term with ID %d', $id));
+            throw new UnexpectedValueException(sprintf('Could not find term with ID %d', $id));
         }
 
         return $term;

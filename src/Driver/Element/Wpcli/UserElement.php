@@ -3,6 +3,7 @@ namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
 use function PaulGibbs\WordpressBehatExtension\Util\buildCLIArgs;
+use UnexpectedValueException;
 
 /**
  * WP-CLI driver element for managing user accounts.
@@ -56,7 +57,7 @@ class UserElement extends BaseElement
         $user       = json_decode($user);
 
         if (! $user) {
-            throw new Exception(sprintf('Could not find user with ID %d', $id));
+            throw new UnexpectedValueException(sprintf('Could not find user with ID %d', $id));
         }
 
         return $user;

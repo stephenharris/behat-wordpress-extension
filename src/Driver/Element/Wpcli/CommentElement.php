@@ -2,7 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
-use Exception;
+use UnexpectedValueException;
 use function PaulGibbs\WordpressBehatExtension\Util\buildCLIArgs;
 
 /**
@@ -56,7 +56,7 @@ class CommentElement extends BaseElement
         $comment    = json_decode($comment);
 
         if (! $comment) {
-            throw new Exception(sprintf('Could not find comment with ID %d', $id));
+            throw new UnexpectedValueException(sprintf('Could not find comment with ID %d', $id));
         }
 
         return $comment;

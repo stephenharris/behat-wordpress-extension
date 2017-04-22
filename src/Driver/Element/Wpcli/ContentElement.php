@@ -2,7 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
 use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
-use Exception;
+use UnexpectedValueException;
 use function PaulGibbs\WordpressBehatExtension\Util\buildCLIArgs;
 
 /**
@@ -58,7 +58,7 @@ class ContentElement extends BaseElement
         $post       = json_decode($post);
 
         if (! $post) {
-            throw new Exception(sprintf('Could not find post with ID %d', $id));
+            throw new UnexpectedValueException(sprintf('Could not find post with ID %d', $id));
         }
 
         return $post;
