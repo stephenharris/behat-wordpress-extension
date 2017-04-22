@@ -41,8 +41,8 @@ class DatabaseElement extends BaseElement
      */
     public function startTransaction()
     {
-        $this->drivers->getDriver()->query('SET autocommit = 0;');
-        $this->drivers->getDriver()->query('START TRANSACTION;');
+        $this->drivers->getDriver()->wpdb->query('SET autocommit = 0;');
+        $this->drivers->getDriver()->wpdb->query('START TRANSACTION;');
     }
 
     /**

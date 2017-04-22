@@ -16,7 +16,6 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use PaulGibbs\WordpressBehatExtension\Compiler\DriverPass;
 use PaulGibbs\WordpressBehatExtension\Compiler\DriverElementPass;
 
-use InvalidArgumentException;
 use RuntimeException;
 
 /**

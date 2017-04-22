@@ -79,7 +79,7 @@ class WpapiDriver extends BaseDriver
      * @param string $name
      * @return string Plugin filename and path.
      */
-    protected function getPlugin($name)
+    public function getPlugin($name)
     {
         foreach (get_plugins() as $file => $_) {
             // Logic taken from WP-CLI.

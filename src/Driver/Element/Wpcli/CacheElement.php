@@ -11,8 +11,8 @@ class CacheElement extends BaseElement
     /**
      * Clear object cache.
      *
-     * @param int|string $id   Not used.
-     * @param array      $args Not used.
+     * @param int   $id   Not used.
+     * @param array $args Not used.
      */
     public function update($id, $args = [])
     {
