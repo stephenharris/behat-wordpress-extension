@@ -219,8 +219,8 @@ class WpapiDriver extends BaseDriver
      *
      * This method will be removed in release 1.0.0.
      *
-     * @param string $title The title of the content to get
-     * @param string|array Post type(s) to consider when searching for the content
+     * @param string $title     The title of the content to get.
+     * @param string $post_type Post type(s) to consider when searching for the content.
      * @return array {
      *     @type int    $id   Content ID.
      *     @type string $slug Content slug.
@@ -228,9 +228,15 @@ class WpapiDriver extends BaseDriver
      * }
      * @throws \UnexpectedValueException If post does not exist
      */
-    public function getContentFromTitle($title, $post_type = null)
+    public function getContentFromTitle($title, $post_type = '')
     {
-        // djpaultodo
+        $post = $this->content->get($title, ['by' => $title, 'post_type' => $post_type]);
+
+        return array(
+            'id'   => $post->ID,
+            'slug' => $post->post_name,
+            'url'  => get_permalink($post),
+        );
     }
 
     /**
@@ -315,7 +321,8 @@ class WpapiDriver extends BaseDriver
      */
     public function getUserIdFromLogin($username)
     {
-        // DJPAULTODO
+        $user = $this->user->get($username, ['by' => 'login']);
+        return $user->ID;
     }
 
     /**

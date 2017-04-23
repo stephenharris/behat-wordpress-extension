@@ -31,14 +31,31 @@ class ContentElement extends BaseElement
     /**
      * Retrieve an item for this element.
      *
-     * @param \WP_Post|int $id   Object ID.
-     * @param array        $args Not used.
+     * @param \WP_Post|string|int $id   Object ID.
+     * @param array               $args Optional data used to fetch an object.
      *
      * @return \WP_Post The item.
      */
     public function get($id, $args = [])
     {
-        $post = get_post($id);
+        if (is_numeric($id) || is_object($id) && $id instanceof \WP_Post) {
+            $post = get_post($id);
+        } else {
+            $post = new \WP_Query();
+            $post = $post->query(array(
+                "{$args['by']}"          => $id,
+                'no_found_rows'          => true,
+                'posts_per_page'         => 1,
+                'suppress_filters'       => false,
+                'update_post_meta_cache' => false,
+                'update_post_term_cache' => false,
+                ''
+            ));
+
+            if ($post) {
+                $post = $post[0];
+            }
+        }
 
         if (! $post) {
             throw new UnexpectedValueException(sprintf('Could not find content with ID %d', $id));

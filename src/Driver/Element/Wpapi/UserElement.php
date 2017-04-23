@@ -31,14 +31,20 @@ class UserElement extends BaseElement
     /**
      * Retrieve an item for this element.
      *
-     * @param int   $id   Object ID.
-     * @param array $args Optional. Unused.
+     * @param int|string $id   Object ID.
+     * @param array      $args Optional data used to fetch an object.
      *
      * @return \WP_User The item.
      */
     public function get($id, $args = [])
     {
-        $user = get_user_by('ID', $id);
+        if (is_numeric($id) || ! isset($args['by'])) {
+            $type = 'ID';
+        } else {
+            $type = $args['by'];
+        }
+
+        $user = get_user_by($type, $id);
 
         if (! $user) {
             throw new UnexpectedValueException(sprintf('Could not find user with ID %d', $id));
