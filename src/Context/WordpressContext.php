@@ -40,7 +40,7 @@ class WordpressContext extends RawWordpressContext implements PageObjectAware
      *
      * @BeforeStep
      */
-    public function beforeStep(BeforeStepScope $scope)
+    public function fixToolbar()
     {
         $driver = $this->getSession()->getDriver();
         if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver && $driver->getWebDriverSession()) {
