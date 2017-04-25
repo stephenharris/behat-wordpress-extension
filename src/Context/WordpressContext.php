@@ -35,6 +35,27 @@ class WordpressContext extends RawWordpressContext implements PageObjectAware
     }
 
     /**
+     * When using the Selenium driver, position the admin bar to the top of the page, not fixed to the screen.
+     * Otherwise the admin toolbar can hide clickable elements.
+     *
+     * @BeforeStep
+     */
+    public function beforeStep(BeforeStepScope $scope)
+    {
+        $driver = $this->getSession()->getDriver();
+        if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver && $driver->getWebDriverSession()) {
+            $this->getSession()->getDriver()->executeScript(
+                'if (document.getElementById("wpadminbar")){
+                    document.getElementById("wpadminbar").style.position="absolute";
+					if ( document.getElementsByTagName("body")[0].className.match(/wp-admin/) ) {
+						document.getElementById("wpadminbar").style.top="-32px";
+					}
+				};'
+            );
+        }
+    }
+
+    /**
      * Open the dashboard.
      *
      * Example: Given I am on the dashboard
