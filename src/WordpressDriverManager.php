@@ -60,7 +60,7 @@ class WordpressDriverManager
      */
     public function registerDriverElement($name, ElementInterface $element)
     {
-        $this->getDriver($name)->registerElement($name, $element);
+        $this->getDriver()->registerElement($name, $element);
     }
 
     /**
