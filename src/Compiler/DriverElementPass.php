@@ -18,13 +18,19 @@ class DriverElementPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $wordpress = $container->getDefinition('wordpress.wordpress');
-        if (! $wordpress) {
+        $driver    = $container->getParameter('wordpress.wordpress.default_driver');
+
+        if (! $wordpress || ! $driver) {
             return;
         }
 
         foreach ($container->findTaggedServiceIds('wordpress.element') as $id => $attributes) {
             foreach ($attributes as $attribute) {
-                if (empty($attribute['alias'])) {
+                if (! isset($attribute['alias'], $attribute['driver'])) {
+                    continue;
+                }
+
+                if ($attribute['driver'] !== $driver) {
                     continue;
                 }
 

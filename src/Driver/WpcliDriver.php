@@ -254,7 +254,6 @@ class WpcliDriver extends BaseDriver
     {
         $post = $this->content->create($args);
 
-error_log(print_r($post, true));
         return array(
             'id'   => (int) $post->ID,
             'slug' => $post->post_name,
@@ -292,7 +291,6 @@ error_log(print_r($post, true));
     public function getContentFromTitle($title, $post_type = '')
     {
         $post = $this->content->get($title, ['by' => $title, 'post_type' => $post_type]);
-error_log(print_r($post, true));
 
         return array(
             'id'   => $post->ID,
