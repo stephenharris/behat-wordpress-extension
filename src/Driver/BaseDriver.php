@@ -8,6 +8,15 @@ use PaulGibbs\WordpressBehatExtension\Driver\Element\ElementInterface;
  * Common base class for WordPress drivers.
  *
  * A driver represents and manages the connection between the Behat environment and a WordPress site.
+ *
+ * @property \ElementInterface $cache
+ * @property \ElementInterface $comment
+ * @property \ElementInterface $content
+ * @property \ElementInterface $database
+ * @property \ElementInterface $plugin
+ * @property \ElementInterface $term
+ * @property \ElementInterface $theme
+ * @property \ElementInterface $user
  */
 abstract class BaseDriver implements DriverInterface
 {
