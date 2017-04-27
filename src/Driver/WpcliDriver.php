@@ -1,6 +1,7 @@
 <?php
 namespace PaulGibbs\WordpressBehatExtension\Driver;
 
+use PaulGibbs\WordpressBehatExtension\Exception\UnsupportedDriverActionException;
 use RuntimeException;
 use UnexpectedValueException;
 
@@ -148,5 +149,261 @@ class WpcliDriver extends BaseDriver
         }
 
         return compact('stdout', 'exit_code');
+    }
+
+
+    /*
+     * Backwards compatibility.
+     */
+
+    /**
+     * Clear object cache.
+     *
+     * This method will be removed in release 1.0.0.
+     */
+    public function clearCache()
+    {
+        $this->cache->clear();
+    }
+
+    /**
+     * Activate a plugin.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $plugin
+     */
+    public function activatePlugin($plugin)
+    {
+        $this->plugin->activate($plugin);
+    }
+
+    /**
+     * Deactivate a plugin.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $plugin
+     */
+    public function deactivatePlugin($plugin)
+    {
+        $this->plugin->deactivate($plugin);
+    }
+
+    /**
+     * Switch active theme.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $theme
+     */
+    public function switchTheme($theme)
+    {
+        $this->theme->change($theme);
+    }
+
+    /**
+     * Create a term in a taxonomy.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $term
+     * @param string $taxonomy
+     * @param array  $args     Optional. Set the values of the new term.
+     * @return array {
+     *     @type int    $id   Term ID.
+     *     @type string $slug Term slug.
+     * }
+     */
+    public function createTerm($term, $taxonomy, $args = [])
+    {
+        $term = $this->term->create($args);
+
+        return array(
+            'id'   => $term->term_id,
+            'slug' => $term->slug,
+        );
+    }
+
+    /**
+     * Delete a term from a taxonomy.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param int    $term_id
+     * @param string $taxonomy
+     */
+    public function deleteTerm($term_id, $taxonomy)
+    {
+        $this->term->delete($term_id, $args);
+    }
+
+    /**
+     * Create content.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param array $args Set the values of the new content item.
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url  Content permalink.
+     * }
+     */
+    public function createContent($args)
+    {
+        $post = $this->content->create($args);
+
+error_log(print_r($post, true));
+        return array(
+            'id'   => (int) $post->ID,
+            'slug' => $post->post_name,
+            'url'  => $post->url,
+        );
+    }
+
+    /**
+     * Delete specified content.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param int   $id   ID of content to delete.
+     * @param array $args Optional. Extra parameters to pass to WordPress.
+     */
+    public function deleteContent($id, $args = [])
+    {
+        $this->content->delete($id, $args);
+    }
+
+    /**
+     * Get content from its title.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $title     The title of the content to get.
+     * @param string $post_type Post type(s) to consider when searching for the content.
+     * @return array {
+     *     @type int    $id   Content ID.
+     *     @type string $slug Content slug.
+     *     @type string $url Content url.
+     * }
+     * @throws \UnexpectedValueException If post does not exist
+     */
+    public function getContentFromTitle($title, $post_type = '')
+    {
+        $post = $this->content->get($title, ['by' => $title, 'post_type' => $post_type]);
+error_log(print_r($post, true));
+
+        return array(
+            'id'   => $post->ID,
+            'slug' => $post->post_name,
+            'url'  => $post->url,
+        );
+    }
+
+    /**
+     * Create a comment.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param array $args Set the values of the new comment.
+     * @return array {
+     *     @type int $id Content ID.
+     * }
+     */
+    public function createComment($args)
+    {
+        $comment = $this->comment->create($args);
+
+        return array(
+            'id' => $comment->comment_ID,
+        );
+    }
+
+    /**
+     * Delete specified comment.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param int   $id   ID of comment to delete.
+     * @param array $args Optional. Extra parameters to pass to WordPress.
+     */
+    public function deleteComment($id, $args = [])
+    {
+        $this->comment->delete($id, $args);
+    }
+
+    /**
+     * Create a user.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $user_login User login name.
+     * @param string $user_email User email address.
+     * @param array  $args       Optional. Extra parameters to pass to WordPress.
+     * @return array {
+     *     @type int    $id   User ID.
+     *     @type string $slug User slug (nicename).
+     * }
+     */
+    public function createUser($user_login, $user_email, $args = [])
+    {
+        $args['user_login'] = $user_login;
+        $args['user_email'] = $user_email;
+
+        $user = $this->user->create($args);
+
+        return array(
+            'id'   => $user->ID,
+            'slug' => $user->user_nicename,
+        );
+    }
+
+    /**
+     * Delete a user.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param int   $id   ID of user to delete.
+     * @param array $args Optional. Extra parameters to pass to WordPress.
+     */
+    public function deleteUser($id, $args = [])
+    {
+        $this->user->delete($id, $args);
+    }
+
+    /**
+     * Get a User's ID from their username.
+     *
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $username The username of the user to get the ID of
+     * @return int ID of the user.
+     * @throws \UnexpectedValueException If provided data is invalid
+     */
+    public function getUserIdFromLogin($username)
+    {
+        $user = $this->user->get($username, ['by' => 'login']);
+        return $user->ID;
+    }
+
+    /**
+     * Start a database transaction.
+     *
+     * This method will be removed in release 1.0.0.
+     */
+    public function startTransaction()
+    {
+        throw new UnsupportedDriverActionException('start a database transaction in ' . static::class);
+    }
+
+    /**
+     * End (rollback) a database transaction.
+     *
+     * This method will be removed in release 1.0.0.
+     */
+    public function endTransaction()
+    {
+        throw new UnsupportedDriverActionException('rollback a database transaction in ' . static::class);
     }
 }
