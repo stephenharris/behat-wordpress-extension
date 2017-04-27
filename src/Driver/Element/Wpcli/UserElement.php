@@ -28,7 +28,7 @@ class UserElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $args['user_login'], $args['user_email'], '--porcelain');
+        array_unshift($wpcli_args, $args['user_login'], $args['user_email'], '--porcelain');
         $user_id    = (int) $this->drivers->getDriver()->wpcli('user', 'create', $wpcli_args)['stdout'];
 
         return $this->get($user_id);
@@ -52,7 +52,7 @@ class UserElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $id, '--format=json');
+        array_unshift($wpcli_args, $id, '--format=json');
         $user       = $this->drivers->getDriver()->wpcli('user', 'get', $wpcli_args)['stdout'];
         $user       = json_decode($user);
 
@@ -76,7 +76,7 @@ class UserElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $id, '--yes');
+        array_unshift($wpcli_args, $id, '--yes');
 
         $this->drivers->getDriver()->wpcli('user', 'delete', $wpcli_args);
     }

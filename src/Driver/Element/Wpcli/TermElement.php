@@ -27,7 +27,7 @@ class TermElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $args['taxonomy'], $args['term'], '--porcelain');
+        array_unshift($wpcli_args, $args['taxonomy'], $args['term'], '--porcelain');
         $term_id    = (int) $this->drivers->getDriver()->wpcli('term', 'create', $wpcli_args)['stdout'];
 
         return $this->get($term_id);
@@ -51,7 +51,7 @@ class TermElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $args['taxonomy'], $id, '--format=json');
+        array_unshift($wpcli_args, $args['taxonomy'], $id, '--format=json');
         $term       = $this->drivers->getDriver()->wpcli('term', 'get', $wpcli_args)['stdout'];
         $term       = json_decode($term);
 

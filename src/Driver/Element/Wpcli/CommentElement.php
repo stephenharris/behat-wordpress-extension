@@ -27,7 +27,7 @@ class CommentElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, '--porcelain');
+        array_unshift($wpcli_args, '--porcelain');
         $comment_id = (int) $this->drivers->getDriver()->wpcli('comment', 'create', $wpcli_args)['stdout'];
 
         return $this->get($comment_id);
@@ -51,7 +51,7 @@ class CommentElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $id, '--format=json');
+        array_unshift($wpcli_args, $id, '--format=json');
         $comment    = $this->drivers->getDriver()->wpcli('comment', 'get', $wpcli_args)['stdout'];
         $comment    = json_decode($comment);
 
@@ -75,7 +75,7 @@ class CommentElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $id);
+        array_unshift($wpcli_args, $id);
 
         $this->drivers->getDriver()->wpcli('comment', 'delete', $wpcli_args);
     }

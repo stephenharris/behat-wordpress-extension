@@ -29,7 +29,7 @@ class ContentElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, '--porcelain');
+        array_unshift($wpcli_args, '--porcelain');
         $post_id    = (int) $this->drivers->getDriver()->wpcli('post', 'create', $wpcli_args)['stdout'];
 
         return $this->get($post_id);
@@ -53,7 +53,7 @@ class ContentElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $id, '--format=json');
+        array_unshift($wpcli_args, $id, '--format=json');
         $post       = $this->drivers->getDriver()->wpcli('post', 'get', $wpcli_args)['stdout'];
         $post       = json_decode($post);
 
@@ -77,7 +77,7 @@ class ContentElement extends BaseElement
             $args
         );
 
-        $wpcli_args = array_unshift($wpcli_args, $id);
+        array_unshift($wpcli_args, $id);
 
         $this->drivers->getDriver()->wpcli('post', 'delete', $wpcli_args);
     }
