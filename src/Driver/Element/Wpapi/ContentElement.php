@@ -21,7 +21,7 @@ class ContentElement extends BaseElement
         $args = wp_slash($args);
         $post = wp_insert_post($args);
 
-        if (is_wordpress_error($post)) {
+        if (is_wp_error($post)) {
             throw new UnexpectedValueException(sprintf('Failed creating new content: %s', $post->get_error_message()));
         }
 
