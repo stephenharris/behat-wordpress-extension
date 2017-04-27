@@ -95,18 +95,20 @@ function buildCLIArgs($whitelist, $raw_args)
 {
     $retval = [];
 
-    foreach ($whitelist as $option => $value) {
+    foreach ($raw_args as $option => $value) {
         // Assocative array key.
-        if (! is_numeric($option) && ! isset($raw_args[$option])) {
-            continue;
+        if (! is_numeric($option)) {
+            if (! in_array($option, $whitelist, true)) {
+                continue;
+            }
 
         // Numeric array key.
-        } elseif (! in_array($value, $raw_args, true)) {
+        } elseif (! in_array($value, $whitelist, true)) {
             continue;
         }
 
         if (is_numeric($option)) {
-            $retval[] = "--{$value}";  // DJPAULTODO: check escaping for these.
+            $retval[] = escapeshellcmd("--{$value}");
         } else {
             $retval[] = sprintf('--%s=%s', $option, escapeshellarg($value));
         }
