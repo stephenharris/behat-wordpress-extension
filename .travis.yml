@@ -15,8 +15,8 @@ cache:
 env:
   - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}' WH_BUILD_DOCS=1
   - WP_VERSION=latest BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
-  - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
-  - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
+#  - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpapi"}}}'
+#  - WP_VERSION=nightly BEHAT_PARAMS='{"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%/../../vendor/bin/wp"}}}}'
 
 matrix:
   allow_failures:
