@@ -101,25 +101,13 @@ class WpcliDriver extends BaseDriver
      */
     public function wpcli($command, $subcommand, $raw_arguments = [])
     {
-        $arguments = '';
-
-        // Build parameter list.
-        foreach ($raw_arguments as $name => $value) {
-            if (is_numeric($name)) {
-                $arguments .= "{$value} ";
-            } else {
-                $arguments .= sprintf('%s=%s ', $name, escapeshellarg($value));
-            }
-        }
-
-        // TODO: review best practice with escapeshellcmd() here, and impact on metacharacters.
-        $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
+        $arguments = implode(' ', $raw_arguments);
+        $config    = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
 
         // Support WP-CLI environment aliases.
         if ($this->alias) {
             $config = "@{$this->alias}";
         }
-
 
         // Query WP-CLI.
         $proc = proc_open(
