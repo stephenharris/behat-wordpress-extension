@@ -45,6 +45,14 @@ class ContentElement extends BaseElement
      */
     public function get($id, $args = [])
     {
+        // Support fetching via arbitary field.
+        if (! is_numeric($id)) {
+            $wpcli_args = ['--field=ID', "--{$args['by']}=" . escapeshellarg($id), '--format=json'];
+            $result     = json_decode($this->drivers->getDriver()->wpcli('post', 'list', $wpcli_args)['stdout']);
+            $id         = (int) $result[0];
+        }
+
+        // Fetch by ID.
         $wpcli_args = buildCLIArgs(
             array(
                 'field',
@@ -54,8 +62,8 @@ class ContentElement extends BaseElement
         );
 
         array_unshift($wpcli_args, $id, '--format=json');
-        $post       = $this->drivers->getDriver()->wpcli('post', 'get', $wpcli_args)['stdout'];
-        $post       = json_decode($post);
+        $post = $this->drivers->getDriver()->wpcli('post', 'get', $wpcli_args)['stdout'];
+        $post = json_decode($post);
 
         if (! $post) {
             throw new UnexpectedValueException(sprintf('Could not find post with ID %d', $id));

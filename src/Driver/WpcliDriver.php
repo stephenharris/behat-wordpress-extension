@@ -280,7 +280,7 @@ class WpcliDriver extends BaseDriver
      */
     public function getContentFromTitle($title, $post_type = '')
     {
-        $post = $this->content->get($title, ['by' => $title, 'post_type' => $post_type]);
+        $post = $this->content->get($title, ['by' => 'title']);
         $alt  = $this->wpcli('post', 'list', ['--post__in=' . $post->ID, '--fields=url', '--format=json'])['stdout'];
         $alt  = json_decode($alt);
 
