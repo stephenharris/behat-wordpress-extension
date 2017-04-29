@@ -19,13 +19,13 @@ class ContentElement extends BaseElement
     public function create($args)
     {
         $args = wp_slash($args);
-        $post = wp_insert_post($args);
+        $id   = wp_insert_post($args);
 
         if (is_wp_error($post)) {
             throw new UnexpectedValueException(sprintf('Failed creating new content: %s', $post->get_error_message()));
         }
 
-        return $this->get($post->ID);
+        return $this->get($id);
     }
 
     /**

@@ -241,7 +241,7 @@ class WpcliDriver extends BaseDriver
     public function createContent($args)
     {
         $post = $this->content->create($args);
-        $alt  = $this->wpcli('post', 'list', ['--post__in=' . $post->ID, '--fields=url', '--format=json'])['stdout'];
+        $alt  = $this->wpcli('post', 'list', ['--post__in=' . $post->ID, '--fields=url', '--post_type=any', '--format=json'])['stdout'];
         $alt  = json_decode($alt);
 
         return array(
