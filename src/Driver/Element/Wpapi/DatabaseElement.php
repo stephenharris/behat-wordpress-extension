@@ -50,6 +50,6 @@ class DatabaseElement extends BaseElement
      */
     public function endTransaction()
     {
-        $this->drivers->getDriver()->query('ROLLBACK;');
+        $this->drivers->getDriver()->wpdb->query('ROLLBACK;');
     }
 }

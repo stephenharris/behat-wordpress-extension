@@ -205,6 +205,9 @@ class WpcliDriver extends BaseDriver
      */
     public function createTerm($term, $taxonomy, $args = [])
     {
+        $args['taxonomy'] = $taxonomy;
+        $args['term']     = $term;
+
         $term = $this->term->create($args);
 
         return array(
@@ -223,7 +226,7 @@ class WpcliDriver extends BaseDriver
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        $this->term->delete($term_id, $args);
+        $this->term->delete($term_id, ['taxonomy' => $taxonomy]);
     }
 
     /**

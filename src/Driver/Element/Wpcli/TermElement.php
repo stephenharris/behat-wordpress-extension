@@ -66,7 +66,7 @@ class TermElement extends BaseElement
      * Delete an item for this element.
      *
      * @param int|string $id   Object ID.
-     * @param array      $args Unused.
+     * @param array      $args Optional data used to delete an object.
      */
     public function delete($id, $args = [])
     {
