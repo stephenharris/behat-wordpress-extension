@@ -38,11 +38,13 @@ class ContentElement extends BaseElement
      */
     public function get($id, $args = [])
     {
+        $post = false;
+
         if (is_numeric($id) || is_object($id) && $id instanceof \WP_Post) {
             $post = get_post($id);
         } else {
-            $post = new \WP_Query();
-            $post = $post->query(array(
+            $query = new \WP_Query();
+            $query = $query->query(array(
                 "{$args['by']}"          => $id,
                 'no_found_rows'          => true,
                 'posts_per_page'         => 1,
@@ -52,8 +54,8 @@ class ContentElement extends BaseElement
                 ''
             ));
 
-            if ($post) {
-                $post = $post[0];
+            if ($query) {
+                $post = $query[0];
             }
         }
 
