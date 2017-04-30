@@ -3,7 +3,7 @@ namespace PaulGibbs\WordpressBehatExtension\Context;
 
 use InvalidArgumentException;
 use Behat\Gherkin\Node\TableNode;
-use function PaulGibbs\WordpressBehatExtension\Util\is_wordpress_error;
+use function PaulGibbs\WordpressBehatExtension\Util\isWordpressError;
 use SensioLabs\Behat\PageObjectExtension\Context\PageObjectAware;
 use Behat\Mink\Exception\ElementTextException;
 
@@ -12,8 +12,8 @@ use Behat\Mink\Exception\ElementTextException;
  */
 class WordpressContext extends RawWordpressContext implements PageObjectAware
 {
-
     use PageObjectContextTrait;
+
     /**
      * Clear object cache.
      *

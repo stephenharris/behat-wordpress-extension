@@ -1,0 +1,81 @@
+<?php
+namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi;
+
+use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
+use UnexpectedValueException;
+
+/**
+ * WP-API driver element for content (i.e. blog posts).
+ */
+class ContentElement extends BaseElement
+{
+    /**
+     * Create an item for this element.
+     *
+     * @param array $args Data used to create an object.
+     *
+     * @return \WP_Post The new item.
+     */
+    public function create($args)
+    {
+        $args = wp_slash($args);
+        $id   = wp_insert_post($args);
+
+        if (is_wp_error($post)) {
+            throw new UnexpectedValueException(sprintf('Failed creating new content: %s', $post->get_error_message()));
+        }
+
+        return $this->get($id);
+    }
+
+    /**
+     * Retrieve an item for this element.
+     *
+     * @param \WP_Post|string|int $id   Object ID.
+     * @param array               $args Optional data used to fetch an object.
+     *
+     * @return \WP_Post The item.
+     */
+    public function get($id, $args = [])
+    {
+        if (is_numeric($id) || is_object($id) && $id instanceof \WP_Post) {
+            $post = get_post($id);
+        } else {
+            $post = new \WP_Query();
+            $post = $post->query(array(
+                "{$args['by']}"          => $id,
+                'no_found_rows'          => true,
+                'posts_per_page'         => 1,
+                'suppress_filters'       => false,
+                'update_post_meta_cache' => false,
+                'update_post_term_cache' => false,
+                ''
+            ));
+
+            if ($post) {
+                $post = $post[0];
+            }
+        }
+
+        if (! $post) {
+            throw new UnexpectedValueException(sprintf('Could not find content with ID %d', $id));
+        }
+
+        return $post;
+    }
+
+    /**
+     * Delete an item for this element.
+     *
+     * @param int   $id   Object ID.
+     * @param array $args Optional data used to delete an object.
+     */
+    public function delete($id, $args = [])
+    {
+        $result = wp_delete_post($id, isset($args['force']));
+
+        if (! $result) {
+            throw new UnexpectedValueException('Failed deleting content.');
+        }
+    }
+}

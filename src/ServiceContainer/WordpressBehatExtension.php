@@ -14,8 +14,8 @@ use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 use PaulGibbs\WordpressBehatExtension\Compiler\DriverPass;
+use PaulGibbs\WordpressBehatExtension\Compiler\DriverElementPass;
 
-use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -281,6 +281,7 @@ class WordpressBehatExtension implements ExtensionInterface
     public function process(ContainerBuilder $container)
     {
         $this->processDriverPass($container);
+        $this->processDriverElementPass($container);
         $this->processClassGenerator($container);
         $this->setPageObjectNamespaces($container);
         $this->injectSiteUrlIntoPageObjects($container);
@@ -294,6 +295,17 @@ class WordpressBehatExtension implements ExtensionInterface
     protected function processDriverPass(ContainerBuilder $container)
     {
         $driver = new DriverPass();
+        $driver->process($container);
+    }
+
+    /**
+     * Set up driver extension registration.
+     *
+     * @param ContainerBuilder $container
+     */
+    protected function processDriverElementPass(ContainerBuilder $container)
+    {
+        $driver = new DriverElementPass();
         $driver->process($container);
     }
 

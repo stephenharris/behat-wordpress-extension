@@ -1,6 +1,7 @@
 <?php
 namespace PaulGibbs\WordpressBehatExtension\Driver;
 
+use PaulGibbs\WordpressBehatExtension\Exception\UnsupportedDriverActionException;
 use RuntimeException;
 use UnexpectedValueException;
 
@@ -100,25 +101,13 @@ class WpcliDriver extends BaseDriver
      */
     public function wpcli($command, $subcommand, $raw_arguments = [])
     {
-        $arguments = '';
-
-        // Build parameter list.
-        foreach ($raw_arguments as $name => $value) {
-            if (is_numeric($name)) {
-                $arguments .= "{$value} ";
-            } else {
-                $arguments .= sprintf('%s=%s ', $name, escapeshellarg($value));
-            }
-        }
-
-        // TODO: review best practice with escapeshellcmd() here, and impact on metacharacters.
-        $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
+        $arguments = implode(' ', $raw_arguments);
+        $config    = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
 
         // Support WP-CLI environment aliases.
         if ($this->alias) {
             $config = "@{$this->alias}";
         }
-
 
         // Query WP-CLI.
         $proc = proc_open(
@@ -150,46 +139,61 @@ class WpcliDriver extends BaseDriver
         return compact('stdout', 'exit_code');
     }
 
+
+    /*
+     * Backwards compatibility.
+     */
+
     /**
      * Clear object cache.
+     *
+     * This method will be removed in release 1.0.0.
      */
     public function clearCache()
     {
-        $this->wpcli('cache', 'flush');
+        $this->cache->clear();
     }
 
     /**
      * Activate a plugin.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param string $plugin
      */
     public function activatePlugin($plugin)
     {
-        $this->wpcli('plugin', 'activate', [$plugin]);
+        $this->plugin->activate($plugin);
     }
 
     /**
      * Deactivate a plugin.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param string $plugin
      */
     public function deactivatePlugin($plugin)
     {
-        $this->wpcli('plugin', 'deactivate', [$plugin]);
+        $this->plugin->deactivate($plugin);
     }
 
     /**
      * Switch active theme.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param string $theme
      */
     public function switchTheme($theme)
     {
-        $this->wpcli('theme', 'activate', [$theme]);
+        $this->theme->change($theme);
     }
 
     /**
      * Create a term in a taxonomy.
+     *
+     * This method will be removed in release 1.0.0.
      *
      * @param string $term
      * @param string $taxonomy
@@ -201,97 +205,72 @@ class WpcliDriver extends BaseDriver
      */
     public function createTerm($term, $taxonomy, $args = [])
     {
-        // Term.
-        $whitelist  = ['description', 'parent', 'slug'];
-        $wpcli_args = [$taxonomy, $term, '--porcelain'];
-
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args["--{$option}"] = $args[$option];
-            }
-        }
-
-        $term_id = (int) $this->wpcli('term', 'create', $wpcli_args)['stdout'];
-
-
-        // Term slug.
-        $wpcli_args = [$taxonomy, $term_id, '--field=slug'];
-        $term_slug  = $this->wpcli('term', 'get', $wpcli_args)['stdout'];
-
+        $term = $this->term->create($args);
 
         return array(
-            'id'   => $term_id,
-            'slug' => $term_slug,
+            'id'   => $term->term_id,
+            'slug' => $term->slug,
         );
     }
 
     /**
      * Delete a term from a taxonomy.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param int    $term_id
      * @param string $taxonomy
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        $this->wpcli('term', 'delete', [$taxonomy, $term_id]);
+        $this->term->delete($term_id, $args);
     }
 
     /**
      * Create content.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param array $args Set the values of the new content item.
      * @return array {
      *     @type int    $id   Content ID.
      *     @type string $slug Content slug.
+     *     @type string $url  Content permalink.
      * }
      */
     public function createContent($args)
     {
-        // Post.
-        $wpcli_args = ['--porcelain'];
-        $whitelist  = array(
-            'ID', 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_content_filtered', 'post_title',
-            'post_excerpt', 'post_status', 'post_type', 'comment_status', 'ping_status', 'post_password', 'post_name',
-            'to_ping', 'pinged', 'post_modified', 'post_modified_gmt', 'post_parent', 'menu_order', 'post_mime_type',
-            'guid', 'post_category', 'tax_input', 'meta_input',
+        $post = $this->content->create($args);
+        $alt  = $this->wpcli('post', 'list', ['--post__in=' . $post->ID, '--fields=url', '--post_type=any', '--format=json'])['stdout'];
+        $alt  = json_decode($alt);
+
+        return array(
+            'id'   => (int) $post->ID,
+            'slug' => $post->post_name,
+            'url'  => $alt[0]->url,
         );
-
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args["--{$option}"] = $args[$option];
-            }
-        }
-
-        $post_id = (int) $this->wpcli('post', 'create', $wpcli_args)['stdout'];
-
-        return $this->getPost($post_id);
     }
 
     /**
      * Delete specified content.
+     *
+     * This method will be removed in release 1.0.0.
      *
      * @param int   $id   ID of content to delete.
      * @param array $args Optional. Extra parameters to pass to WordPress.
      */
     public function deleteContent($id, $args = [])
     {
-        $wpcli_args = [$id];
-        $whitelist  = ['force', 'defer-term-counting'];
-
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args[] = "--{$option}";
-            }
-        }
-
-        $this->wpcli('post', 'delete', $wpcli_args);
+        $this->content->delete($id, $args);
     }
 
     /**
      * Get content from its title.
      *
-     * @param string $title The title of the content to get
-     * @param string|array Post type(s) to consider when searching for the content
+     * This method will be removed in release 1.0.0.
+     *
+     * @param string $title     The title of the content to get.
+     * @param string $post_type Post type(s) to consider when searching for the content.
      * @return array {
      *     @type int    $id   Content ID.
      *     @type string $slug Content slug.
@@ -299,55 +278,23 @@ class WpcliDriver extends BaseDriver
      * }
      * @throws \UnexpectedValueException If post does not exist
      */
-    public function getContentFromTitle($title, $post_type = null)
+    public function getContentFromTitle($title, $post_type = '')
     {
-        if ($post_type === null) {
-            $post_type = explode("\n", $this->wpcli('post-type', 'list', ['--field=name'])['stdout']);
-        }
-
-        $post_type = (array) $post_type;
-
-        $wpcli_args = ['--title="' . $title, '" --field=ID', '--post_type=' . implode(',', $post_type)];
-        $post_id = (int) $this->wpcli('post', 'list', $wpcli_args)['stdout'];
-
-        if (! $post_id) {
-            throw new UnexpectedValueException(
-                sprintf('Post "%s" of post type %s not found', $title, implode('/', $post_type))
-            );
-        }
-
-        return $this->getPost($post_id);
-    }
-
-    /**
-     * Get a post by ID.
-     *
-     * @param int $post_id
-     */
-    protected function getPost($post_id)
-    {
-        $wpcli_args = [
-            '--format'    => 'json',
-            '--post__in'  => $post_id,
-            '--post_type' => 'any',
-            '--fields'    => 'ID,post_name,url'
-        ];
-        $posts = json_decode($this->wpcli('post', 'list', $wpcli_args)['stdout']);
-
-        if (! $posts) {
-            throw new \Exception(sprintf('Could not find post with ID %d', $post_id));
-        }
-        $post = $posts[0];
+        $post = $this->content->get($title, ['by' => 'title']);
+        $alt  = $this->wpcli('post', 'list', ['--post__in=' . $post->ID, '--fields=url', '--format=json'])['stdout'];
+        $alt  = json_decode($alt);
 
         return array(
-            'id'   => $post->ID,
+            'id'   => (int) $post->ID,
             'slug' => $post->post_name,
-            'url'  => $post->url,
+            'url'  => $alt[0]->url,
         );
     }
 
     /**
      * Create a comment.
+     *
+     * This method will be removed in release 1.0.0.
      *
      * @param array $args Set the values of the new comment.
      * @return array {
@@ -356,82 +303,30 @@ class WpcliDriver extends BaseDriver
      */
     public function createComment($args)
     {
-        $wpcli_args = ['--porcelain'];
-        $whitelist  = array(
-            'comment_author', 'comment_author_email', 'comment_author_url', 'comment_content', 'comment_date',
-            'comment_date_gmt', 'comment_parent', 'comment_post_ID', 'user_id', 'comment_agent', 'comment_author_IP',
-        );
-
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args["--{$option}"] = $args[$option];
-            }
-        }
+        $comment = $this->comment->create($args);
 
         return array(
-            'id' => (int) $this->wpcli('comment', 'create', $wpcli_args)['stdout'],
+            'id' => $comment->comment_ID,
         );
     }
 
     /**
      * Delete specified comment.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param int   $id   ID of comment to delete.
      * @param array $args Optional. Extra parameters to pass to WordPress.
      */
     public function deleteComment($id, $args = [])
     {
-        $wpcli_args = [$id];
-        $whitelist  = ['force'];
-
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args[] = "--{$option}";
-            }
-        }
-
-        $this->wpcli('comment', 'delete', $wpcli_args);
-    }
-
-    /**
-     * Export WordPress database.
-     *
-     * @return string Absolute path to database SQL file.
-     */
-    public function exportDatabase()
-    {
-        while (true) {
-            $filename = uniqid('database-', true) . '.sql';
-
-            if (! file_exists(getcwd() . "/{$filename}")) {
-                break;
-            }
-        }
-
-        // Protect against WP-CLI changing the filename.
-        $filename = $this->wpcli('db', 'export', [$filename, '--porcelain'])['stdout'];
-
-        return getcwd() . "/{$filename}";
-    }
-
-    /**
-     * Import WordPress database.
-     *
-     * If $import_file begins with a directory separator or ~ it is treated as an absolute path.
-     * Otherwise, it is treated as relative to the current working directory.
-     *
-     * @param string $import_file Relative or absolute path and filename of SQL file to import.
-     */
-    public function importDatabase($import_file)
-    {
-        if (! in_array($import_file[0], [DIRECTORY_SEPARATOR, '~'], true)) {
-            $import_file = getcwd() . "/{$import_file}";
-        }
-        $this->wpcli('db', 'import', [$import_file]);
+        $this->comment->delete($id, $args);
     }
 
     /**
      * Create a user.
+     *
+     * This method will be removed in release 1.0.0.
      *
      * @param string $user_login User login name.
      * @param string $user_email User email address.
@@ -443,59 +338,34 @@ class WpcliDriver extends BaseDriver
      */
     public function createUser($user_login, $user_email, $args = [])
     {
-        // User.
-        $wpcli_args = [$user_login, $user_email, '--porcelain'];
-        $whitelist  = array(
-            'ID', 'user_pass', 'user_nicename', 'user_url', 'display_name', 'nickname', 'first_name', 'last_name',
-            'description', 'rich_editing', 'comment_shortcuts', 'admin_color', 'use_ssl', 'user_registered',
-            'show_admin_bar_front', 'role', 'locale',
-        );
+        $args['user_login'] = $user_login;
+        $args['user_email'] = $user_email;
 
-        foreach ($whitelist as $option) {
-            if (isset($args[$option])) {
-                $wpcli_args["--{$option}"] = $args[$option];
-            }
-        }
-
-        $user_id = (int) $this->wpcli('user', 'create', $wpcli_args)['stdout'];
-
-
-        // User slug (nicename).
-        $wpcli_args = [$user_id, '--field=user_nicename'];
-        $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['stdout'];
+        $user = $this->user->create($args);
 
         return array(
-            'id'   => $user_id,
-            'slug' => $user_slug,
+            'id'   => $user->ID,
+            'slug' => $user->user_nicename,
         );
     }
 
     /**
      * Delete a user.
      *
+     * This method will be removed in release 1.0.0.
+     *
      * @param int   $id   ID of user to delete.
      * @param array $args Optional. Extra parameters to pass to WordPress.
      */
     public function deleteUser($id, $args = [])
     {
-        $wpcli_args = [$id, '--yes'];
-        $whitelist  = ['network', 'reassign'];
-
-        foreach ($whitelist as $option => $value) {
-            if (isset($args[$option])) {
-                if (is_int($option)) {
-                    $wpcli_args[] = "--{$value}";
-                } else {
-                    $wpcli_args[] = sprintf('%s=%s', $option, escapeshellarg($value));
-                }
-            }
-        }
-
-        $this->wpcli('user', 'delete', $wpcli_args);
+        $this->user->delete($id, $args);
     }
 
     /**
      * Get a User's ID from their username.
+     *
+     * This method will be removed in release 1.0.0.
      *
      * @param string $username The username of the user to get the ID of
      * @return int ID of the user.
@@ -503,13 +373,27 @@ class WpcliDriver extends BaseDriver
      */
     public function getUserIdFromLogin($username)
     {
-        $wpcli_args = [$username, '--field=ID'];
+        $user = $this->user->get($username, ['by' => 'login']);
+        return $user->ID;
+    }
 
-        $userId = (int) $this->wpcli('user', 'get', $wpcli_args)['stdout'];
+    /**
+     * Start a database transaction.
+     *
+     * This method will be removed in release 1.0.0.
+     */
+    public function startTransaction()
+    {
+        throw new UnsupportedDriverActionException('start a database transaction in ' . static::class);
+    }
 
-        if (! $userId) {
-            throw new UnexpectedValueException(sprintf('User "%s" not found', $username));
-        }
-        return $userId;
+    /**
+     * End (rollback) a database transaction.
+     *
+     * This method will be removed in release 1.0.0.
+     */
+    public function endTransaction()
+    {
+        throw new UnsupportedDriverActionException('rollback a database transaction in ' . static::class);
     }
 }

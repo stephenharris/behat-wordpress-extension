@@ -77,7 +77,42 @@ function stripTagsAndContent($html)
  * @param object $item
  * @return bool
  */
-function is_wordpress_error($item)
+function isWordpressError($item)
 {
     return (is_object($item) && get_class($item) === 'WP_Error');
+}
+
+/**
+ * Construct arguments for a CLI command.
+ *
+ * Supports any mixture of assocative and numeric array values.
+ *
+ * @param array $whitelist Accept only these arguments.
+ * @param array $raw_args Raw argument/value pairs. May be user-supplied.
+ * @return array
+ */
+function buildCLIArgs($whitelist, $raw_args)
+{
+    $retval = [];
+
+    foreach ($raw_args as $option => $value) {
+        // Assocative array key.
+        if (! is_numeric($option)) {
+            if (! in_array($option, $whitelist, true)) {
+                continue;
+            }
+
+        // Numeric array key.
+        } elseif (! in_array($value, $whitelist, true)) {
+            continue;
+        }
+
+        if (is_numeric($option)) {
+            $retval[] = escapeshellcmd("--{$value}");
+        } else {
+            $retval[] = sprintf('--%s=%s', $option, escapeshellarg($value));
+        }
+    }
+
+    return $retval;
 }
