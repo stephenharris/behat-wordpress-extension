@@ -73,7 +73,7 @@ class ContentElement extends BaseElement
         }
 
         if (! $url) {
-            $wpcli_args = ['--field=url', '--ID=' . escapeshellarg($post->ID), '--format=json'];
+            $wpcli_args = ['--field=url', '--post__in=' . $post->ID, '--format=json'];
             $result     = json_decode($this->drivers->getDriver()->wpcli('post', 'list', $wpcli_args)['stdout']);
             $url        = $result[0];
         }
