@@ -10,9 +10,9 @@ To specify which driver to use for your tests, set [`default_driver`](settings.m
 
 Feature                                  | WP-CLI                     | WordPress API | Blackbox
 ---------------------------------------- | -------------------------- | ------------- | --------
-Publish posts and comments.              | Yes                        | Yes           | No
-Create terms for taxonomy.               | Yes                        | Yes           | No
-Create users.                            | Yes                        | Yes           | No
+Posts and comments.                      | Yes                        | Yes           | No
+Terms for taxonomy.                      | Yes                        | Yes           | No
+Manage users.                            | Yes                        | Yes           | No
 Manage plugins.                          | Yes                        | Yes           | No
 Switch theme.                            | Yes                        | Yes           | No
 Clear cache.                             | Yes                        | Yes           | No
