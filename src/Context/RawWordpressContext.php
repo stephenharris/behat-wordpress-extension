@@ -216,7 +216,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function clearCache()
     {
-        $this->getDriver()->clearCache();
+        $this->getDriver()->cache->clear();
     }
 
     /**
@@ -234,7 +234,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function activatePlugin($plugin)
     {
-        $this->getDriver()->activatePlugin($plugin);
+        $this->getDriver()->plugin->activate($plugin);
     }
 
     /**
@@ -244,7 +244,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deactivatePlugin($plugin)
     {
-        $this->getDriver()->deactivatePlugin($plugin);
+        $this->getDriver()->plugin->deactivate($plugin);
     }
 
     /**
@@ -254,7 +254,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function switchTheme($theme)
     {
-        $this->getDriver()->switchTheme($theme);
+        $this->getDriver()->theme->change($theme);
     }
 
     /**
@@ -270,7 +270,15 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function createTerm($term, $taxonomy, $args = [])
     {
-        return $this->getDriver()->createTerm($term, $taxonomy, $args);
+        $args['taxonomy'] = $taxonomy;
+        $args['term']     = $term;
+
+        $term = $this->getDriver()->term->create($args);
+
+        return array(
+            'id'   => $term->term_id,
+            'slug' => $term->slug,
+        );
     }
 
     /**
@@ -281,7 +289,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        $this->getDriver()->deleteTerm($term_id, $taxonomy);
+        $this->getDriver()->term->delete($term_id, compact($taxonomy));
     }
 
     /**
@@ -291,11 +299,18 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      * @return array {
      *     @type int    $id   Content ID.
      *     @type string $slug Content slug.
+     *     @type string $url  Content permalink.
      * }
      */
     public function createContent($args)
     {
-        return $this->getDriver()->createContent($args);
+        $content = $this->getDriver()->content->create($args);
+
+        return array(
+            'id'   => $content->ID,
+            'slug' => $content->post_name,
+            //'url'  => $alt[0]->url,
+        );
     }
 
     /**
@@ -306,7 +321,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deleteContent($id, $args = [])
     {
-        $this->getDriver()->deleteContent($id, $args);
+        $this->getDriver()->content->delete($id, $args);
     }
 
     /**
@@ -319,7 +334,11 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function createComment($args)
     {
-        return $this->getDriver()->createComment($args);
+        $comment = $this->getDriver()->comment->create($args);
+
+        return array(
+            'id' => $comment->comment_ID,
+        );
     }
 
     /**
@@ -330,7 +349,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deleteComment($id, $args = [])
     {
-        $this->getDriver()->deleteComment($id, $args);
+        $this->getDriver()->comment->delete($id, $args);
     }
 
     /**
@@ -340,7 +359,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function exportDatabase()
     {
-        return $this->getDriver()->exportDatabase();
+        $this->getDriver()->database->export(0);
     }
 
     /**
@@ -350,7 +369,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function importDatabase($import_file)
     {
-        $this->getDriver()->importDatabase($import_file);
+        $this->getDriver()->database->import($import_file);
     }
 
     /**
@@ -366,7 +385,15 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function createUser($user_login, $user_email, $args = [])
     {
-        return $this->getDriver()->createUser($user_login, $user_email, $args);
+        $args['user_email'] = $user_email;
+        $args['user_login'] = $user_login;
+
+        $user = $this->getDriver()->user->create($args);
+
+        return array(
+            'id'   => $user->ID,
+            'slug' => $user->user_nicename,
+        );
     }
 
     /**
@@ -377,7 +404,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deleteUser($id, $args = [])
     {
-        $this->getDriver()->deleteUser($id, $args);
+        $this->getDriver()->user->delete($id, $args);
     }
 
     /**
@@ -385,7 +412,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function startTransaction()
     {
-        $this->getDriver()->startTransaction();
+        $this->getDriver()->database->startTransaction();
     }
 
     /**
@@ -393,6 +420,6 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function endTransaction()
     {
-        $this->getDriver()->endTransaction();
+        $this->getDriver()->database->endTransaction();
     }
 }
