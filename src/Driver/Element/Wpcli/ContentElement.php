@@ -49,7 +49,7 @@ class ContentElement extends BaseElement
 
         // Support fetching via arbitary field.
         if (! is_numeric($id)) {
-            $wpcli_args = ['--fields=ID,url', "--{$args['by']}=" . escapeshellarg($id), '--format=json'];
+            $wpcli_args = ['--fields=ID,url', "--{$args['by']}=" . escapeshellarg($id), '--post_type=any', '--format=json'];
             $result     = json_decode($this->drivers->getDriver()->wpcli('post', 'list', $wpcli_args)['stdout']);
             $id         = (int) $result[0]->ID;
             $url        = $result[0]->url;
@@ -73,9 +73,9 @@ class ContentElement extends BaseElement
         }
 
         if (! $url) {
-            $wpcli_args = ['--field=url', '--post__in=' . $post->ID, '--format=json'];
+            $wpcli_args = ['--post__in=' . $post->ID, '--fields=url', '--post_type=any', '--format=json'];
             $result     = json_decode($this->drivers->getDriver()->wpcli('post', 'list', $wpcli_args)['stdout']);
-            $url        = $result[0];
+            $url        = $result[0]->url;
         }
 
         $post->url = $url;
