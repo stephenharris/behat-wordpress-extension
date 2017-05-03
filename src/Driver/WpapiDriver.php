@@ -157,6 +157,9 @@ class WpapiDriver extends BaseDriver
      */
     public function createTerm($term, $taxonomy, $args = [])
     {
+        $args['taxonomy'] = $taxonomy;
+        $args['term']     = $term;
+
         $term = $this->term->create($args);
 
         return array(
@@ -175,7 +178,7 @@ class WpapiDriver extends BaseDriver
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        $this->term->delete($term_id, $args);
+        $this->term->delete($term_id, ['taxonomy' => $taxonomy]);
     }
 
     /**
@@ -230,7 +233,7 @@ class WpapiDriver extends BaseDriver
      */
     public function getContentFromTitle($title, $post_type = '')
     {
-        $post = $this->content->get($title, ['by' => $title, 'post_type' => $post_type]);
+        $post = $this->content->get($title, ['by' => 'title', 'post_type' => $post_type]);
 
         return array(
             'id'   => $post->ID,
