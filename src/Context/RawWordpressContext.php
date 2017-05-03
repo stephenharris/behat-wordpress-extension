@@ -309,7 +309,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         return array(
             'id'   => $content->ID,
             'slug' => $content->post_name,
-            //'url'  => $alt[0]->url,
+            'url'  => $content->url,
         );
     }
 

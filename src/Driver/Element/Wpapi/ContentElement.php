@@ -63,6 +63,8 @@ class ContentElement extends BaseElement
             throw new UnexpectedValueException(sprintf('Could not find content with ID %d', $id));
         }
 
+        $post->url = get_permalink($post);
+
         return $post;
     }
 
