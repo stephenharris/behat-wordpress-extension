@@ -61,5 +61,4 @@ class WidgetElement extends BaseElement
         }
         return $sidebar_id;
     }
-
 }
