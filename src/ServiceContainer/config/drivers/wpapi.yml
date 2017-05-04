@@ -8,6 +8,7 @@ parameters:
   wordpress.element.wpapi.term.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\TermElement
   wordpress.element.wpapi.theme.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\ThemeElement
   wordpress.element.wpapi.user.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\UserElement
+  wordpress.element.wpcli.widgets.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpapi\WidgetElement
 
 services:
   wordpress.driver.wpapi:
@@ -72,3 +73,10 @@ services:
       - "@wordpress.wordpress"
     tags:
       - { name: wordpress.element, alias: user, driver: wpapi }
+
+  wordpress.element.wpapi.widgets:
+    class: %wordpress.element.wpapi.widgets.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: widgets, driver: wpapi }
