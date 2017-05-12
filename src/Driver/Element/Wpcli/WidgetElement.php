@@ -26,7 +26,7 @@ class WidgetElement extends BaseElement
         $wpcli_args = [
                 $widget_name,
                 $sidebar_id
-            ] + buildCLIArgs( array_keys( $args ), $args );
+            ] + buildCLIArgs(array_keys($args), $args);
 
         $this->drivers->getDriver()->wpcli('widget', 'add', $wpcli_args);
     }
