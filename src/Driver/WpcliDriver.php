@@ -1,4 +1,4 @@
-d<?php
+<?php
 namespace PaulGibbs\WordpressBehatExtension\Driver;
 
 use PaulGibbs\WordpressBehatExtension\Exception\UnsupportedDriverActionException;
