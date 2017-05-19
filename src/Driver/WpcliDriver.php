@@ -69,7 +69,7 @@ class WpcliDriver extends BaseDriver
     {
         $version = '';
 
-        preg_match('#^WP-CLI (\d\.\d\.\d)$#', $this->wpcli('cli', 'version')['stdout'], $match);
+        preg_match('#^WP-CLI (.*)$#', $this->wpcli('cli', 'version')['stdout'], $match);
         if (! empty($match)) {
             $version = array_pop($match);
         }
