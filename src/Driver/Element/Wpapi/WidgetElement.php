@@ -16,7 +16,7 @@ class WidgetElement extends BaseElement
      * @param string $widget_name The ID base of the widget (e.g. 'meta', 'calendar'). Case insensitive.
      * @param string $sidebar_id The ID of the sidebar to the add the widget to
      * @param array $args Associative array of widget settings for this widget
-     * @throws \Exception If the widget is not registered.
+     * @throws UnexpectedValueException If the widget is not registered.
      */
     public function addToSidebar($widget_name, $sidebar_id, $args)
     {
@@ -57,7 +57,7 @@ class WidgetElement extends BaseElement
      *
      * @param string $sidebar_name The name of the sidebar (e.g. 'Footer', 'Widget Area', 'Right Sidebar')
      * @return string The sidebar ID
-     * @throws \Exception If the sidebar is not registered
+     * @throws UnexpectedValueException If the sidebar is not registered
      */
     public function getSidebar($sidebar_name)
     {
