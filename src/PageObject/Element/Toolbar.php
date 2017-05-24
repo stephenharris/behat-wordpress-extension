@@ -105,7 +105,7 @@ class Toolbar extends Element
                 try {
                     // "Focus" (add hover class) on the toolbar link so the submenu appears
                     $id = $first_level_item->getAttribute('id');
-                    $this->getDriver()->evaluateScript(
+                    $this->getSession()->evaluateScript(
                         'jQuery("#' . $id . '").addClass("hover");'
                     );
                 } catch (UnsupportedDriverActionException $e) {
@@ -155,7 +155,7 @@ class Toolbar extends Element
         // Using NodeElement::mouseOver() won't work because WordPress is using hoverIndent. Instead we just
         // manually add the hover class. See https://github.com/paulgibbs/behat-wordpress-extension/issues/65
         try {
-            $this->getDriver()->evaluateScript(
+            $this->getSession()->evaluateScript(
                 'jQuery("#wp-admin-bar-my-account").addClass("hover");'
             );
         } catch (UnsupportedDriverActionException $e) {
