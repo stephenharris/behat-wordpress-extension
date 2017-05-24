@@ -2,7 +2,7 @@ Feature: Toolbar
 
   Background:
     Given I am logged in as an admin
-    And I am on "/"
+    And I am on the homepage
 
   @javascript @insulated
   Scenario: I can go to the support forums
