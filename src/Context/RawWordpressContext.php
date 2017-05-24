@@ -166,6 +166,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary
         }
+        $node->setValue('');
         $node->setValue($username);
 
         $node = $page->findField('user_pass');
@@ -174,6 +175,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary
         }
+        $node->setValue('');
         $node->setValue($password);
 
         $page->findButton('wp-submit')->click();
