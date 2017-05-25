@@ -64,7 +64,6 @@ script:
   # Execute all of the commands which should make the build pass or fail.
   - find ./src -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
   - vendor/bin/phpcs --standard=phpcs-ruleset.xml -p -s -v -n src --extensions=php
-  - export WP_CLI_STRICT_ARGS_MODE=1
   - vendor/bin/behat --config ./bin/travis/behat.yml
 
 after_success:
