@@ -13,21 +13,9 @@ Feature: Toolbar
     When I follow the toolbar link "New > Page"
     Then I should be on the "Add New Page" page
 
-  Scenario: I can select a site
-    When I follow the toolbar link "wordpress.dev > Widgets"
-    Then I should be on the "Widgets" page
-
-  Scenario: I can go to comments
-    When I follow the toolbar link "Comments"
-    Then I should be on the "Comments" page
-
-  Scenario: I can go to edit my profile
-    When I follow the toolbar link "Howdy, admin > Edit My Profile"
-    Then I should be on the "Profile" page
-
   Scenario: I can search using the toolbar
+     Given there are posts:
+       | post_type | post_title | post_content | post_status |
+       | page      | Test Post  | Hello World  | publish     |
     When I search for "Hello World" in the toolbar
     Then I should see "Search results"
-
-  Scenario: I can a greeting in the toolbar
-    Then I should see "Howdy, admin" in the toolbar
