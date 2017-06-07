@@ -35,3 +35,7 @@ html .md-footer-copyright {
 html .md-typeset table:not([class]) {
   font-size: 1.4rem;
 }
+
+.md-sidebar {
+  height: 100% !important;
+}
