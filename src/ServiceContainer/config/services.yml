@@ -1,20 +1,14 @@
 parameters:
-  # WordPress driver manager.
-  wordpress.wordpress.class: PaulGibbs\WordpressBehatExtension\WordpressDriverManager
-
-  # Context initialiser.
-  wordpress.context.initializer.class: PaulGibbs\WordpressBehatExtension\Context\Initialiser\WordpressAwareInitialiser
-
   # Parameters.
   wordpress.parameters: {}
 
 services:
   wordpress.wordpress:
-    class: %wordpress.wordpress.class%
+    class: 'PaulGibbs\WordpressBehatExtension\WordpressDriverManager'
     arguments:
       - {}
   wordpress.context.initializer:
-    class: %wordpress.context.initializer.class%
+    class: 'PaulGibbs\WordpressBehatExtension\Context\Initialiser\WordpressAwareInitialiser'
     arguments:
       - "@wordpress.wordpress"
       - %wordpress.parameters%
