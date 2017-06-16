@@ -53,7 +53,7 @@ class WpapiDriver extends BaseDriver
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
 
         if (! file_exists("{$this->path}/index.php")) {
-            throw new RuntimeException(sprintf('WordPress API driver cannot find WordPress at %s.', $this->path));
+            throw new RuntimeException(sprintf('WordPress PHP driver cannot find WordPress at %s.', $this->path));
         }
 
         // "Cry 'Havoc!' and let slip the dogs of war".

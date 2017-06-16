@@ -157,7 +157,7 @@ class WordpressBehatExtension implements ExtensionInterface
                     ->end()
                 ->end()
 
-                // WordPress API driver.
+                // WordPress PHP driver.
                 ->arrayNode('wpapi')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -235,7 +235,7 @@ class WordpressBehatExtension implements ExtensionInterface
     }
 
     /**
-     * Load settings for the WordPress API driver.
+     * Load settings for the WordPress PHP driver.
      *
      * @param FileLoader       $loader
      * @param ContainerBuilder $container
@@ -250,7 +250,7 @@ class WordpressBehatExtension implements ExtensionInterface
         $loader->load('drivers/wpapi.yml');
 
         if (empty($config['path'])) {
-            throw new RuntimeException('WordPress API driver requires a root `path` set.');
+            throw new RuntimeException('WordPress PHP driver requires a root `path` set.');
         }
 
         $config['wpapi']['path'] = isset($config['path']) ? $config['path'] : '';
