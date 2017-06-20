@@ -73,11 +73,13 @@ class DashboardContext extends RawWordpressContext
     /**
      * Go to a given page on the admin menu.
      *
-     * Example: Given I go to "Posts > Add New"
-     * Example: Given I go to "Users"
-     * Example: Given I go to "Settubgs > Reading"
+     * In 1.0.0, the regex will simplify to 'I go to the menu "foobar"'.
      *
-     * @Given I go to menu item :item
+     * Example: Given I go to menu item "Posts > Add New"
+     * Example: Given I go to the menu item "Users"
+     * Example: Given I go to the menu "Settubgs > Reading"
+     *
+     * @Given I go to (the )menu (item ):item
      */
     public function iGoToMenuItem($item)
     {
