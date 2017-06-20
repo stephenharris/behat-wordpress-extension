@@ -150,14 +150,16 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      *
      * @param string $username
      * @param string $password
+     * @param string $redirect Optional. Default = "/".
+     *                         After succesful log in, redirect browser to this path.
      */
-    public function logIn($username, $password)
+    public function logIn($username, $password, $redirect_to = '/')
     {
         if ($this->loggedIn()) {
             $this->logOut();
         }
 
-        $this->visitPath('wp-login.php?redirect_to=' . urlencode($this->locatePath('/')));
+        $this->visitPath('wp-login.php?redirect_to=' . urlencode($this->locatePath($redirect_to)));
         $page = $this->getSession()->getPage();
 
         $node = $page->findField('user_login');
@@ -166,6 +168,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary
         }
+        $node->setValue('');
         $node->setValue($username);
 
         $node = $page->findField('user_pass');
@@ -174,6 +177,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary
         }
+        $node->setValue('');
         $node->setValue($password);
 
         $page->findButton('wp-submit')->click();

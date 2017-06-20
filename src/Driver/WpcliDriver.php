@@ -83,6 +83,8 @@ class WpcliDriver extends BaseDriver
             throw new RuntimeException('WP-CLI driver cannot find WordPress. Check "path" and/or "alias" settings.');
         }
 
+        putenv('WP_CLI_STRICT_ARGS_MODE=1');
+
         $this->is_bootstrapped = true;
     }
 

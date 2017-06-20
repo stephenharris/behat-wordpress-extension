@@ -78,8 +78,10 @@ class UserContext extends RawWordpressContext
      * Log user out.
      *
      * Example: Given I am an anonymous user
+     * Example: When I log out
      *
      * @Given /^(?:I am|they are) an anonymous user/
+     * @When I log out
      */
     public function iAmAnonymousUser()
     {

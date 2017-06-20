@@ -1,6 +1,16 @@
-# Credits &amp; Acknowledgements
+## Contributors
 
-[Paul Gibbs](https://github.com/paulgibbs/) (project lead) and the rest of the contributors wish to thank the following projects and their contributors, who provided inspiration and were fantasically useful learning resources:
+* [Paul Gibbs](https://github.com/paulgibbs/): Project Lead
+* [Stephen Harris](https://github.com/stephenharris/): Project Lead
+* [Dan Westall](https://github.com/dan-westall): Contributor
+* [Steve Persch](https://github.com/stevector): Contributor
+* [John Blackbourn](https://github.com/johnbillion): Contributor
+* [Jake Foster](https://github.com/romancandlethoughts): Contributor
+
+
+## Acknowledgements
+
+[The team](team.md) wishes to thank the following projects and their contributors, who provide inspiration and were fantasically useful learning resources:
 
 * [Stephen Harris](https://github.com/stephenharris/): [stephenharris/WordPressBehatExtension](https://github.com/stephenharris/WordPressBehatExtension/)
 * [John Blackbourn](https://github.com/johnbillion/): [johnbillion/WordPressBehatExtension](https://github.com/johnbillion/WordPressBehatExtension/)
