@@ -6,7 +6,7 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 /**
  * An Element representing a WYSIWYG editor
  */
-class ContentEditor extends Element
+class TinyMCEEditor extends Element
 {
 
     /**
