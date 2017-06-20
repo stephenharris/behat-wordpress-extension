@@ -78,7 +78,14 @@ class AdminPage extends Page
      */
     public function clickLinkInHeader($link)
     {
+        $header_link = $this->find('css', '.page-title-action');
+
+        if ($header_link->getText() === $link) {
+            return $header_link->click();
+        }
+
         $header = $this->getHeaderElement();
+
         $header->clickLink($link);
     }
 
