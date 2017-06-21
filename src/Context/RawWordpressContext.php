@@ -150,8 +150,8 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      *
      * @param string $username
      * @param string $password
-     * @param string $redirect Optional. Default = "/".
-     *                         After succesful log in, redirect browser to this path.
+     * @param string $redirect_to Optional. Default = "/".
+     *                            After succesful log in, redirect browser to this path.
      */
     public function logIn($username, $password, $redirect_to = '/')
     {
