@@ -49,6 +49,7 @@ class EditPostPage extends AdminPage
 
     /**
      * Get the node element for the specified metabox.
+     * @param string The title of the metabox to get
      * @throws \Behat\Mink\Exception\ExpectationException If the metabox cannot be found
      */
     public function getMetaBox($title)

@@ -8,6 +8,9 @@ use Behat\Mink\Exception\ExpectationException;
 
 class EditPostContext extends RawWordpressContext
 {
+    /**
+     * @param EditPostPage $edit_post_page The page object representing the edit post page.
+     */
     public function __construct(EditPostPage $edit_post_page)
     {
         $this->edit_post_page = $edit_post_page;
@@ -22,10 +25,13 @@ class EditPostContext extends RawWordpressContext
      * Example: Given I am on the edit event screen for "Some Event"
      *
      * @Given /^I am on the edit ([a-zA-z_-]+) screen for "([^"]*)"$/
+     *
+     * @param string $post_type The post type of the referenced 'post' being edited.
+     * @param string $title The name of the 'post' being edited.
      */
-    public function iGoToEditScreenForPostType($postType, $title)
+    public function iGoToEditScreenForPostType($post_type, $title)
     {
-        $post = $this->getDriver()->content->get($title, ['by' => 'title', 'post_type' => $postType]);
+        $post = $this->getDriver()->content->get($title, ['by' => 'title', 'post_type' => $post_type]);
         $this->edit_post_page->open(array(
             'id' => $post->ID,
         ));
@@ -40,6 +46,8 @@ class EditPostContext extends RawWordpressContext
      * Example: Given I am on the edit screen for "Some Event"
      *
      * @Given /^I am on the edit screen for "(?P<title>[^"]*)"$/
+     *
+     * @param string $title The name of the 'post' being edited.
      */
     public function iGoToEditScreenFor($title)
     {
@@ -55,6 +63,8 @@ class EditPostContext extends RawWordpressContext
      * Example: When I change the title to "Hello World"
      *
      * @When /^I change the title to "(?P<title>[^"]*)"$/
+     *
+     * @param string $title The title to enter in the title field on the edit post page.
      */
     public function iChangeTitleTo($title)
     {
@@ -68,6 +78,8 @@ class EditPostContext extends RawWordpressContext
      * Example: When I switch to the post content editor's Text mode
      *
      * @When /^I switch to the post content editor's (visual|text) mode$/i
+     *
+     * @param string $mode The mode (visual or text) to switch to in the editor.
      */
     public function iSelectPostContentEditorMode($mode)
     {
@@ -83,6 +95,8 @@ class EditPostContext extends RawWordpressContext
      *   Welcome to WordPress. This is your first post. Edit or delete it, then start writing!
      *   """
      * @When I enter the following content into the post content editor:
+     *
+     * @param PyStringNode $content The content to enter into the editor.
      */
     public function iEnterContentIntoPostContentEditor(PyStringNode $content)
     {
@@ -97,6 +111,8 @@ class EditPostContext extends RawWordpressContext
      * Example: Then The post content editor is in Text mode
      *
      * @Then /^the post content editor is in (visual|text) mode$/i
+     *
+     * @param string $mode Assert that the editor is the specified mode (visual or text).
      */
     public function postContentEditorIsInMode($mode)
     {
@@ -129,10 +145,13 @@ class EditPostContext extends RawWordpressContext
      * Example: Then I should be on the edit post screen for "Hello World"
      *
      * @Then /^I should be on the edit "([a-zA-z_-]+)" screen for "([^"]*)"$/
+     *
+     * @param string $post_type The post type of the referenced 'post' being edited.
+     * @param string $title The name of the 'post' being edited.
      */
-    public function iAmOnEditScreenForPostType($postType, $title)
+    public function iAmOnEditScreenForPostType($post_type, $title)
     {
-        $post_id = $this->getDriver()->getContentIdFromTitle($title, $postType);
+        $post_id = $this->getDriver()->getContentIdFromTitle($title, $post_type);
         $this->edit_post_page->isOpen(array(
             'id' => $post_id,
         ));
@@ -145,6 +164,8 @@ class EditPostContext extends RawWordpressContext
      * Example: Then I should be on the edit screen for "Hello World"
      *
      * @Then /^I should be on the edit screen for "([^"]*)"$/
+     *
+     * @param string $title The name of the 'post' being edited.
      */
     public function iAmOnEditScreenFor($title)
     {
@@ -162,6 +183,8 @@ class EditPostContext extends RawWordpressContext
      * Example: Then I should see the "Comments" metabox
      *
      * @Then I should see the :title metabox
+     *
+     * @param string $title The title of the metabox being checked
      */
     public function iShouldSeeTheMetabox($title)
     {
@@ -176,6 +199,8 @@ class EditPostContext extends RawWordpressContext
      * Example: Then I should not see the "Featured Image" metabox
      *
      * @Then I should not see the :title metabox
+     *
+     * @param string $title The title of the metabox being checked
      */
     public function iShouldNotSeeTheMetabox($title)
     {

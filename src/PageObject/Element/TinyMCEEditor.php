@@ -49,11 +49,11 @@ class TinyMCEEditor extends Element
 
     /**
      * Enter the given content into the WYSIWYG editor
-     * @return string $content
+     * @param string $content The content being entered
      */
     public function setContent($content)
     {
-        if (self::VISUAL == $this->getMode()) {
+        if (self::VISUAL === $this->getMode()) {
             $this->getDriver()->switchToIFrame(self::$wysiwyg_iframe_id);
             $this->getDriver()->executeScript(
                 ';document.body.innerHTML = \'<p>' . addslashes(htmlspecialchars($content)) . '</p>\';'
