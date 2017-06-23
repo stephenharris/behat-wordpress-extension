@@ -11,14 +11,6 @@ class EditPostPage extends AdminPage
     protected $path = '/wp-admin/post.php?post={id}&action=edit';
 
     /**
-     * @param array $urlParameters
-     */
-    protected function verifyPage()
-    {
-        $this->assertHasHeader('Edit Post');
-    }
-
-    /**
      * Enter the title into the title field.
      * @param string $title
      * @throws \Behat\Mink\Exception\ElementNotFoundException
@@ -55,7 +47,7 @@ class EditPostPage extends AdminPage
     public function getMetaBox($title)
     {
         $metaboxes = $this->findAll('css', '.postbox');
-        if ($metaboxes) {
+        if (! empty($metaboxes)) {
             foreach ($metaboxes as $metabox) {
                 if ($metabox->find('css', 'h2')->getText() === $title) {
                     return $metabox;
