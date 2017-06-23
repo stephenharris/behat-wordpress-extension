@@ -8,6 +8,13 @@ use Behat\Mink\Exception\ExpectationException;
 
 class EditPostContext extends RawWordpressContext
 {
+
+    /**
+     * Edit post/page/post-type page (/wp-admin/post.php?post=<id>&action=edit) object.
+     * @param EditPostPage
+     */
+    private $edit_post_page;
+
     /**
      * @param EditPostPage $edit_post_page The page object representing the edit post page.
      */
@@ -120,7 +127,7 @@ class EditPostContext extends RawWordpressContext
         if (strtoupper($mode) !== $content_editor->getMode()) {
             throw new ExpectationException(
                 sprintf('Content editor is in "" mode. Expected "".', $content_editor->getMode(), $mode),
-                $this->getDriver()
+                $this->getSession()
             );
         }
     }
@@ -151,9 +158,9 @@ class EditPostContext extends RawWordpressContext
      */
     public function iAmOnEditScreenForPostType($post_type, $title)
     {
-        $post_id = $this->getDriver()->getContentIdFromTitle($title, $post_type);
+        $post = $this->getDriver()->getContentFromTitle($title, $post_type);
         $this->edit_post_page->isOpen(array(
-            'id' => $post_id,
+            'id' => $post->ID,
         ));
     }
 
@@ -169,9 +176,9 @@ class EditPostContext extends RawWordpressContext
      */
     public function iAmOnEditScreenFor($title)
     {
-        $post_id = $this->getDriver()->getContentIdFromTitle($title, null);
+        $post = $this->getDriver()->getContentFromTitle($title, null);
         $this->edit_post_page->isOpen(array(
-            'id' => $post_id,
+            'id' => $post->ID,
         ));
     }
 
