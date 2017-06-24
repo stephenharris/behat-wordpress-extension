@@ -43,16 +43,18 @@ class WordpressContext extends RawWordpressContext implements PageObjectAware
     public function fixToolbar()
     {
         $driver = $this->getSession()->getDriver();
-        if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver && $driver->getWebDriverSession()) {
-            $this->getSession()->getDriver()->executeScript(
-                'if (document.getElementById("wpadminbar")){
-                    document.getElementById("wpadminbar").style.position="absolute";
-					if ( document.getElementsByTagName("body")[0].className.match(/wp-admin/) ) {
-						document.getElementById("wpadminbar").style.top="-32px";
-					}
-				};'
-            );
+        if (! $driver instanceof \Behat\Mink\Driver\Selenium2Driver || ! $driver->getWebDriverSession()) {
+            return;
         }
+
+        $this->getSession()->getDriver()->executeScript(
+            'if (document.getElementById("wpadminbar")) {
+                document.getElementById("wpadminbar").style.position="absolute";
+                if (document.getElementsByTagName("body")[0].className.match(/wp-admin/)) {
+                    document.getElementById("wpadminbar").style.top="-32px";
+                }
+            };'
+        );
     }
 
     /**
