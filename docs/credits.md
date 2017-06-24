@@ -10,7 +10,7 @@
 
 ## Acknowledgements
 
-[The team](team.md) wishes to thank the following projects and their contributors, who provide inspiration and were fantasically useful learning resources:
+The team wish to thank the following projects and their contributors, who provide inspiration and were fantasically useful learning resources:
 
 * [Stephen Harris](https://github.com/stephenharris/): [stephenharris/WordPressBehatExtension](https://github.com/stephenharris/WordPressBehatExtension/)
 * [John Blackbourn](https://github.com/johnbillion/): [johnbillion/WordPressBehatExtension](https://github.com/johnbillion/WordPressBehatExtension/)
