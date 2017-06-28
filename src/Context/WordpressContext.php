@@ -47,14 +47,17 @@ class WordpressContext extends RawWordpressContext implements PageObjectAware
             return;
         }
 
-        $this->getSession()->getDriver()->executeScript(
-            'if (document.getElementById("wpadminbar")) {
-                document.getElementById("wpadminbar").style.position="absolute";
-                if (document.getElementsByTagName("body")[0].className.match(/wp-admin/)) {
-                    document.getElementById("wpadminbar").style.top="-32px";
-                }
-            };'
-        );
+        try {
+            $this->getSession()->getDriver()->executeScript(
+                'if (document.getElementById("wpadminbar")) {
+                    document.getElementById("wpadminbar").style.position="absolute";
+                    if (document.getElementsByTagName("body")[0].className.match(/wp-admin/)) {
+                        document.getElementById("wpadminbar").style.top="-32px";
+                    }
+                };'
+            );
+        } catch (\Exception $e) {
+        }
     }
 
     /**
